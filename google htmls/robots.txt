@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://68aae3995f3d2ef7fadd70ed--comforting-monstera-64e250.netlify.app/sitemap.xml
+Sitemap: https://www.pattaya-living-estate.com/sitemap.xml
 
 # Crawl-delay für respektvolle Crawling-Geschwindigkeit
 Crawl-delay: 1

@@ -1,0 +1,19 @@
+# Redirects für SEO und Funktionalität
+
+# www zu non-www (oder umgekehrt - wähle eine Variante)
+https://www.pattaya-living-estate.com/* https://pattaya-living-estate.com/:splat 301!
+
+# Alte URLs zu neuen URLs (falls nötig)
+/old-page /new-page 301
+
+# API Redirects für n8n Webhooks
+/api/contact https://your-n8n-instance.com/webhook/ple-lead 200
+/api/appointment https://your-n8n-instance.com/webhook/ple-appointment 200
+
+# Fallback für SPA (falls Sie später zu React/Vue wechseln)
+/* /index.html 200
+
+# Sicherheits-Redirects
+/.env /404 404
+/.git /404 404
+/wp-admin /404 404

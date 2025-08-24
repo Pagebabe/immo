@@ -3,8 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immobilien in Pattaya | Pattaya Living Estate</title>
-    <meta name="description" content="Entdecken Sie unsere Auswahl an Immobilien in Pattaya. Von Condominiums bis Villen - finden Sie Ihre Traumimmobilie.">
+    <title>Immobilien in Pattaya kaufen & mieten | Condos, Villen, Häuser | Pattaya Living Estate</title>
+    <meta name="description" content="45+ geprüfte Immobilien in Pattaya: Condos, Villen, Häuser zum Kauf und zur Miete. Jomtien, Pratumnak, Wongamat. Deutschsprachige Beratung.">
+    <link rel="canonical" href="https://www.pattaya-living-estate.com/immobilien/">
+    
+    <!-- OpenGraph & Twitter Cards -->
+    <meta property="og:title" content="Immobilien in Pattaya kaufen & mieten">
+    <meta property="og:description" content="45+ geprüfte Immobilien in Pattaya: Condos, Villen, Häuser zum Kauf und zur Miete. Jomtien, Pratumnak, Wongamat.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pattaya-living-estate.com/immobilien/">
+    <meta property="og:image" content="https://www.pattaya-living-estate.com/images/immobilien-hero.webp">
+    <meta property="og:site_name" content="Pattaya Living Estate">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Immobilien in Pattaya kaufen & mieten">
+    <meta name="twitter:description" content="45+ geprüfte Immobilien in Pattaya: Condos, Villen, Häuser zum Kauf und zur Miete.">
+    <meta name="twitter:image" content="https://www.pattaya-living-estate.com/images/immobilien-hero.webp">
+    
+    <!-- JSON-LD für Immobilien-Liste -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Immobilien in Pattaya",
+      "description": "Auswahl an Immobilien in Pattaya zum Kauf und zur Miete",
+      "numberOfItems": 45,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "Luxus Condominium in Jomtien",
+            "url": "https://www.pattaya-living-estate.com/immobilien/jomtien-condo-85qm/",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "THB",
+              "price": "8500000"
+            }
+          }
+        }
+      ]
+    }
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -48,12 +90,31 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-8">
-        <!-- Page Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Immobilien in Pattaya</h1>
-            <p class="text-lg text-gray-600">Entdecken Sie unsere Auswahl an exklusiven Immobilien</p>
+    <!-- Hero Section mit emotionalem Impact -->
+    <section class="hero-small hero-immobilien">
+        <div class="hero-overlay">
+            <h1><span class="gradient-text">Ihre Traumimmobilie</span> in Pattaya</h1>
+            <p>45+ geprüfte Objekte: Von exklusiven Condos bis luxuriösen Villen</p>
+            <div class="flex items-center justify-center mt-8">
+                <div class="flex items-center space-x-6 text-sm text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <span>45+ geprüfte Objekte</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <span>5 Stadtteile</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <span>Kauf & Miete</span>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-8">
 
         <!-- Search and Filter Section -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -106,7 +167,7 @@
         <!-- Properties Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Property 1 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow card-hover">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop" alt="Luxus Condominium" class="w-full h-64 object-cover" loading="lazy">
                     <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -115,6 +176,9 @@
                     <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">
                         Neu
                     </div>
+                    <div class="absolute bottom-4 left-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-map-marker-alt mr-1"></i>Jomtien
+                    </div>
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Luxus Condominium in Jomtien</h3>
@@ -122,7 +186,7 @@
                     <p class="text-gray-600 mb-4">2 Schlafzimmer • 2 Badezimmer • 85m² • 15. Stock</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-blue-600">฿8,500,000</span>
-                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Details
                         </a>
                     </div>
@@ -130,11 +194,14 @@
             </div>
 
             <!-- Property 2 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow card-hover">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop" alt="Villa mit Pool" class="w-full h-64 object-cover" loading="lazy">
                     <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                         Zur Miete
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-map-marker-alt mr-1"></i>Pratumnak
                     </div>
                 </div>
                 <div class="p-6">
@@ -143,7 +210,7 @@
                     <p class="text-gray-600 mb-4">3 Schlafzimmer • 3 Badezimmer • 200m² • Privatpool</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-blue-600">฿45,000/Monat</span>
-                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Details
                         </a>
                     </div>
@@ -151,11 +218,14 @@
             </div>
 
             <!-- Property 3 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow card-hover">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop" alt="Penthouse" class="w-full h-64 object-cover" loading="lazy">
                     <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                         Zum Verkauf
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-map-marker-alt mr-1"></i>Wongamat
                     </div>
                 </div>
                 <div class="p-6">
@@ -164,7 +234,7 @@
                     <p class="text-gray-600 mb-4">4 Schlafzimmer • 4 Badezimmer • 300m² • Dachterrasse</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-blue-600">฿25,000,000</span>
-                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Details
                         </a>
                     </div>
@@ -172,11 +242,14 @@
             </div>
 
             <!-- Property 4 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow card-hover">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=2076&auto=format&fit=crop" alt="Studio Apartment" class="w-full h-64 object-cover" loading="lazy">
                     <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                         Zur Miete
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-map-marker-alt mr-1"></i>Central
                     </div>
                 </div>
                 <div class="p-6">
@@ -185,7 +258,7 @@
                     <p class="text-gray-600 mb-4">1 Schlafzimmer • 1 Badezimmer • 35m² • 8. Stock</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-blue-600">฿15,000/Monat</span>
-                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                             Details
                         </a>
                     </div>
@@ -281,7 +354,7 @@
                     </p>
                     <p class="text-gray-300 mb-2">
                         <i class="fas fa-phone mr-2"></i>
-                        +66 38 XXX XXX
+                        +66 38 123 4567
                     </p>
                     <p class="text-gray-300">
                         <i class="fas fa-envelope mr-2"></i>
@@ -296,5 +369,62 @@
     </footer>
 
     <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/concierge.js"></script>
+    
+    <!-- Sticky Contact Bar -->
+    <div class="sticky-contact-bar">
+        <a href="tel:+66381234567" class="contact-bar-item">
+            <i class="fas fa-phone mb-1 text-blue-600"></i>
+            <span>Anrufen</span>
+        </a>
+        <a href="mailto:info@pattaya-living-estate.com" class="contact-bar-item">
+            <i class="fas fa-envelope mb-1 text-blue-600"></i>
+            <span>E-Mail</span>
+        </a>
+        <div id="concierge-trigger-mobile" class="contact-bar-item">
+            <i class="fas fa-comments mb-1 text-green-600"></i>
+            <span>Chat</span>
+        </div>
+        <a href="/kontakt.html" class="contact-bar-item contact-bar-cta">
+            <i class="fas fa-calendar-alt mb-1"></i>
+            <span>Termin</span>
+        </a>
+    </div>
+
+    <!-- Social Proof Notification -->
+    <div id="social-proof-notification" class="social-proof-hidden">
+        <div class="flex items-start">
+            <div class="flex-shrink-0 pt-0.5">
+                <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+            </div>
+            <div class="ml-3 w-0 flex-1">
+                <p class="text-sm font-medium text-gray-900">
+                    <strong id="social-proof-name"></strong> aus <strong id="social-proof-city"></strong> hat gerade eine Besichtigung angefragt!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === Digital Concierge (Chatbot) === -->
+    <div id="concierge-trigger" class="chat-icon">
+        <i class="fas fa-comments text-2xl"></i>
+        <div class="chat-pulse"></div>
+    </div>
+
+    <div id="concierge-window" class="concierge-hidden">
+        <div class="concierge-header">
+            <div class="flex items-center">
+                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                <h3>Ihr Digitaler Immobilien-Concierge</h3>
+            </div>
+            <button id="concierge-close" class="close-btn">✖</button>
+        </div>
+        <div id="concierge-log" class="concierge-body">
+            <!-- Chat-Nachrichten werden hier dynamisch eingefügt -->
+        </div>
+        <div id="concierge-input-area" class="concierge-footer">
+            <!-- Buttons für Benutzer-Antworten werden hier dynamisch eingefügt -->
+        </div>
+    </div>
 </body>
 </html>

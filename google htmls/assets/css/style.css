@@ -823,6 +823,107 @@ h4 { font-size: 1.25rem; }
     }
 }
 
+/* ======================================================= */
+/* ============= IMMOBILIEN PAGE OPTIMIZATION ============ */
+/* ======================================================= */
+
+/* Hero für Immobilien-Seite */
+.hero-immobilien {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+/* Immobilien-Karten Optimierung */
+.property-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.property-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.property-card img {
+    transition: transform 0.3s ease;
+}
+
+.property-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Filter-Sektion */
+.search-filter-section {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.search-filter-section h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.search-filter-section select,
+.search-filter-section input {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    background: white;
+    color: var(--text-dark);
+}
+
+.search-filter-section button {
+    background: var(--accent-orange);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.search-filter-section button:hover {
+    background: #ea580c;
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.pagination a {
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.pagination .active {
+    background: var(--primary-blue);
+    color: white;
+}
+
 /* Mobile-first optimizations */
 @media (max-width: 768px) {
     .sticky-contact-bar {

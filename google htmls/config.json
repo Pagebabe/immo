@@ -1,0 +1,15 @@
+{
+  "company": {
+    "name": "Pattaya Living Estate",
+    "phone": "+66 38 123 4567",
+    "whatsapp": "+66 81 234 5678",
+    "email": "info@pattaya-living-estate.com",
+    "address": "Pattaya, Chonburi 20150, Thailand",
+    "website": "https://www.pattaya-living-estate.com"
+  },
+  "seo": {
+    "default_title": "Pattaya Living Estate - Ihr Partner für Immobilien in Pattaya",
+    "default_description": "Professionelle Immobilienberatung in Pattaya. Kauf, Verkauf und Vermietung von Condos, Häusern und Villen. Deutschsprachige Beratung.",
+    "canonical_base": "https://www.pattaya-living-estate.com"
+  }
+}
