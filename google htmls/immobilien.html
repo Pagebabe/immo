@@ -22,29 +22,14 @@
     <meta name="twitter:image" content="https://www.pattaya-living-estate.com/images/immobilien-hero.webp">
     
     <!-- JSON-LD für Immobilien-Liste -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="properties-json-ld">
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "Immobilien in Pattaya",
       "description": "Auswahl an Immobilien in Pattaya zum Kauf und zur Miete",
-      "numberOfItems": 45,
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "Product",
-            "name": "Luxus Condominium in Jomtien",
-            "url": "https://www.pattaya-living-estate.com/immobilien/jomtien-condo-85qm/",
-            "offers": {
-              "@type": "Offer",
-              "priceCurrency": "THB",
-              "price": "8500000"
-            }
-          }
-        }
-      ]
+      "numberOfItems": 8,
+      "itemListElement": []
     }
     </script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -118,34 +103,45 @@
 
         <!-- Search and Filter Section -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <select class="border border-gray-300 rounded-lg px-4 py-3">
+            <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4" onsubmit="return false;">
+                <select name="type" class="border border-gray-300 rounded-lg px-4 py-3">
                     <option value="">Alle Typen</option>
                     <option value="condominium">Condominium</option>
                     <option value="villa">Villa</option>
                     <option value="house">Haus</option>
+                    <option value="studio">Studio</option>
+                    <option value="penthouse">Penthouse</option>
                     <option value="land">Grundstück</option>
                 </select>
                 
-                <select class="border border-gray-300 rounded-lg px-4 py-3">
+                <select name="district" class="border border-gray-300 rounded-lg px-4 py-3">
                     <option value="">Alle Stadtteile</option>
                     <option value="jomtien">Jomtien</option>
                     <option value="pratumnak">Pratumnak</option>
                     <option value="wongamat">Wongamat</option>
                     <option value="naklua">Naklua</option>
                     <option value="central-pattaya">Central Pattaya</option>
+                    <option value="east-pattaya">East Pattaya</option>
                 </select>
                 
-                <select class="border border-gray-300 rounded-lg px-4 py-3">
+                <select name="status" class="border border-gray-300 rounded-lg px-4 py-3">
                     <option value="">Alle Status</option>
                     <option value="sale">Zum Verkauf</option>
                     <option value="rent">Zur Miete</option>
                 </select>
                 
-                <input type="number" placeholder="Min. Preis (THB)" class="border border-gray-300 rounded-lg px-4 py-3">
+                <select name="bedrooms" class="border border-gray-300 rounded-lg px-4 py-3">
+                    <option value="">Alle Zimmer</option>
+                    <option value="1">1+ Schlafzimmer</option>
+                    <option value="2">2+ Schlafzimmer</option>
+                    <option value="3">3+ Schlafzimmer</option>
+                    <option value="4">4+ Schlafzimmer</option>
+                </select>
                 
-                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">
-                    <i class="fas fa-search mr-2"></i>Suchen
+                <input name="minPrice" type="number" placeholder="Min. Preis (THB)" class="border border-gray-300 rounded-lg px-4 py-3">
+                
+                <button type="button" onclick="propertyManager.applyFilters()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-search mr-2"></i>Filtern
                 </button>
             </form>
         </div>
@@ -155,11 +151,12 @@
             <p class="text-gray-600">Zeige <span class="font-semibold">12</span> von <span class="font-semibold">45</span> Immobilien</p>
             <div class="flex items-center space-x-4">
                 <span class="text-gray-600">Sortieren nach:</span>
-                <select class="border border-gray-300 rounded-lg px-3 py-2">
-                    <option>Preis (niedrig → hoch)</option>
-                    <option>Preis (hoch → niedrig)</option>
-                    <option>Datum (neueste)</option>
-                    <option>Größe</option>
+                <select name="sort" class="border border-gray-300 rounded-lg px-3 py-2">
+                    <option value="date">Datum (neueste)</option>
+                    <option value="price">Preis (niedrig → hoch)</option>
+                    <option value="price-desc">Preis (hoch → niedrig)</option>
+                    <option value="size">Größe (klein → groß)</option>
+                    <option value="size-desc">Größe (groß → klein)</option>
                 </select>
             </div>
         </div>
@@ -368,6 +365,7 @@
         </div>
     </footer>
 
+    <script src="/assets/js/properties-data.js"></script>
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/concierge.js"></script>
     
