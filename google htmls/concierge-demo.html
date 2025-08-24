@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Concierge Demo | Pattaya Living Estate</title>
+    <meta name="description" content="Testen Sie unseren intelligenten Digital Concierge mit Wissensdatenbank für Pattaya Immobilien">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-blue-600">Pattaya Living Estate</h1>
+                <a href="/" class="text-gray-700 hover:text-blue-600">← Zurück zur Hauptseite</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Content -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                    🤖 Digital Concierge Demo
+                </h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    Testen Sie unseren intelligenten Berater mit Wissensdatenbank
+                </p>
+            </div>
+
+            <!-- Demo Instructions -->
+            <div class="bg-blue-50 p-8 rounded-lg mb-8">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4">Wie funktioniert der intelligente Concierge?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-blue-800 mb-2">🎯 Wissensdatenbank</h3>
+                        <ul class="text-blue-700 space-y-1">
+                            <li>• 30+ Antworten zu Pattaya Immobilien</li>
+                            <li>• Thai Quota & Eigentumsrecht</li>
+                            <li>• Stadtteil-Informationen</li>
+                            <li>• Kaufprozess & Finanzierung</li>
+                            <li>• Visa & Aufenthalt</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-blue-800 mb-2">💬 Freie Fragen</h3>
+                        <ul class="text-blue-700 space-y-1">
+                            <li>• Natürliche Sprache verstehen</li>
+                            <li>• Keyword-basierte Antworten</li>
+                            <li>• Intelligente Vorschläge</li>
+                            <li>• Weiterleitung zu Beratern</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Questions -->
+            <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">🧪 Testen Sie diese Fragen:</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-800">🇹🇭 Thai Quota & Eigentum</h3>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Was ist Foreign Quota?">
+                            • Was ist Foreign Quota?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Kann ich als Ausländer ein Haus kaufen?">
+                            • Kann ich als Ausländer ein Haus kaufen?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Was ist Leasehold?">
+                            • Was ist Leasehold?
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-800">🏖️ Stadtteile</h3>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Wie ist Jomtien?">
+                            • Wie ist Jomtien?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Was kostet ein Condo in Pratumnak?">
+                            • Was kostet ein Condo in Pratumnak?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Ist Wongamat teuer?">
+                            • Ist Wongamat teuer?
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-800">💰 Kosten & Finanzierung</h3>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Was kosten die Nebenkosten?">
+                            • Was kosten die Nebenkosten?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Wie läuft der Kaufprozess ab?">
+                            • Wie läuft der Kaufprozess ab?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Brauche ich einen Anwalt?">
+                            • Brauche ich einen Anwalt?
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-800">🛂 Visa & Leben</h3>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Welche Visa-Optionen gibt es?">
+                            • Welche Visa-Optionen gibt es?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Wie hoch sind die Lebenshaltungskosten?">
+                            • Wie hoch sind die Lebenshaltungskosten?
+                        </button>
+                        <button class="test-question w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm" data-question="Wie kann ich Sie kontaktieren?">
+                            • Wie kann ich Sie kontaktieren?
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-green-50 p-8 rounded-lg">
+                <h2 class="text-2xl font-bold text-green-900 mb-4">🚀 So testen Sie den Concierge:</h2>
+                <div class="space-y-4 text-green-800">
+                    <div class="flex items-start">
+                        <div class="bg-green-200 p-2 rounded-full mr-4 mt-1">
+                            <i class="fas fa-1 text-green-700 text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Klicken Sie auf das Chat-Icon unten rechts</p>
+                            <p class="text-sm">Der Concierge öffnet sich automatisch</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-green-200 p-2 rounded-full mr-4 mt-1">
+                            <i class="fas fa-2 text-green-700 text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Wählen Sie "💬 Freie Frage stellen"</p>
+                            <p class="text-sm">Das Text-Eingabefeld erscheint</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-green-200 p-2 rounded-full mr-4 mt-1">
+                            <i class="fas fa-3 text-green-700 text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Stellen Sie Ihre Frage oder klicken Sie auf eine Test-Frage oben</p>
+                            <p class="text-sm">Der Concierge sucht in der Wissensdatenbank</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-green-200 p-2 rounded-full mr-4 mt-1">
+                            <i class="fas fa-4 text-green-700 text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Erhalten Sie intelligente Antworten und Vorschläge</p>
+                            <p class="text-sm">Der Concierge leitet Sie zu relevanten Seiten weiter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Digital Concierge -->
+    <div id="concierge-container" class="fixed bottom-4 right-4 z-50">
+        <button id="concierge-toggle" class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors">
+            <i class="fas fa-comments text-xl"></i>
+        </button>
+        
+        <div id="concierge-chat" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-lg shadow-xl border">
+            <div class="bg-blue-600 text-white p-4 rounded-t-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-semibold">Digitaler Immobilien-Concierge</h3>
+                    <button id="concierge-close" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="concierge-messages" class="p-4 h-64 overflow-y-auto">
+                <!-- Messages will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/app.js"></script>
+    <script type="module" src="/assets/js/concierge.js"></script>
+    
+    <script>
+        // Test-Fragen Funktionalität
+        document.addEventListener('DOMContentLoaded', function() {
+            const testQuestions = document.querySelectorAll('.test-question');
+            
+            testQuestions.forEach(button => {
+                button.addEventListener('click', function() {
+                    const question = this.getAttribute('data-question');
+                    
+                    // Concierge öffnen
+                    const toggle = document.getElementById('concierge-toggle');
+                    const chat = document.getElementById('concierge-chat');
+                    
+                    if (chat.classList.contains('hidden')) {
+                        toggle.click();
+                    }
+                    
+                    // Kurze Verzögerung, dann Frage stellen
+                    setTimeout(() => {
+                        const textInput = document.getElementById('concierge-text-input');
+                        if (textInput) {
+                            textInput.value = question;
+                            textInput.dispatchEvent(new KeyboardEvent('keypress', {key: 'Enter'}));
+                        }
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
