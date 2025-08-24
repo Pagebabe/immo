@@ -2,6 +2,9 @@
 // ============= DIGITAL CONCIERGE LOGIC ================
 // =======================================================
 
+// Import der Wissensdatenbank
+import { findBestAnswer, generateSuggestions } from './knowledgeBase.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('concierge-toggle');
     const chat = document.getElementById('concierge-chat');
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let currentState = 'start';
+    let isFreeTextMode = false;
 
     // === Das Gehirn des Concierge: Konversations-Struktur ===
     const conversationFlows = {
@@ -23,8 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 { text: "🏠 Ich möchte eine Immobilie kaufen", next: "buy_start" },
                 { text: "💰 Ich möchte meine Immobilie verkaufen", next: "sell_start" },
                 { text: "📅 Einen Beratungstermin vereinbaren", next: "schedule_start" },
-                { text: "❓ Allgemeine Fragen zu Pattaya", next: "general_questions" }
+                { text: "❓ Allgemeine Fragen zu Pattaya", next: "general_questions" },
+                { text: "💬 Freie Frage stellen", next: "free_text_mode" }
             ]
+        },
+        
+        free_text_mode: {
+            message: "💬 Perfekt! Sie können mir jetzt Ihre Frage direkt eingeben. Ich werde versuchen, Ihnen die beste Antwort zu geben.",
+            action: 'enable_text_input'
         },
         
         buy_start: {
@@ -233,9 +243,109 @@ document.addEventListener('DOMContentLoaded', function() {
         messages.scrollTop = messages.scrollHeight;
     }
 
+    function displayTextInput() {
+        const inputDiv = document.createElement('div');
+        inputDiv.className = 'mt-4';
+        inputDiv.innerHTML = `
+            <div class="flex space-x-2">
+                <input type="text" 
+                       id="concierge-text-input" 
+                       placeholder="Ihre Frage eingeben..." 
+                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button id="concierge-send-btn" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        `;
+        
+        messages.appendChild(inputDiv);
+        messages.scrollTop = messages.scrollHeight;
+        
+        // Event Listeners für Text-Eingabe
+        const input = document.getElementById('concierge-text-input');
+        const sendBtn = document.getElementById('concierge-send-btn');
+        
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleTextInput();
+            }
+        });
+        
+        sendBtn.addEventListener('click', handleTextInput);
+        
+        // Focus auf Input
+        input.focus();
+    }
+
+    function handleTextInput() {
+        const input = document.getElementById('concierge-text-input');
+        const userInput = input.value.trim();
+        
+        if (!userInput) return;
+        
+        // Benutzer-Nachricht anzeigen
+        displayMessage(userInput, true);
+        
+        // Input-Feld entfernen
+        input.parentElement.remove();
+        
+        // Antwort aus Wissensdatenbank suchen
+        const answer = findBestAnswer(userInput);
+        
+        if (answer) {
+            // Antwort aus Wissensdatenbank anzeigen
+            displayMessage(answer.answer);
+            
+            // Vorschläge generieren
+            const suggestions = generateSuggestions(userInput);
+            displaySuggestions(suggestions);
+        } else {
+            // Keine Antwort gefunden
+            displayMessage("Entschuldigung, dazu habe ich keine spezifische Information. Möchten Sie eine andere Frage stellen oder mit einem Berater sprechen?");
+            
+            displayOptions([
+                { text: "💬 Andere Frage stellen", next: "free_text_mode" },
+                { text: "📞 Mit Berater sprechen", next: "schedule_start" },
+                { text: "🏠 Immobilien anzeigen", next: "redirect_properties" }
+            ]);
+        }
+    }
+
+    function displaySuggestions(suggestions) {
+        const suggestionsDiv = document.createElement('div');
+        suggestionsDiv.className = 'mt-4';
+        suggestionsDiv.innerHTML = '<p class="text-sm text-gray-600 mb-2">Weitere Fragen:</p>';
+        
+        suggestions.forEach(suggestion => {
+            const button = document.createElement('button');
+            button.className = 'block w-full text-left p-2 bg-gray-50 hover:bg-gray-100 rounded text-sm mb-1';
+            button.textContent = suggestion;
+            button.onclick = () => {
+                displayMessage(suggestion, true);
+                const answer = findBestAnswer(suggestion);
+                if (answer) {
+                    displayMessage(answer.answer);
+                }
+            };
+            suggestionsDiv.appendChild(button);
+        });
+        
+        messages.appendChild(suggestionsDiv);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
     function handleUserChoice(nextState) {
         if (nextState === 'redirect_properties') {
             window.location.href = '/immobilien.html';
+            return;
+        }
+        
+        if (nextState === 'free_text_mode') {
+            currentState = nextState;
+            const flow = conversationFlows[nextState];
+            displayMessage(flow.message);
+            displayTextInput();
             return;
         }
         
@@ -257,6 +367,9 @@ document.addEventListener('DOMContentLoaded', function() {
             displayMessage(flow.message);
             if (flow.options) {
                 displayOptions(flow.options);
+            }
+            if (flow.action === 'enable_text_input') {
+                displayTextInput();
             }
         }
     }
