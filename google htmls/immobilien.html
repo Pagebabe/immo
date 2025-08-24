@@ -47,7 +47,48 @@
                 </div>
                 <nav class="hidden md:flex space-x-8">
                     <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Startseite</a>
-                    <a href="/immobilien.html" class="text-blue-600 font-medium">Immobilien</a>
+                    
+                    <!-- === DROPDOWN-MENÜ IMMOBILIEN === -->
+                    <div class="has-dropdown relative">
+                        <a href="/immobilien.html" class="text-blue-600 font-medium flex items-center">
+                            Immobilien
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dropdown-arrow ml-1 w-4 h-4">
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        
+                        <!-- Dropdown-Panel -->
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <!-- Spalte 1: Nach Typ -->
+                                <div class="dropdown-column">
+                                    <h4>Nach Immobilientyp</h4>
+                                    <ul>
+                                        <li><a href="/immobilien.html?type=condo">Condos & Apartments</a></li>
+                                        <li><a href="/immobilien.html?type=house">Häuser & Villen</a></li>
+                                        <li><a href="/immobilien.html?status=rent">Immobilien zur Miete</a></li>
+                                        <li><a href="/immobilien.html?status=sale">Immobilien zum Verkauf</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Spalte 2: Nach Stadtteil -->
+                                <div class="dropdown-column">
+                                    <h4>Beliebte Stadtteile</h4>
+                                    <ul>
+                                        <li><a href="/stadtteile/jomtien.html">Jomtien</a></li>
+                                        <li><a href="/stadtteile/pratumnak.html">Pratumnak Hill</a></li>
+                                        <li><a href="/stadtteile/naklua.html">Naklua & Wong Amat</a></li>
+                                        <li><a href="/stadtteile/central-pattaya.html">Central Pattaya</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer des Dropdowns -->
+                            <div class="dropdown-footer">
+                                <a href="/immobilien.html" class="dropdown-footer-link">Alle 45+ Immobilien anzeigen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- === ENDE DROPDOWN-MENÜ === -->
+                    
                     <a href="/stadtteile.html" class="text-gray-700 hover:text-blue-600 font-medium">Stadtteile</a>
                     <a href="/kaufen-in-thailand.html" class="text-gray-700 hover:text-blue-600 font-medium">Kaufen in Thailand</a>
                     <a href="/services.html" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
@@ -66,7 +107,36 @@
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-6 py-4 bg-gray-50 border-t">
                 <a href="/" class="block py-2 text-gray-700 hover:text-blue-600">Startseite</a>
-                <a href="/immobilien.html" class="block py-2 text-blue-600">Immobilien</a>
+                
+                <!-- Mobile Dropdown Immobilien -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-toggle w-full text-left py-2 text-blue-600 flex items-center justify-between">
+                        Immobilien
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mobile-dropdown-arrow w-4 h-4 transition-transform">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content hidden pl-4">
+                        <div class="py-2">
+                            <h5 class="font-semibold text-gray-800 mb-2">Nach Typ:</h5>
+                            <a href="/immobilien.html?type=condo" class="block py-1 text-gray-600 hover:text-blue-600">Condos & Apartments</a>
+                            <a href="/immobilien.html?type=house" class="block py-1 text-gray-600 hover:text-blue-600">Häuser & Villen</a>
+                            <a href="/immobilien.html?status=rent" class="block py-1 text-gray-600 hover:text-blue-600">Zur Miete</a>
+                            <a href="/immobilien.html?status=sale" class="block py-1 text-gray-600 hover:text-blue-600">Zum Verkauf</a>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="font-semibold text-gray-800 mb-2">Stadtteile:</h5>
+                            <a href="/stadtteile/jomtien.html" class="block py-1 text-gray-600 hover:text-blue-600">Jomtien</a>
+                            <a href="/stadtteile/pratumnak.html" class="block py-1 text-gray-600 hover:text-blue-600">Pratumnak Hill</a>
+                            <a href="/stadtteile/naklua.html" class="block py-1 text-gray-600 hover:text-blue-600">Naklua & Wong Amat</a>
+                            <a href="/stadtteile/central-pattaya.html" class="block py-1 text-gray-600 hover:text-blue-600">Central Pattaya</a>
+                        </div>
+                        <div class="py-2 border-t border-gray-200">
+                            <a href="/immobilien.html" class="block py-1 text-blue-600 font-semibold">Alle Immobilien anzeigen</a>
+                        </div>
+                    </div>
+                </div>
+                
                 <a href="/stadtteile.html" class="block py-2 text-gray-700 hover:text-blue-600">Stadtteile</a>
                 <a href="/kaufen-in-thailand.html" class="block py-2 text-gray-700 hover:text-blue-600">Kaufen in Thailand</a>
                 <a href="/services.html" class="block py-2 text-gray-700 hover:text-blue-600">Services</a>

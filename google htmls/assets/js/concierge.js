@@ -3,11 +3,17 @@
 // =======================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    const trigger = document.getElementById('concierge-trigger');
-    const windowEl = document.getElementById('concierge-window');
-    const closeBtn = document.getElementById('concierge-close');
-    const log = document.getElementById('concierge-log');
-    const inputArea = document.getElementById('concierge-input-area');
+    const toggle = document.getElementById('concierge-toggle');
+    const chat = document.getElementById('concierge-chat');
+    const close = document.getElementById('concierge-close');
+    const messages = document.getElementById('concierge-messages');
+
+    if (!toggle || !chat || !close || !messages) {
+        console.log('Concierge elements not found');
+        return;
+    }
+
+    let currentState = 'start';
 
     // === Das Gehirn des Concierge: Konversations-Struktur ===
     const conversationFlows = {
@@ -98,279 +104,187 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         schedule_getName: {
-            message: "Perfekt! Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse an, damit ich den Termin für Sie reservieren kann.",
-            action: 'collect_user_data_and_schedule'
-        },
-        
-        general_questions: {
-            message: "Gerne beantworte ich Ihre Fragen! Worum geht es?",
+            message: "Perfekt! Um den Termin zu vereinbaren, benötige ich noch Ihren Namen.",
             options: [
-                { text: "🏛️ Rechtliche Fragen (Foreign Quota, etc.)", next: "legal_questions" },
-                { text: "💰 Finanzierung & Banken", next: "finance_questions" },
-                { text: "📋 Visa & Aufenthalt", next: "visa_questions" },
-                { text: "🌍 Leben in Pattaya", next: "lifestyle_questions" }
+                { text: "📝 Name eingeben", next: "schedule_getContact" }
             ]
         },
         
-        legal_questions: {
-            message: "Sehr gute Frage! Als Ausländer können Sie in Thailand Immobilien auf verschiedene Weise besitzen. Die sicherste Methode ist der Kauf über 'Foreign Quota' bei Condominiums. Möchten Sie mehr Details dazu?",
+        schedule_getContact: {
+            message: "Vielen Dank! Wie können wir Sie am besten erreichen?",
             options: [
-                { text: "📖 Mehr über Foreign Quota", next: "foreign_quota_details" },
-                { text: "👨‍💼 Mit Anwalt sprechen", next: "schedule_start" }
+                { text: "📧 Per E-Mail", next: "schedule_success" },
+                { text: "📱 Per WhatsApp", next: "schedule_success" },
+                { text: "📞 Per Telefon", next: "schedule_success" }
             ]
         },
         
-        foreign_quota_details: {
-            message: "Foreign Quota bedeutet, dass bis zu 49% der Fläche eines Condominiums direkt an Ausländer verkauft werden können. Sie erhalten ein 'Chanote' (Eigentumsurkunde) auf Ihren Namen. Das ist der einfachste und sicherste Weg zum Immobilienbesitz in Thailand.",
+        schedule_valuation: {
+            message: "Ausgezeichnet! Ein Experte wird sich innerhalb von 24 Stunden bei Ihnen melden, um einen Termin für die kostenlose Bewertung zu vereinbaren.",
             options: [
-                { text: "🏠 Condos mit Foreign Quota anzeigen", next: "show_results" },
-                { text: "📅 Beratungstermin vereinbaren", next: "schedule_start" }
+                { text: "✅ Verstanden, vielen Dank!", next: "end" }
+            ]
+        },
+        
+        schedule_success: {
+            message: "Perfekt! Ein Berater wird sich innerhalb von 2 Stunden bei Ihnen melden, um den Termin zu bestätigen. Vielen Dank für Ihr Vertrauen!",
+            options: [
+                { text: "✅ Verstanden, vielen Dank!", next: "end" }
             ]
         },
         
         show_results: {
-            message: "Einen Moment, bitte. Ich suche in unserer Datenbank nach den besten Angeboten für Sie...",
-            action: 'show_property_results'
+            message: "Einen Moment, bitte. Ich suche in unserer Datenbank nach passenden Immobilien...",
+            options: [
+                { text: "🏠 Immobilien anzeigen", next: "show_properties" }
+            ]
         },
         
-        schedule_valuation: {
-            message: "Ausgezeichnet! Ein Experte wird sich innerhalb von 24 Stunden bei Ihnen melden, um einen Besichtigungstermin zu vereinbaren. Bitte geben Sie mir Ihre Kontaktdaten.",
-            action: 'collect_user_data_and_schedule'
+        show_properties: {
+            message: "Ich habe 3 Top-Immobilien für Sie gefunden! Möchten Sie diese ansehen oder direkt mit einem Berater sprechen?",
+            options: [
+                { text: "🏠 Immobilien anzeigen", next: "redirect_properties" },
+                { text: "📞 Mit Berater sprechen", next: "schedule_start" }
+            ]
+        },
+        
+        redirect_properties: {
+            message: "Perfekt! Ich leite Sie zu unseren Immobilien weiter. Dort können Sie alle Details einsehen und direkt Kontakt aufnehmen.",
+            options: [
+                { text: "🏠 Zu den Immobilien", next: "end" }
+            ]
+        },
+        
+        general_questions: {
+            message: "Gerne beantworte ich Ihre Fragen zu Pattaya! Was möchten Sie wissen?",
+            options: [
+                { text: "🏖️ Beste Stadtteile", next: "districts_info" },
+                { text: "💰 Lebenshaltungskosten", next: "costs_info" },
+                { text: "📋 Kaufprozess", next: "process_info" },
+                { text: "📞 Direkt mit Berater sprechen", next: "schedule_start" }
+            ]
+        },
+        
+        districts_info: {
+            message: "Pattaya hat viele verschiedene Stadtteile, jeder mit seinem eigenen Charme. Jomtien ist entspannt und familienfreundlich, Pratumnak ist exklusiv mit Meerblick, Wongamat ist luxuriös, und Central Pattaya ist lebhaft und zentral gelegen.",
+            options: [
+                { text: "🏠 Immobilien in diesen Stadtteilen", next: "redirect_properties" },
+                { text: "📞 Persönliche Beratung", next: "schedule_start" }
+            ]
+        },
+        
+        costs_info: {
+            message: "Die Lebenshaltungskosten in Pattaya sind deutlich niedriger als in Deutschland. Ein Condo kostet zwischen 3-15 Mio. THB, die monatlichen Nebenkosten sind etwa 2.000-5.000 THB.",
+            options: [
+                { text: "🏠 Immobilien anzeigen", next: "redirect_properties" },
+                { text: "📞 Detaillierte Beratung", next: "schedule_start" }
+            ]
+        },
+        
+        process_info: {
+            message: "Der Kaufprozess ist einfacher als Sie denken! Als Ausländer können Sie Condos direkt kaufen (Foreign Quota), für Häuser gibt es verschiedene Lösungen. Wir begleiten Sie durch den gesamten Prozess.",
+            options: [
+                { text: "🏠 Immobilien anzeigen", next: "redirect_properties" },
+                { text: "📞 Beratung zum Kaufprozess", next: "schedule_start" }
+            ]
+        },
+        
+        end: {
+            message: "Vielen Dank für das Gespräch! Ein Berater wird sich bald bei Ihnen melden. Haben Sie noch weitere Fragen?",
+            options: [
+                { text: "🏠 Immobilien anzeigen", next: "redirect_properties" },
+                { text: "📞 Weitere Beratung", next: "schedule_start" },
+                { text: "👋 Nein, danke", next: "start" }
+            ]
         }
     };
 
-    let currentNode = 'start';
-    let userData = {};
-
-    // === Chat-Funktionen ===
-    function showBotMessage(text) {
-        const msg = document.createElement('div');
-        msg.className = 'bot-message';
-        msg.innerHTML = text;
-        log.appendChild(msg);
-        log.scrollTop = log.scrollHeight;
+    // === Funktionen ===
+    function displayMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `mb-4 ${isUser ? 'text-right' : 'text-left'}`;
+        
+        const messageBubble = document.createElement('div');
+        messageBubble.className = `inline-block p-3 rounded-lg max-w-xs ${
+            isUser 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-100 text-gray-800'
+        }`;
+        messageBubble.textContent = message;
+        
+        messageDiv.appendChild(messageBubble);
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
     }
 
-    function showUserMessage(text) {
-        const msg = document.createElement('div');
-        msg.className = 'user-message';
-        msg.textContent = text;
-        log.appendChild(msg);
-        log.scrollTop = log.scrollHeight;
-    }
-
-    function showTypingIndicator() {
-        const typing = document.createElement('div');
-        typing.className = 'typing-indicator';
-        typing.innerHTML = `
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-        `;
-        log.appendChild(typing);
-        log.scrollTop = log.scrollHeight;
-        return typing;
-    }
-
-    function showOptions(options) {
-        inputArea.innerHTML = '';
+    function displayOptions(options) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'space-y-2 mt-4';
+        
         options.forEach(option => {
             const button = document.createElement('button');
-            button.className = 'choice-button';
+            button.className = 'w-full text-left p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-sm';
             button.textContent = option.text;
-            button.onclick = () => handleChoice(option);
-            inputArea.appendChild(button);
+            button.onclick = () => handleUserChoice(option.next);
+            optionsDiv.appendChild(button);
         });
-    }
-
-    function handleChoice(option) {
-        showUserMessage(option.text);
-        currentNode = option.next;
         
-        // Kleine Verzögerung für Realismus
-        setTimeout(() => {
-            runConversation();
-        }, 800);
+        messages.appendChild(optionsDiv);
+        messages.scrollTop = messages.scrollHeight;
     }
-    
-    function runConversation() {
-        const node = conversationFlows[currentNode];
-        inputArea.innerHTML = '';
 
-        if (node.message) {
-            showBotMessage(node.message);
+    function handleUserChoice(nextState) {
+        if (nextState === 'redirect_properties') {
+            window.location.href = '/immobilien.html';
+            return;
         }
-
-        if (node.options) {
+        
+        if (nextState === 'end') {
+            displayMessage("Vielen Dank für das Gespräch! Ein Berater wird sich bald bei Ihnen melden.", false);
             setTimeout(() => {
-                showOptions(node.options);
-            }, 1000);
+                currentState = 'start';
+                messages.innerHTML = '';
+                displayMessage(conversationFlows.start.message);
+                displayOptions(conversationFlows.start.options);
+            }, 3000);
+            return;
         }
-
-        if (node.action) {
-            setTimeout(() => {
-                executeAction(node.action);
-            }, 1500);
-        }
-    }
-    
-    function executeAction(action) {
-        switch(action) {
-            case 'collect_user_data_and_schedule':
-                startSchedulingProcess();
-                break;
-            case 'show_property_results':
-                showPropertyResults();
-                break;
-        }
-    }
-    
-    function showPropertyResults() {
-        showBotMessage("Ich habe 3 exklusive Angebote für Sie gefunden:");
         
-        setTimeout(() => {
-            showBotMessage("🏠 <strong>Luxus Condo Jomtien</strong><br>2 SZ, 85m², Meerblick<br>💎 <strong>8.5 Mio. THB</strong>");
-        }, 1000);
+        currentState = nextState;
+        const flow = conversationFlows[nextState];
         
-        setTimeout(() => {
-            showBotMessage("🏡 <strong>Villa mit Pool Pratumnak</strong><br>3 SZ, 200m², Privatpool<br>💎 <strong>15.8 Mio. THB</strong>");
-        }, 2000);
-        
-        setTimeout(() => {
-            showBotMessage("🏢 <strong>Investment Condo Wongamat</strong><br>1 SZ, 45m², Vermietung<br>💎 <strong>3.2 Mio. THB</strong>");
-        }, 3000);
-        
-        setTimeout(() => {
-            showOptions([
-                { text: "📅 Besichtigungstermin vereinbaren", next: "schedule_start" },
-                { text: "📞 Mit Berater sprechen", next: "schedule_start" },
-                { text: "🏠 Weitere Objekte anzeigen", next: "show_results" }
-            ]);
-        }, 4000);
-    }
-    
-    async function startSchedulingProcess() {
-        showBotMessage("Bitte geben Sie Ihren vollen Namen an:");
-        
-        // In einer echten App würde hier ein Eingabefeld erscheinen
-        // Für Demo-Zwecke simulieren wir das:
-        setTimeout(() => {
-            const name = prompt("Ihr voller Name:");
-            if (name) {
-                userData.name = name;
-                showUserMessage(name);
-                
-                setTimeout(() => {
-                    showBotMessage("Danke! Und Ihre E-Mail-Adresse?");
-                    
-                    setTimeout(() => {
-                        const email = prompt("Ihre E-Mail-Adresse:");
-                        if (email) {
-                            userData.email = email;
-                            showUserMessage(email);
-                            
-                            setTimeout(() => {
-                                showBotMessage(`Vielen Dank, ${name}! Ich suche nach verfügbaren Terminen... Das kann einen Moment dauern.`);
-                                
-                                // Google Calendar Integration
-                                scheduleAppointment(name, email);
-                            }, 1000);
-                        }
-                    }, 1000);
-                }, 1000);
+        if (flow) {
+            displayMessage(flow.message);
+            if (flow.options) {
+                displayOptions(flow.options);
             }
-        }, 1000);
-    }
-    
-    async function scheduleAppointment(name, email) {
-        try {
-            // Termin in 2 Tagen um 14:00 Uhr (Beispiel)
-            const startTime = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
-            startTime.setHours(14, 0, 0, 0);
-            
-            const response = await fetch('/.netlify/functions/create-appointment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    startTime: startTime.toISOString(),
-                    meetingType: 'Video-Call'
-                }),
-            });
-
-            const result = await response.json();
-
-            if (response.ok && result.success) {
-                showBotMessage("✅ Super! Ihr Termin ist bestätigt. Sie erhalten in Kürze eine Einladung per E-Mail.");
-                
-                setTimeout(() => {
-                    showBotMessage(`📅 Termin: ${new Date(result.startTime).toLocaleString('de-DE')}<br>📧 E-Mail: ${email}`);
-                }, 1000);
-                
-                setTimeout(() => {
-                    showOptions([
-                        { text: "🎉 Perfekt, danke!", next: "start" },
-                        { text: "📅 Weitere Termine anzeigen", next: "schedule_start" }
-                    ]);
-                }, 2000);
-            } else {
-                throw new Error(result.error || 'Unknown error');
-            }
-
-        } catch (error) {
-            console.error('Error scheduling appointment:', error);
-            showBotMessage("Es tut mir leid, bei der Terminplanung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.");
-            
-            setTimeout(() => {
-                showOptions([
-                    { text: "📞 Direkt anrufen", next: "start" },
-                    { text: "📧 E-Mail schreiben", next: "start" }
-                ]);
-            }, 2000);
         }
     }
-    
-    // === UI-Events ===
-    trigger.onclick = () => {
-        windowEl.classList.remove('concierge-hidden');
-        if (log.children.length === 0) {
-            setTimeout(() => {
-                runConversation();
-            }, 500);
-        }
-    };
-    
-    // Mobile Concierge Trigger
-    const mobileTrigger = document.getElementById('concierge-trigger-mobile');
-    if (mobileTrigger) {
-        mobileTrigger.onclick = () => {
-            windowEl.classList.remove('concierge-hidden');
-            if (log.children.length === 0) {
-                setTimeout(() => {
-                    runConversation();
-                }, 500);
-            }
-        };
+
+    function startConversation() {
+        messages.innerHTML = '';
+        currentState = 'start';
+        const flow = conversationFlows.start;
+        displayMessage(flow.message);
+        displayOptions(flow.options);
     }
-    
-    closeBtn.onclick = () => {
-        windowEl.classList.add('concierge-hidden');
-    };
-    
+
+    // === Event Listeners ===
+    toggle.addEventListener('click', function() {
+        chat.classList.toggle('hidden');
+        if (!chat.classList.contains('hidden')) {
+            startConversation();
+        }
+    });
+
+    close.addEventListener('click', function() {
+        chat.classList.add('hidden');
+    });
+
     // Schließen bei Klick außerhalb
-    windowEl.onclick = (e) => {
-        if (e.target === windowEl) {
-            windowEl.classList.add('concierge-hidden');
-        }
-    };
-    
-    // ESC-Taste zum Schließen
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !windowEl.classList.contains('concierge-hidden')) {
-            windowEl.classList.add('concierge-hidden');
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('#concierge-container')) {
+            chat.classList.add('hidden');
         }
     });
 });

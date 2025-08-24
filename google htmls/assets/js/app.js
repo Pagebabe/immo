@@ -2,12 +2,60 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-
+    
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', function() {
             mobileMenu.classList.toggle('hidden');
         });
     }
+
+    // === Dropdown-Menü Funktionalität ===
+    const dropdowns = document.querySelectorAll('.has-dropdown');
+    const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+
+    // Desktop Dropdowns
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+
+        // Verhindert, dass der Link auf Touch-Geräten beim ersten Klick ausgelöst wird
+        link.addEventListener('click', function (event) {
+            // Prüfen, ob der Viewport mobil ist
+            if (window.innerWidth <= 768) {
+                // Wenn das Menü noch nicht offen ist, öffne es und verhindere den Link-Klick
+                if (!dropdown.classList.contains('is-open')) {
+                    event.preventDefault();
+                    
+                    // Schließe andere offene Dropdowns
+                    dropdowns.forEach(d => d.classList.remove('is-open'));
+
+                    // Öffne das aktuelle
+                    dropdown.classList.add('is-open');
+                }
+            }
+        });
+    });
+    
+    // Mobile Dropdowns
+    mobileDropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
+        const content = dropdown.querySelector('.mobile-dropdown-content');
+        
+        if (toggle && content) {
+            toggle.addEventListener('click', function() {
+                dropdown.classList.toggle('is-open');
+                content.classList.toggle('hidden');
+            });
+        }
+    });
+    
+    // Klicks außerhalb des Menüs schließen es
+    window.addEventListener('click', function(event) {
+        if (!event.target.closest('.has-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('is-open');
+            });
+        }
+    });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
