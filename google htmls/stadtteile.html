@@ -3,13 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stadtteile in Pattaya | Entdecken Sie Ihr perfektes Viertel | Pattaya Living Estate</title>
-    <meta name="description" content="Entdecken Sie die verschiedenen Stadtteile von Pattaya. Jeder Stadtteil hat seinen eigenen Charakter - finden Sie Ihr perfektes Viertel.">
+    <title>Stadtteile in Pattaya | Jomtien, Pratumnak, Wongamat | Pattaya Living Estate</title>
+    <meta name="description" content="Entdecken Sie die verschiedenen Stadtteile von Pattaya: Jomtien, Pratumnak, Wongamat, Naklua. Finden Sie Ihren perfekten Standort für Ihre Traumimmobilie.">
+    <link rel="canonical" href="https://www.pattaya-living-estate.com/stadtteile/">
+    
+    <!-- OpenGraph & Twitter Cards -->
+    <meta property="og:title" content="Stadtteile in Pattaya - Jomtien, Pratumnak, Wongamat">
+    <meta property="og:description" content="Entdecken Sie die verschiedenen Stadtteile von Pattaya und finden Sie Ihren perfekten Standort für Ihre Traumimmobilie.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pattaya-living-estate.com/stadtteile/">
+    <meta property="og:image" content="https://www.pattaya-living-estate.com/images/pattaya-districts.webp">
+    <meta property="og:site_name" content="Pattaya Living Estate">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stadtteile in Pattaya - Jomtien, Pratumnak, Wongamat">
+    <meta name="twitter:description" content="Entdecken Sie die verschiedenen Stadtteile von Pattaya und finden Sie Ihren perfekten Standort.">
+    <meta name="twitter:image" content="https://www.pattaya-living-estate.com/images/pattaya-districts.webp">
+    
+    <!-- JSON-LD für Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Stadtteile in Pattaya",
+      "description": "Übersicht aller Stadtteile in Pattaya mit Immobilienangeboten",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Place",
+            "name": "Jomtien",
+            "url": "https://www.pattaya-living-estate.com/stadtteile/jomtien/"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Place",
+            "name": "Pratumnak",
+            "url": "https://www.pattaya-living-estate.com/stadtteile/pratumnak/"
+          }
+        }
+      ]
+    }
+    </script>
+
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
@@ -48,81 +95,140 @@
         </div>
     </header>
 
-    <main>
-        <section class="bg-white">
-            <div class="container mx-auto px-6 py-16 text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Finden Sie Ihr perfektes Viertel in Pattaya</h1>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Jeder Stadtteil hat seinen eigenen Charakter. Ob Sie die entspannte Strandatmosphäre, exklusive Ruhe oder das pulsierende Stadtleben suchen – hier finden Sie den richtigen Ort für Ihr neues Zuhause.</p>
+    <!-- Hero Section -->
+    <section class="hero-small hero-stadtteile">
+        <div class="hero-overlay">
+            <h1><span class="gradient-text">Stadtteile</span> in Pattaya</h1>
+            <p>Entdecken Sie die verschiedenen Viertel und finden Sie Ihren perfekten Standort</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-16">
+        <!-- Einleitung -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Finden Sie Ihr perfektes Viertel</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Jeder Stadtteil in Pattaya hat seinen eigenen Charakter und Charme. Ob Sie die entspannte Strandatmosphäre, 
+                exklusive Ruhe oder das pulsierende Stadtleben suchen – hier finden Sie den richtigen Ort für Ihr neues Zuhause.
+            </p>
+        </div>
+
+        <!-- Stadtteile Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Jomtien -->
+            <a href="/stadtteile/jomtien.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1590892211130-2a8a3a4041b3?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Jomtien</h3>
+                    <p class="text-gray-600 mb-4">Entspanntes Strandleben trifft auf exzellente Infrastruktur. Ideal für Familien, Rentner und alle, die Ruhe suchen.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span>Südlich von Pattaya</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold group-hover:underline">Mehr erfahren →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Pratumnak -->
+            <a href="/stadtteile/pratumnak.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1592476722379-cf70e3cb3973?q=80&w=1974&auto=format&fit=crop');"></div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Pratumnak</h3>
+                    <p class="text-gray-600 mb-4">Exklusive, ruhige und prestigeträchtige Wohngegend auf dem Hügel zwischen Pattaya und Jomtien.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span>Hügel zwischen Pattaya & Jomtien</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold group-hover:underline">Mehr erfahren →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Wongamat -->
+            <a href="/stadtteile/wongamat.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1620067913361-23573bf3a444?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Wongamat</h3>
+                    <p class="text-gray-600 mb-4">Bekannt für seine sauberen Privatstrände und luxuriösen 5-Sterne-Condominiums im Norden Pattayas.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span>Norden von Pattaya</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold group-hover:underline">Mehr erfahren →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Naklua -->
+            <a href="/stadtteile/naklua.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Naklua</h3>
+                    <p class="text-gray-600 mb-4">Traditioneller Fischerort mit authentischem thailändischen Flair und wachsender Immobilienentwicklung.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span>Nördlich von Pattaya</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold group-hover:underline">Mehr erfahren →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Central Pattaya -->
+            <a href="/stadtteile/central-pattaya.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop');"></div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Central Pattaya</h3>
+                    <p class="text-gray-600 mb-4">Das pulsierende Herz der Stadt mit Shopping, Restaurants und dem berühmten Walking Street Entertainment.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span>Zentrum von Pattaya</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold group-hover:underline">Mehr erfahren →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- East Pattaya -->
+            <a href="/stadtteile/east-pattaya.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">East Pattaya</h3>
+                    <p class="text-gray-600 mb-4">Entwicklungsgebiet mit großem Potenzial für Familien und Investoren. Ruhig und erschwinglich.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span>Östlich von Pattaya</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold group-hover:underline">Mehr erfahren →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="mt-16 text-center bg-blue-50 rounded-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Bereit, Ihr perfektes Viertel zu finden?</h3>
+            <p class="text-gray-600 mb-6">Lassen Sie sich von unseren Experten beraten und finden Sie Ihre Traumimmobilie in Pattaya.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/immobilien.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-search mr-2"></i>Immobilien durchsuchen
+                </a>
+                <a href="/kontakt.html" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold border border-blue-600 hover:bg-blue-50 transition-colors">
+                    <i class="fas fa-phone mr-2"></i>Beratung anfordern
+                </a>
             </div>
-        </section>
-
-        <section class="container mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Jomtien -->
-                <a href="/stadtteile-detail.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
-                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1590892211130-2a8a3a4041b3?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900">Jomtien</h3>
-                        <p class="mt-2 text-gray-600">Entspanntes Strandleben trifft auf exzellente Infrastruktur. Ideal für Familien, Rentner und alle, die Ruhe suchen.</p>
-                        <span class="mt-4 inline-block font-semibold text-blue-600 group-hover:underline">Mehr über Jomtien erfahren →</span>
-                    </div>
-                </a>
-
-                <!-- Pratumnak -->
-                <a href="/stadtteile-detail.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
-                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1592476722379-cf70e3cb3973?q=80&w=1974&auto=format&fit=crop');"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900">Pratumnak</h3>
-                        <p class="mt-2 text-gray-600">Exklusive, ruhige und prestigeträchtige Wohngegend auf dem Hügel zwischen Pattaya und Jomtien.</p>
-                        <span class="mt-4 inline-block font-semibold text-blue-600 group-hover:underline">Mehr über Pratumnak erfahren →</span>
-                    </div>
-                </a>
-
-                <!-- Wongamat -->
-                <a href="/stadtteile-detail.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
-                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1620067913361-23573bf3a444?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900">Wongamat</h3>
-                        <p class="mt-2 text-gray-600">Bekannt für seine sauberen Privatstrände und luxuriösen 5-Sterne-Condominiums im Norden Pattayas.</p>
-                        <span class="mt-4 inline-block font-semibold text-blue-600 group-hover:underline">Mehr über Wongamat erfahren →</span>
-                    </div>
-                </a>
-
-                <!-- Naklua -->
-                <a href="/stadtteile-detail.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
-                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900">Naklua</h3>
-                        <p class="mt-2 text-gray-600">Traditioneller Fischerort mit authentischem thailändischen Flair und wachsender Immobilienentwicklung.</p>
-                        <span class="mt-4 inline-block font-semibold text-blue-600 group-hover:underline">Mehr über Naklua erfahren →</span>
-                    </div>
-                </a>
-
-                <!-- Central Pattaya -->
-                <a href="/stadtteile-detail.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
-                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop');"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900">Central Pattaya</h3>
-                        <p class="mt-2 text-gray-600">Das pulsierende Herz der Stadt mit Shopping, Restaurants und dem berühmten Walking Street Entertainment.</p>
-                        <span class="mt-4 inline-block font-semibold text-blue-600 group-hover:underline">Mehr über Central Pattaya erfahren →</span>
-                    </div>
-                </a>
-
-                <!-- East Pattaya -->
-                <a href="/stadtteile-detail.html" class="block bg-white rounded-lg shadow-md overflow-hidden group transform hover:-translate-y-1 transition-transform duration-300">
-                    <div class="h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2068&auto=format&fit=crop');"></div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900">East Pattaya</h3>
-                        <p class="mt-2 text-gray-600">Entwicklungsgebiet mit großem Potenzial für Investoren und Familien, die mehr Platz suchen.</p>
-                        <span class="mt-4 inline-block font-semibold text-blue-600 group-hover:underline">Mehr über East Pattaya erfahren →</span>
-                    </div>
-                </a>
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
+    <footer class="bg-gray-800 text-white py-12 mt-16">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
@@ -154,7 +260,7 @@
                     </p>
                     <p class="text-gray-300 mb-2">
                         <i class="fas fa-phone mr-2"></i>
-                        +66 38 XXX XXX
+                        +66 38 123 4567
                     </p>
                     <p class="text-gray-300">
                         <i class="fas fa-envelope mr-2"></i>
@@ -168,6 +274,63 @@
         </div>
     </footer>
 
+    <!-- Sticky Contact Bar -->
+    <div class="sticky-contact-bar">
+        <a href="tel:+66381234567" class="contact-bar-item">
+            <i class="fas fa-phone mb-1 text-blue-600"></i>
+            <span>Anrufen</span>
+        </a>
+        <a href="mailto:info@pattaya-living-estate.com" class="contact-bar-item">
+            <i class="fas fa-envelope mb-1 text-blue-600"></i>
+            <span>E-Mail</span>
+        </a>
+        <div id="concierge-trigger-mobile" class="contact-bar-item">
+            <i class="fas fa-comments mb-1 text-green-600"></i>
+            <span>Chat</span>
+        </div>
+        <a href="/kontakt.html" class="contact-bar-item contact-bar-cta">
+            <i class="fas fa-calendar-alt mb-1"></i>
+            <span>Termin</span>
+        </a>
+    </div>
+
+    <!-- Social Proof Notification -->
+    <div id="social-proof-notification" class="social-proof-hidden">
+        <div class="flex items-start">
+            <div class="flex-shrink-0 pt-0.5">
+                <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+            </div>
+            <div class="ml-3 w-0 flex-1">
+                <p class="text-sm font-medium text-gray-900">
+                    <strong id="social-proof-name"></strong> aus <strong id="social-proof-city"></strong> hat gerade eine Besichtigung angefragt!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === Digital Concierge (Chatbot) === -->
+    <div id="concierge-trigger" class="chat-icon">
+        <i class="fas fa-comments text-2xl"></i>
+        <div class="chat-pulse"></div>
+    </div>
+
+    <div id="concierge-window" class="concierge-hidden">
+        <div class="concierge-header">
+            <div class="flex items-center">
+                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                <h3>Ihr Digitaler Immobilien-Concierge</h3>
+            </div>
+            <button id="concierge-close" class="close-btn">✖</button>
+        </div>
+        <div id="concierge-log" class="concierge-body">
+            <!-- Chat-Nachrichten werden hier dynamisch eingefügt -->
+        </div>
+        <div id="concierge-input-area" class="concierge-footer">
+            <!-- Buttons für Benutzer-Antworten werden hier dynamisch eingefügt -->
+        </div>
+    </div>
+
     <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/concierge.js"></script>
 </body>
 </html>
