@@ -1,7 +1,7 @@
 {
   "name": "pattaya-living-estate",
   "version": "1.0.0",
-  "description": "Pattaya Living Estate - Digitaler Immobilien-Concierge",
+  "description": "Immobilien-Website mit Google Sheets CMS",
   "main": "index.js",
   "scripts": {
     "dev": "netlify dev",
@@ -18,8 +18,8 @@
     "immobilien",
     "pattaya",
     "thailand",
-    "concierge",
-    "chatbot"
+    "google-sheets",
+    "cms"
   ],
   "author": "Pattaya Living Estate",
   "license": "MIT"

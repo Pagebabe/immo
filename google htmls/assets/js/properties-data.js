@@ -1,8 +1,9 @@
 // ======================================================= 
-// ============= IMMOBILIEN-DATENBANK ====================
+// ============= GOOGLE SHEETS CMS INTEGRATION ===========
 // ======================================================= 
 
-const propertiesDatabase = [
+// Fallback-Datenbank (wird überschrieben, wenn Google Sheets verfügbar ist)
+let propertiesDatabase = [
     {
         id: "PLE-001",
         title: "Luxus Condominium in Jomtien",
@@ -473,12 +474,78 @@ class PropertyManager {
 }
 
 // ======================================================= 
+// ============= GOOGLE SHEETS DATA LOADER ===============
+// ======================================================= 
+
+// Funktion zum Laden der Daten von Google Sheets
+async function loadPropertiesFromGoogleSheets() {
+    try {
+        console.log('🔄 Lade Immobilien-Daten von Google Sheets...');
+        
+        const response = await fetch('/.netlify/functions/get-properties');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // Google Sheets Daten in unser Format konvertieren
+        const convertedData = data.map(row => ({
+            id: row.id || `PLE-${Math.random().toString(36).substr(2, 9)}`,
+            title: row.title || 'Unbekanntes Objekt',
+            type: row.type || 'condominium',
+            status: row.status || 'sale',
+            price: parseFloat(row.price) || 0,
+            priceType: row.status === 'rent' ? 'rent' : 'sale',
+            location: row.location || 'Pattaya',
+            district: row.district || 'central-pattaya',
+            bedrooms: parseInt(row.bedrooms) || 0,
+            bathrooms: parseInt(row.bathrooms) || 0,
+            size: parseInt(row.area) || 0,
+            floor: parseInt(row.floor) || null,
+            features: row.features ? row.features.split(',').map(f => f.trim()) : [],
+            image: row.image || 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop',
+            description: row.description || 'Keine Beschreibung verfügbar',
+            isNew: row.isNew === 'true' || row.isNew === true,
+            url: row.detail_url || `/immobilien/${row.id || 'objekt'}/`
+        }));
+        
+        // Datenbank aktualisieren
+        propertiesDatabase = convertedData;
+        
+        console.log(`✅ ${convertedData.length} Immobilien von Google Sheets geladen`);
+        
+        // Property Manager neu initialisieren
+        if (propertyManager) {
+            propertyManager.properties = [...propertiesDatabase];
+            propertyManager.filteredProperties = [...propertiesDatabase];
+            propertyManager.loadFromURL();
+        }
+        
+        return convertedData;
+        
+    } catch (error) {
+        console.error('❌ Fehler beim Laden von Google Sheets:', error);
+        console.log('🔄 Verwende Fallback-Datenbank...');
+        return propertiesDatabase; // Fallback zu lokalen Daten
+    }
+}
+
+// ======================================================= 
 // ============= INITIALISIERUNG =========================
 // ======================================================= 
 
 let propertyManager;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Erst Google Sheets Daten laden, dann Property Manager initialisieren
+    await loadPropertiesFromGoogleSheets();
+    
     propertyManager = new PropertyManager();
     
     // Event Listeners für Filter
@@ -500,4 +567,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // URL Parameter laden und initial rendern
     propertyManager.loadFromURL();
+    
+    // Refresh-Button für Google Sheets Daten (für Entwicklung)
+    if (window.location.hostname === 'localhost' || window.location.hostname.includes('netlify.app')) {
+        const refreshButton = document.createElement('button');
+        refreshButton.innerHTML = '🔄 Daten aktualisieren';
+        refreshButton.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg z-50';
+        refreshButton.onclick = async () => {
+            refreshButton.innerHTML = '⏳ Lade...';
+            await loadPropertiesFromGoogleSheets();
+            refreshButton.innerHTML = '✅ Aktualisiert!';
+            setTimeout(() => {
+                refreshButton.innerHTML = '🔄 Daten aktualisieren';
+            }, 2000);
+        };
+        document.body.appendChild(refreshButton);
+    }
 });
