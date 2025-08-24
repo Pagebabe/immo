@@ -1,0 +1,395 @@
+<!-- Pattaya Living Estate KI-Immobilienberater -->
+<div id="chatbot-container" class="fixed bottom-5 left-5 z-50">
+    
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle" 
+            class="bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 transition-all transform hover:scale-110">
+        <i class="fas fa-comments text-2xl"></i>
+    </button>
+    
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" 
+         class="hidden absolute bottom-16 left-0 w-96 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
+        
+        <!-- Chatbot Header -->
+        <div class="bg-blue-600 text-white p-4 rounded-t-lg flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-home text-blue-600"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold">Pattaya Living Estate</h3>
+                    <p class="text-blue-100 text-sm">KI-Immobilienberater</p>
+                </div>
+            </div>
+            <button id="chatbot-close" class="text-white hover:text-blue-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Chat Messages -->
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4">
+            <!-- Welcome Message -->
+            <div class="flex items-start">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                    <i class="fas fa-robot text-blue-600 text-sm"></i>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-3 max-w-xs">
+                    <p class="text-gray-800 text-sm">
+                        Hallo! Ich bin Ihr digitaler Berater für Immobilien in Pattaya. Wie kann ich Ihnen helfen?
+                    </p>
+                    <div class="mt-3 space-y-2">
+                        <button class="chat-option w-full text-left bg-white rounded px-3 py-2 text-sm hover:bg-blue-100 transition-colors" 
+                                data-option="immobilie-suchen">
+                            🏠 Immobilie suchen
+                        </button>
+                        <button class="chat-option w-full text-left bg-white rounded px-3 py-2 text-sm hover:bg-blue-100 transition-colors" 
+                                data-option="frage-kaufprozess">
+                            ❓ Frage zum Kaufprozess
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Input -->
+        <div class="p-4 border-t border-gray-200">
+            <div class="flex space-x-2">
+                <input type="text" 
+                       id="chat-input" 
+                       placeholder="Tippen Sie Ihre Nachricht..." 
+                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <button id="chat-send" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Chatbot Logic
+class PattayaEstateChatbot {
+    constructor() {
+        this.isOpen = false;
+        this.conversationState = {
+            step: 'welcome',
+            preferences: {
+                stadtteil: null,
+                budget: null,
+                immobilientyp: null,
+                zimmer: null
+            }
+        };
+        this.init();
+    }
+    
+    init() {
+        // Toggle Button
+        document.getElementById('chatbot-toggle').addEventListener('click', () => {
+            this.toggleChat();
+        });
+        
+        // Close Button
+        document.getElementById('chatbot-close').addEventListener('click', () => {
+            this.closeChat();
+        });
+        
+        // Chat Options
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('chat-option')) {
+                this.handleOptionClick(e.target.dataset.option);
+            }
+        });
+        
+        // Send Button
+        document.getElementById('chat-send').addEventListener('click', () => {
+            this.sendMessage();
+        });
+        
+        // Enter Key
+        document.getElementById('chat-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.sendMessage();
+            }
+        });
+    }
+    
+    toggleChat() {
+        const window = document.getElementById('chatbot-window');
+        this.isOpen = !this.isOpen;
+        
+        if (this.isOpen) {
+            window.classList.remove('hidden');
+            window.classList.add('animate-fade-in-up');
+        } else {
+            window.classList.add('hidden');
+        }
+    }
+    
+    closeChat() {
+        this.isOpen = false;
+        document.getElementById('chatbot-window').classList.add('hidden');
+    }
+    
+    addMessage(message, isUser = false, options = null) {
+        const messagesContainer = document.getElementById('chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'flex items-start';
+        
+        if (isUser) {
+            messageDiv.innerHTML = `
+                <div class="ml-auto bg-blue-600 text-white rounded-lg p-3 max-w-xs">
+                    <p class="text-sm">${message}</p>
+                </div>
+            `;
+        } else {
+            let optionsHtml = '';
+            if (options) {
+                optionsHtml = `
+                    <div class="mt-3 space-y-2">
+                        ${options.map(option => `
+                            <button class="chat-option w-full text-left bg-white rounded px-3 py-2 text-sm hover:bg-blue-100 transition-colors" 
+                                    data-option="${option.value}">
+                                ${option.label}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                    <i class="fas fa-robot text-blue-600 text-sm"></i>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-3 max-w-xs">
+                    <p class="text-gray-800 text-sm">${message}</p>
+                    ${optionsHtml}
+                </div>
+            `;
+        }
+        
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    handleOptionClick(option) {
+        switch (option) {
+            case 'immobilie-suchen':
+                this.startPropertySearch();
+                break;
+            case 'frage-kaufprozess':
+                this.showKnowledgeOptions();
+                break;
+            case 'jomtien':
+            case 'pratumnak':
+            case 'wongamat':
+            case 'andere':
+                this.conversationState.preferences.stadtteil = option;
+                this.askBudget();
+                break;
+            case 'budget-5m':
+            case 'budget-5-10m':
+            case 'budget-10-20m':
+            case 'budget-20m+':
+                this.conversationState.preferences.budget = option;
+                this.askPropertyType();
+                break;
+            case 'condo':
+            case 'haus':
+            case 'beides':
+                this.conversationState.preferences.immobilientyp = option;
+                this.askRooms();
+                break;
+            case 'rooms-1':
+            case 'rooms-2':
+            case 'rooms-3+':
+                this.conversationState.preferences.zimmer = option;
+                this.searchProperties();
+                break;
+            case 'foreign-quota':
+            case 'chanote':
+            case 'nebenkosten':
+                this.showKnowledgeAnswer(option);
+                break;
+            case 'mensch-berater':
+                this.handoffToHuman();
+                break;
+        }
+    }
+    
+    startPropertySearch() {
+        this.addMessage('Großartig! Um Ihnen die besten Optionen zu zeigen, habe ich ein paar kurze Fragen. In welchem Stadtteil suchen Sie hauptsächlich?', false, [
+            { value: 'jomtien', label: '🏖️ Jomtien' },
+            { value: 'pratumnak', label: '🏔️ Pratumnak' },
+            { value: 'wongamat', label: '🌊 Wongamat' },
+            { value: 'andere', label: '📍 Andere/Egal' }
+        ]);
+    }
+    
+    askBudget() {
+        const stadtteil = this.conversationState.preferences.stadtteil;
+        let message = 'Verstanden, ';
+        
+        switch (stadtteil) {
+            case 'jomtien':
+                message += 'Jomtien ist eine ausgezeichnete Wahl für entspanntes Wohnen am Strand.';
+                break;
+            case 'pratumnak':
+                message += 'Pratumnak bietet exklusive Ruhe und atemberaubende Ausblicke.';
+                break;
+            case 'wongamat':
+                message += 'Wongamat ist bekannt für seine sauberen Privatstrände.';
+                break;
+            default:
+                message += 'eine gute Wahl.';
+        }
+        
+        message += ' Wie hoch ist Ihr ungefähres Budget in Thailändischen Baht?';
+        
+        this.addMessage(message, false, [
+            { value: 'budget-5m', label: '💰 Bis 5 Mio THB' },
+            { value: 'budget-5-10m', label: '💰 5-10 Mio THB' },
+            { value: 'budget-10-20m', label: '💰 10-20 Mio THB' },
+            { value: 'budget-20m+', label: '💰 20 Mio+ THB' }
+        ]);
+    }
+    
+    askPropertyType() {
+        this.addMessage('Perfekt. Suchen Sie eher ein Condo, ein Haus/Villa oder sind Sie für beides offen?', false, [
+            { value: 'condo', label: '🏢 Nur Condo' },
+            { value: 'haus', label: '🏡 Nur Haus/Villa' },
+            { value: 'beides', label: '🏘️ Beides zeigen' }
+        ]);
+    }
+    
+    askRooms() {
+        this.addMessage('Alles klar. Letzte Frage: Wie viele Schlafzimmer sollten es mindestens sein?', false, [
+            { value: 'rooms-1', label: '🛏️ Studio/1 Zimmer' },
+            { value: 'rooms-2', label: '🛏️ 2 Schlafzimmer' },
+            { value: 'rooms-3+', label: '🛏️ 3+ Schlafzimmer' }
+        ]);
+    }
+    
+    searchProperties() {
+        this.addMessage('Einen Moment, bitte. Ich suche in unserer Datenbank nach passenden Objekten...', false);
+        
+        // Simulate API call
+        setTimeout(() => {
+            this.showPropertyResults();
+        }, 2000);
+    }
+    
+    showPropertyResults() {
+        const prefs = this.conversationState.preferences;
+        let message = `Ich habe 3 Top-Objekte gefunden, die zu Ihren Wünschen passen!`;
+        
+        this.addMessage(message, false, [
+            { value: 'objekt-1', label: '🏠 Luxus Condo Jomtien - 8.5M THB' },
+            { value: 'objekt-2', label: '🏡 Villa mit Pool - 15M THB' },
+            { value: 'objekt-3', label: '🏢 Penthouse - 25M THB' },
+            { value: 'mensch-berater', label: '👤 Mit Berater sprechen' }
+        ]);
+    }
+    
+    showKnowledgeOptions() {
+        this.addMessage('Gerne! Wählen Sie ein Thema, über das Sie mehr erfahren möchten:', false, [
+            { value: 'foreign-quota', label: '📋 Foreign Quota' },
+            { value: 'chanote', label: '📄 Chanote Title Deeds' },
+            { value: 'nebenkosten', label: '💰 Nebenkosten & Steuern' },
+            { value: 'mensch-berater', label: '👤 Persönliche Beratung' }
+        ]);
+    }
+    
+    showKnowledgeAnswer(topic) {
+        let message = '';
+        let options = [
+            { value: 'mensch-berater', label: '👤 Mit Berater sprechen' }
+        ];
+        
+        switch (topic) {
+            case 'foreign-quota':
+                message = 'Foreign Quota bedeutet, dass bis zu 49% der Gesamtfläche eines Condominium-Gebäudes direkt an Ausländer verkauft werden können. Sie können die Immobilie auf Ihren eigenen Namen erwerben.';
+                break;
+            case 'chanote':
+                message = 'Chanote ist das höchste Eigentumsrecht in Thailand. Es gibt Ihnen vollständige Eigentumsrechte und ist die sicherste Form des Immobilienbesitzes.';
+                break;
+            case 'nebenkosten':
+                message = 'Beim Kauf fallen etwa 5-7% Nebenkosten an: Transfer Tax (2%), Stamp Duty (0.5%), und andere Gebühren. Wir erstellen Ihnen gerne eine detaillierte Aufstellung.';
+                break;
+        }
+        
+        this.addMessage(message, false, options);
+    }
+    
+    handoffToHuman() {
+        this.addMessage('Selbstverständlich! Meine menschlichen Kollegen können Ihnen eine detaillierte und persönliche Beratung geben. Um Sie direkt mit dem richtigen Experten zu verbinden, benötige ich nur noch Ihren Namen und Ihre bevorzugte Kontaktmethode.', false, [
+            { value: 'whatsapp', label: '📱 WhatsApp Beratung' },
+            { value: 'telefon', label: '📞 Telefonische Beratung' },
+            { value: 'email', label: '✉️ E-Mail Beratung' }
+        ]);
+    }
+    
+    sendMessage() {
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        
+        if (message) {
+            this.addMessage(message, true);
+            input.value = '';
+            
+            // Simulate bot response
+            setTimeout(() => {
+                this.addMessage('Vielen Dank für Ihre Nachricht! Ein Experte wird sich in Kürze bei Ihnen melden.', false, [
+                    { value: 'mensch-berater', label: '👤 Direkt mit Berater sprechen' }
+                ]);
+            }, 1000);
+        }
+    }
+}
+
+// Initialize chatbot when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    new PattayaEstateChatbot();
+});
+</script>
+
+<style>
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+#chat-messages {
+    scrollbar-width: thin;
+    scrollbar-color: #CBD5E0 #F7FAFC;
+}
+
+#chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: #F7FAFC;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #CBD5E0;
+    border-radius: 3px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #A0AEC0;
+}
+</style>

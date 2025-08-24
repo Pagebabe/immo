@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Wissen | Pattaya Living Estate</title>
+    <meta name="description" content="Fachartikel und Insights rund um Immobilien in Pattaya, Thailand. Expertenwissen für ausländische Käufer.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">Pattaya Living Estate</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Startseite</a>
+                    <a href="/immobilien.html" class="text-gray-700 hover:text-blue-600 font-medium">Immobilien</a>
+                    <a href="/stadtteile.html" class="text-gray-700 hover:text-blue-600 font-medium">Stadtteile</a>
+                    <a href="/kaufen-in-thailand.html" class="text-gray-700 hover:text-blue-600 font-medium">Kaufen in Thailand</a>
+                    <a href="/services.html" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="/ueber-uns.html" class="text-gray-700 hover:text-blue-600 font-medium">Über uns</a>
+                    <a href="/kontakt.html" class="text-gray-700 hover:text-blue-600 font-medium">Kontakt</a>
+                </nav>
+                <div class="md:hidden">
+                    <button class="text-gray-700" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-6 py-4 bg-gray-50 border-t">
+                <a href="/" class="block py-2 text-gray-700 hover:text-blue-600">Startseite</a>
+                <a href="/immobilien.html" class="block py-2 text-gray-700 hover:text-blue-600">Immobilien</a>
+                <a href="/stadtteile.html" class="block py-2 text-gray-700 hover:text-blue-600">Stadtteile</a>
+                <a href="/kaufen-in-thailand.html" class="block py-2 text-gray-700 hover:text-blue-600">Kaufen in Thailand</a>
+                <a href="/services.html" class="block py-2 text-gray-700 hover:text-blue-600">Services</a>
+                <a href="/ueber-uns.html" class="block py-2 text-gray-700 hover:text-blue-600">Über uns</a>
+                <a href="/kontakt.html" class="block py-2 text-gray-700 hover:text-blue-600">Kontakt</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+        
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Blog & Expertenwissen</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Fachartikel, Insights und praktische Tipps rund um Immobilien in Pattaya. Unser Expertenwissen für ausländische Käufer und Investoren.</p>
+        </section>
+
+        <!-- Featured Article -->
+        <section class="mb-16">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop" 
+                             alt="Immobilienkauf in Thailand" 
+                             class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">Featured</span>
+                            <span class="text-gray-500 text-sm ml-4">15. Januar 2024</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Der komplette Guide: Immobilienkauf in Thailand als Ausländer</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Ein umfassender Überblick über alle rechtlichen, steuerlichen und praktischen Aspekte beim Immobilienkauf in Thailand. Von der ersten Idee bis zur Schlüsselübergabe - alles was Sie wissen müssen.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
+                                     alt="Autor" 
+                                     class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Michael Schmidt</p>
+                                    <p class="text-sm text-gray-500">Immobilienexperte</p>
+                                </div>
+                            </div>
+                            <a href="/blog/immobilienkauf-thailand-guide.html" 
+                               class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Weiterlesen
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Article 1 -->
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop" 
+                     alt="Jomtien Immobilien" 
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Stadtteile</span>
+                        <span class="text-gray-500 text-xs ml-3">10. Januar 2024</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Jomtien: Warum dieser Stadtteil bei Ausländern so beliebt ist</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Eine detaillierte Analyse der Vor- und Nachteile von Jomtien als Wohnort für Ausländer. Infrastruktur, Preise und Lebensqualität im Vergleich.
+                    </p>
+                    <a href="/blog/jomtien-immobilien-analyse.html" class="text-blue-600 font-semibold hover:underline">
+                        Weiterlesen →
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2111&auto=format&fit=crop" 
+                     alt="Steuern und Gebühren" 
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-1 rounded-full">Steuern</span>
+                        <span class="text-gray-500 text-xs ml-3">5. Januar 2024</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Steuern und Gebühren beim Immobilienkauf in Thailand</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Eine detaillierte Aufschlüsselung aller anfallenden Kosten. Von Transfer Tax bis Property Tax - keine versteckten Überraschungen.
+                    </p>
+                    <a href="/blog/steuern-gebuehren-thailand.html" class="text-blue-600 font-semibold hover:underline">
+                        Weiterlesen →
+                    </a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop" 
+                     alt="Investment Strategien" 
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">Investment</span>
+                        <span class="text-gray-500 text-xs ml-3">1. Januar 2024</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Immobilien als Investment: Rendite-Strategien in Pattaya</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Wie Sie mit Immobilien in Pattaya eine stabile Rendite erzielen können. Mietrenditen, Wertsteigerung und Exit-Strategien.
+                    </p>
+                    <a href="/blog/immobilien-investment-pattaya.html" class="text-blue-600 font-semibold hover:underline">
+                        Weiterlesen →
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="bg-blue-600 text-white rounded-lg p-8 mt-16 text-center">
+            <h2 class="text-3xl font-bold mb-4">Bleiben Sie informiert</h2>
+            <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+                Erhalten Sie die neuesten Artikel und Marktinsights direkt in Ihr Postfach. Kostenlos und unverbindlich.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" 
+                       placeholder="Ihre E-Mail-Adresse" 
+                       class="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <button type="submit" 
+                        class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Abonnieren
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-20">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Pattaya Living Estate</h3>
+                    <p class="text-gray-400">Ihr vertrauensvoller Partner für Immobilien in Pattaya, Thailand.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Schnellzugriff</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/immobilien.html" class="hover:text-white">Immobilien</a></li>
+                        <li><a href="/stadtteile.html" class="hover:text-white">Stadtteile</a></li>
+                        <li><a href="/services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="/kontakt.html" class="hover:text-white">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Wissen</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/kaufen-in-thailand.html" class="hover:text-white">Kaufen in Thailand</a></li>
+                        <li><a href="/blog.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="/ueber-uns.html" class="hover:text-white">Über uns</a></li>
+                        <li><a href="/impressum.html" class="hover:text-white">Impressum</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Kontakt</h4>
+                    <p class="text-gray-400">Pattaya, Thailand</p>
+                    <p class="text-gray-400">+66 38 XXX XXX</p>
+                    <p class="text-gray-400">info@pattaya-living-estate.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Pattaya Living Estate. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>

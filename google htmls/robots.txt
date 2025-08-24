@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://68aae3995f3d2ef7fadd70ed--comforting-monstera-64e250.netlify.app/sitemap.xml
+
+# Crawl-delay für respektvolle Crawling-Geschwindigkeit
+Crawl-delay: 1
+
+# Spezifische Regeln für verschiedene Crawler
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Blockiere temporäre oder private Bereiche
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /draft/
+
+# Erlaube wichtige Assets
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/

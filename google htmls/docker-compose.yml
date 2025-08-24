@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  pattaya-website:
+    build: .
+    container_name: pattaya-living-estate
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      # Optional: Für Logs
+      - ./logs:/var/log/nginx
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    networks:
+      - pattaya-network
+
+networks:
+  pattaya-network:
+    driver: bridge

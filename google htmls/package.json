@@ -1,0 +1,26 @@
+{
+  "name": "pattaya-living-estate",
+  "version": "1.0.0",
+  "description": "Pattaya Living Estate - Digitaler Immobilien-Concierge",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Static site - no build required'",
+    "deploy": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "googleapis": "^128.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "keywords": [
+    "immobilien",
+    "pattaya",
+    "thailand",
+    "concierge",
+    "chatbot"
+  ],
+  "author": "Pattaya Living Estate",
+  "license": "MIT"
+}

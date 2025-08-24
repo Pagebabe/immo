@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immobilien in Pattaya | Pattaya Living Estate</title>
+    <meta name="description" content="Entdecken Sie unsere Auswahl an Immobilien in Pattaya. Von Condominiums bis Villen - finden Sie Ihre Traumimmobilie.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">Pattaya Living Estate</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Startseite</a>
+                    <a href="/immobilien.html" class="text-blue-600 font-medium">Immobilien</a>
+                    <a href="/stadtteile.html" class="text-gray-700 hover:text-blue-600 font-medium">Stadtteile</a>
+                    <a href="/kaufen-in-thailand.html" class="text-gray-700 hover:text-blue-600 font-medium">Kaufen in Thailand</a>
+                    <a href="/services.html" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="/ueber-uns.html" class="text-gray-700 hover:text-blue-600 font-medium">Über uns</a>
+                    <a href="/kontakt.html" class="text-gray-700 hover:text-blue-600 font-medium">Kontakt</a>
+                </nav>
+                <div class="md:hidden">
+                    <button class="text-gray-700" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-6 py-4 bg-gray-50 border-t">
+                <a href="/" class="block py-2 text-gray-700 hover:text-blue-600">Startseite</a>
+                <a href="/immobilien.html" class="block py-2 text-blue-600">Immobilien</a>
+                <a href="/stadtteile.html" class="block py-2 text-gray-700 hover:text-blue-600">Stadtteile</a>
+                <a href="/kaufen-in-thailand.html" class="block py-2 text-gray-700 hover:text-blue-600">Kaufen in Thailand</a>
+                <a href="/services.html" class="block py-2 text-gray-700 hover:text-blue-600">Services</a>
+                <a href="/ueber-uns.html" class="block py-2 text-gray-700 hover:text-blue-600">Über uns</a>
+                <a href="/kontakt.html" class="block py-2 text-gray-700 hover:text-blue-600">Kontakt</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Immobilien in Pattaya</h1>
+            <p class="text-lg text-gray-600">Entdecken Sie unsere Auswahl an exklusiven Immobilien</p>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <select class="border border-gray-300 rounded-lg px-4 py-3">
+                    <option value="">Alle Typen</option>
+                    <option value="condominium">Condominium</option>
+                    <option value="villa">Villa</option>
+                    <option value="house">Haus</option>
+                    <option value="land">Grundstück</option>
+                </select>
+                
+                <select class="border border-gray-300 rounded-lg px-4 py-3">
+                    <option value="">Alle Stadtteile</option>
+                    <option value="jomtien">Jomtien</option>
+                    <option value="pratumnak">Pratumnak</option>
+                    <option value="wongamat">Wongamat</option>
+                    <option value="naklua">Naklua</option>
+                    <option value="central-pattaya">Central Pattaya</option>
+                </select>
+                
+                <select class="border border-gray-300 rounded-lg px-4 py-3">
+                    <option value="">Alle Status</option>
+                    <option value="sale">Zum Verkauf</option>
+                    <option value="rent">Zur Miete</option>
+                </select>
+                
+                <input type="number" placeholder="Min. Preis (THB)" class="border border-gray-300 rounded-lg px-4 py-3">
+                
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">
+                    <i class="fas fa-search mr-2"></i>Suchen
+                </button>
+            </form>
+        </div>
+
+        <!-- Results Info -->
+        <div class="flex justify-between items-center mb-6">
+            <p class="text-gray-600">Zeige <span class="font-semibold">12</span> von <span class="font-semibold">45</span> Immobilien</p>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">Sortieren nach:</span>
+                <select class="border border-gray-300 rounded-lg px-3 py-2">
+                    <option>Preis (niedrig → hoch)</option>
+                    <option>Preis (hoch → niedrig)</option>
+                    <option>Datum (neueste)</option>
+                    <option>Größe</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Properties Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Property 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop" alt="Luxus Condominium" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        Zum Verkauf
+                    </div>
+                    <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">
+                        Neu
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Luxus Condominium in Jomtien</h3>
+                    <p class="text-gray-600 mb-2">Jomtien Beach Road</p>
+                    <p class="text-gray-600 mb-4">2 Schlafzimmer • 2 Badezimmer • 85m² • 15. Stock</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">฿8,500,000</span>
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop" alt="Villa mit Pool" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        Zur Miete
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Villa mit Pool in Pratumnak</h3>
+                    <p class="text-gray-600 mb-2">Pratumnak Hill</p>
+                    <p class="text-gray-600 mb-4">3 Schlafzimmer • 3 Badezimmer • 200m² • Privatpool</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">฿45,000/Monat</span>
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop" alt="Penthouse" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        Zum Verkauf
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Penthouse in Wongamat</h3>
+                    <p class="text-gray-600 mb-2">Wongamat Beach</p>
+                    <p class="text-gray-600 mb-4">4 Schlafzimmer • 4 Badezimmer • 300m² • Dachterrasse</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">฿25,000,000</span>
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=2076&auto=format&fit=crop" alt="Studio Apartment" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        Zur Miete
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Studio Apartment Central</h3>
+                    <p class="text-gray-600 mb-2">Central Pattaya</p>
+                    <p class="text-gray-600 mb-4">1 Schlafzimmer • 1 Badezimmer • 35m² • 8. Stock</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">฿15,000/Monat</span>
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 5 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop" alt="Grundstück" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        Zum Verkauf
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Bauland in Naklua</h3>
+                    <p class="text-gray-600 mb-2">Naklua, Pattaya</p>
+                    <p class="text-gray-600 mb-4">800m² • Baurecht • Meerblick</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">฿12,000,000</span>
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 6 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" alt="Luxus Villa" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        Zum Verkauf
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Luxus Villa mit Garten</h3>
+                    <p class="text-gray-600 mb-2">Pratumnak</p>
+                    <p class="text-gray-600 mb-4">5 Schlafzimmer • 4 Badezimmer • 450m² • Garten</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">฿35,000,000</span>
+                        <a href="/immobilien-detail.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-12">
+            <nav class="flex items-center space-x-2">
+                <a href="#" class="px-3 py-2 text-gray-500 hover:text-blue-600">← Zurück</a>
+                <a href="#" class="px-3 py-2 bg-blue-600 text-white rounded-lg">1</a>
+                <a href="#" class="px-3 py-2 text-gray-700 hover:text-blue-600">2</a>
+                <a href="#" class="px-3 py-2 text-gray-700 hover:text-blue-600">3</a>
+                <a href="#" class="px-3 py-2 text-gray-700 hover:text-blue-600">4</a>
+                <a href="#" class="px-3 py-2 text-gray-500 hover:text-blue-600">Weiter →</a>
+            </nav>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Pattaya Living Estate</h3>
+                    <p class="text-gray-300">Ihr vertrauensvoller Partner für Immobilien in Pattaya, Thailand.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Schnellzugriff</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/immobilien.html" class="text-gray-300 hover:text-white">Immobilien</a></li>
+                        <li><a href="/stadtteile.html" class="text-gray-300 hover:text-white">Stadtteile</a></li>
+                        <li><a href="/services.html" class="text-gray-300 hover:text-white">Services</a></li>
+                        <li><a href="/kontakt.html" class="text-gray-300 hover:text-white">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Wissen</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/kaufen-in-thailand.html" class="text-gray-300 hover:text-white">Kaufen in Thailand</a></li>
+                        <li><a href="/ueber-uns.html" class="text-gray-300 hover:text-white">Über uns</a></li>
+                        <li><a href="/impressum.html" class="text-gray-300 hover:text-white">Impressum</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Kontakt</h4>
+                    <p class="text-gray-300 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Pattaya, Thailand
+                    </p>
+                    <p class="text-gray-300 mb-2">
+                        <i class="fas fa-phone mr-2"></i>
+                        +66 38 XXX XXX
+                    </p>
+                    <p class="text-gray-300">
+                        <i class="fas fa-envelope mr-2"></i>
+                        info@pattaya-living-estate.com
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 Pattaya Living Estate. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>
