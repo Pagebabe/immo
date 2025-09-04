@@ -18,7 +18,7 @@
     <div class="section-cta">
         <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-primary btn-lg">
             <i class="icon-grid"></i>
-            {{ i18n "view_all_properties" | default "Alle Immobilien anzeigen" }}
+            {{ i18n "view_all_properties" | default "Alle Immobilien ansehen" }}
         </a>
     </div>
 </section>
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">{{ i18n "our_services" | default "Unsere Leistungen" }}</h2>
-            <p class="section-subtitle">{{ i18n "services_desc" | default "Professionelle Beratung und umfassender Service für Ihr Immobilienprojekt" }}</p>
+            <p class="section-subtitle">{{ i18n "services_desc" | default "Vollständige Immobilienbetreuung von der Beratung bis zur Verwaltung" }}</p>
         </div>
         
         <div class="services-grid">
@@ -36,24 +36,27 @@
                 <div class="service-icon">
                     <i class="icon-home"></i>
                 </div>
-                <h3 class="service-title">{{ i18n "property_sales" | default "Immobilienverkauf" }}</h3>
-                <p class="service-desc">{{ i18n "property_sales_desc" | default "Wir helfen Ihnen beim Kauf Ihrer Traumimmobilie in Pattaya" }}</p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="icon-manage"></i>
-                </div>
-                <h3 class="service-title">{{ i18n "property_management" | default "Immobilienverwaltung" }}</h3>
-                <p class="service-desc">{{ i18n "property_management_desc" | default "Professionelle Verwaltung Ihrer Immobilie" }}</p>
+                <h3>{{ i18n "property_purchase" | default "Immobilienkauf" }}</h3>
+                <p>{{ i18n "property_purchase_desc" | default "Professionelle Beratung beim Kauf Ihrer Traumimmobilie in Pattaya" }}</p>
+                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
             </div>
             
             <div class="service-card">
                 <div class="service-icon">
                     <i class="icon-chart"></i>
                 </div>
-                <h3 class="service-title">{{ i18n "investment_consulting" | default "Investmentberatung" }}</h3>
-                <p class="service-desc">{{ i18n "investment_consulting_desc" | default "Strategische Beratung für erfolgreiche Immobilieninvestments" }}</p>
+                <h3>{{ i18n "property_management" | default "Property Management" }}</h3>
+                <p>{{ i18n "property_management_desc" | default "Vollständige Verwaltung Ihrer Immobilie für maximale Rendite" }}</p>
+                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="icon-shield"></i>
+                </div>
+                <h3>{{ i18n "legal_support" | default "Rechtliche Beratung" }}</h3>
+                <p>{{ i18n "legal_support_desc" | default "Foreign Quota, Due Diligence und rechtliche Absicherung" }}</p>
+                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
             </div>
         </div>
     </div>
@@ -64,49 +67,40 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">{{ i18n "popular_areas" | default "Beliebte Stadtteile" }}</h2>
-            <p class="section-subtitle">{{ i18n "areas_desc" | default "Die besten Lagen in Pattaya für Ihr neues Zuhause" }}</p>
+            <p class="section-subtitle">{{ i18n "areas_desc" | default "Entdecken Sie die besten Lagen in Pattaya für Ihre Immobilieninvestition" }}</p>
         </div>
         
         <div class="areas-grid">
             <div class="area-card">
                 <div class="area-image">
-                    <picture>
-                        <source srcset="/images/areas/jomtien.webp" type="image/webp">
-                        <img src="/images/areas/jomtien.jpg" alt="Jomtien Beach" loading="lazy">
-                    </picture>
+                    <img src="/images/areas/jomtien.jpg" alt="Jomtien Beach" loading="lazy">
                 </div>
                 <div class="area-content">
-                    <h3 class="area-title">Jomtien</h3>
-                    <p class="area-desc">{{ i18n "jomtien_desc" | default "Ruhige Lage, familienfreundlich, beste Strände" }}</p>
-                    <a href="/de/areas/jomtien/" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+                    <h3>Jomtien</h3>
+                    <p>{{ i18n "jomtien_desc" | default "Familienfreundlich, ruhiger Strand, günstige Preise" }}</p>
+                    <a href="{{ (site.GetPage "/areas/jomtien").RelPermalink }}" class="btn btn-outline">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
                 </div>
             </div>
             
             <div class="area-card">
                 <div class="area-image">
-                    <picture>
-                        <source srcset="/images/areas/pratumnak.webp" type="image/webp">
-                        <img src="/images/areas/pratumnak.jpg" alt="Pratumnak Hill" loading="lazy">
-                    </picture>
+                    <img src="/images/areas/pratumnak.jpg" alt="Pratumnak Hill" loading="lazy">
                 </div>
                 <div class="area-content">
-                    <h3 class="area-title">Pratumnak</h3>
-                    <p class="area-desc">{{ i18n "pratumnak_desc" | default "Exklusive Lage, Meerblick, Luxus" }}</p>
-                    <a href="/de/areas/pratumnak/" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+                    <h3>Pratumnak</h3>
+                    <p>{{ i18n "pratumnak_desc" | default "Premium-Lage, Hügel-Blick, Luxus-Properties" }}</p>
+                    <a href="{{ (site.GetPage "/areas/pratumnak").RelPermalink }}" class="btn btn-outline">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
                 </div>
             </div>
             
             <div class="area-card">
                 <div class="area-image">
-                    <picture>
-                        <source srcset="/images/areas/central.webp" type="image/webp">
-                        <img src="/images/areas/central.jpg" alt="Central Pattaya" loading="lazy">
-                    </picture>
+                    <img src="/images/areas/central.jpg" alt="Central Pattaya" loading="lazy">
                 </div>
                 <div class="area-content">
-                    <h3 class="area-title">Central Pattaya</h3>
-                    <p class="area-desc">{{ i18n "central_desc" | default "Zentrale Lage, beste Infrastruktur" }}</p>
-                    <a href="/de/areas/central/" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+                    <h3>Central Pattaya</h3>
+                    <p>{{ i18n "central_desc" | default "Urban Leben, Nachtleben, hohe Renditen" }}</p>
+                    <a href="{{ (site.GetPage "/areas/central").RelPermalink }}" class="btn btn-outline">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
                 </div>
             </div>
         </div>
@@ -117,16 +111,16 @@
 <section class="cta-section">
     <div class="container">
         <div class="cta-content">
-            <h2 class="cta-title">{{ i18n "ready_to_start" | default "Bereit für Ihr neues Leben in Pattaya?" }}</h2>
-            <p class="cta-subtitle">{{ i18n "cta_desc" | default "Kontaktieren Sie uns für eine kostenlose Beratung und finden Sie Ihre Traumimmobilie" }}</p>
+            <h2>{{ i18n "ready_to_start" | default "Bereit für Ihr Traumhaus in Pattaya?" }}</h2>
+            <p>{{ i18n "cta_desc" | default "Kontaktieren Sie unsere Experten für eine kostenlose Beratung" }}</p>
             <div class="cta-buttons">
                 <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary btn-lg">
                     <i class="icon-phone"></i>
-                    {{ i18n "free_consultation" | default "Kostenlose Beratung" }}
+                    {{ i18n "get_consultation" | default "Kostenlose Beratung" }}
                 </a>
-                <a href="https://wa.me/66XXXXXXXXX" class="btn btn-secondary btn-lg" target="_blank">
+                <a href="https://wa.me/66XXXXXXXXX" class="btn btn-success btn-lg" target="_blank">
                     <i class="icon-whatsapp"></i>
-                    {{ i18n "whatsapp_chat" | default "WhatsApp Chat" }}
+                    WhatsApp Chat
                 </a>
             </div>
         </div>

@@ -196,6 +196,78 @@
   translation: Telefon
 - id: email
   translation: E-Mail
+
+# Hero Section
+- id: hero_title
+  translation: "Ihr Traumhaus in Pattaya wartet"
+- id: hero_subtitle
+  translation: "Professionelle Immobilienberatung für Deutsche in Thailand. Über 30 Objekte in Verwaltung."
+- id: browse_properties
+  translation: "Immobilien entdecken"
+- id: free_consultation
+  translation: "Kostenlose Beratung"
+- id: properties_managed
+  translation: "Objekte in Verwaltung"
+- id: years_experience
+  translation: "Jahre Erfahrung"
+- id: happy_clients
+  translation: "Zufriedene Kunden"
+
+# Sections
+- id: featured_properties
+  translation: "Ausgewählte Immobilien"
+- id: featured_properties_desc
+  translation: "Entdecken Sie unsere Top-Immobilien in den besten Lagen von Pattaya"
+- id: view_all_properties
+  translation: "Alle Immobilien ansehen"
+- id: our_services
+  translation: "Unsere Leistungen"
+- id: services_desc
+  translation: "Vollständige Immobilienbetreuung von der Beratung bis zur Verwaltung"
+- id: property_purchase
+  translation: "Immobilienkauf"
+- id: property_purchase_desc
+  translation: "Professionelle Beratung beim Kauf Ihrer Traumimmobilie in Pattaya"
+- id: property_management
+  translation: "Property Management"
+- id: property_management_desc
+  translation: "Vollständige Verwaltung Ihrer Immobilie für maximale Rendite"
+- id: legal_support
+  translation: "Rechtliche Beratung"
+- id: legal_support_desc
+  translation: "Foreign Quota, Due Diligence und rechtliche Absicherung"
+- id: learn_more
+  translation: "Mehr erfahren"
+- id: popular_areas
+  translation: "Beliebte Stadtteile"
+- id: areas_desc
+  translation: "Entdecken Sie die besten Lagen in Pattaya für Ihre Immobilieninvestition"
+- id: jomtien_desc
+  translation: "Familienfreundlich, ruhiger Strand, günstige Preise"
+- id: pratumnak_desc
+  translation: "Premium-Lage, Hügel-Blick, Luxus-Properties"
+- id: central_desc
+  translation: "Urban Leben, Nachtleben, hohe Renditen"
+- id: explore_area
+  translation: "Stadtteil erkunden"
+- id: ready_to_start
+  translation: "Bereit für Ihr Traumhaus in Pattaya?"
+- id: cta_desc
+  translation: "Kontaktieren Sie unsere Experten für eine kostenlose Beratung"
+- id: get_consultation
+  translation: "Kostenlose Beratung"
+
+# Property Cards
+- id: featured
+  translation: "Empfohlen"
+- id: bedrooms
+  translation: "Schlafzimmer"
+- id: bathrooms
+  translation: "Badezimmer"
+- id: no_image
+  translation: "Kein Bild verfügbar"
+- id: agent
+  translation: "Makler"
 - id: features
   translation: Ausstattung
 - id: pool

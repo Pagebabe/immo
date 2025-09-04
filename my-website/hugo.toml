@@ -51,6 +51,36 @@ title = "Pattaya Living Estate"
 currency = "THB"
 dateFormat = "02.01.2006"
 
+[[languages.de.menus.main]]
+name = "Immobilien"
+url = "/de/properties/"
+weight = 1
+
+[[languages.de.menus.main]]
+name = "Leistungen"
+url = "/de/services/"
+weight = 2
+
+[[languages.de.menus.main]]
+name = "Stadtteile"
+url = "/de/areas/"
+weight = 3
+
+[[languages.de.menus.main]]
+name = "Blog"
+url = "/de/blog/"
+weight = 4
+
+[[languages.de.menus.main]]
+name = "Über uns"
+url = "/de/about/"
+weight = 5
+
+[[languages.de.menus.main]]
+name = "Kontakt"
+url = "/de/contact/"
+weight = 6
+
 [languages.th]
 languageName = "ไทย"
 weight = 3

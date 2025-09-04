@@ -1,0 +1,78 @@
+{{ $property := . }}
+<div class="property-card" data-price="{{ $property.Params.price }}" data-type="{{ $property.Params.type }}" data-location="{{ $property.Params.location }}">
+    <div class="property-image">
+        {{ if $property.Params.images }}
+            <img src="{{ index $property.Params.images 0 }}" alt="{{ $property.Title }}" loading="lazy">
+        {{ else }}
+            <div class="no-image">
+                <i class="icon-home"></i>
+                <span>{{ i18n "no_image" | default "Kein Bild verfügbar" }}</span>
+            </div>
+        {{ end }}
+        
+        {{ if $property.Params.featured }}
+            <div class="property-badge featured">{{ i18n "featured" | default "Empfohlen" }}</div>
+        {{ end }}
+        
+        <div class="property-actions">
+            <button class="action-btn compare-btn" data-id="{{ $property.RelPermalink }}" data-title="{{ $property.Title }}">
+                <i class="icon-compare"></i>
+            </button>
+            <button class="action-btn fav-btn" data-id="{{ $property.RelPermalink }}">
+                <i class="icon-heart"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="property-content">
+        <div class="property-price">
+            <span class="price" data-thb="{{ $property.Params.price }}">{{ $property.Params.price | lang.FormatNumber 0 }} {{ $property.Params.currency }}</span>
+        </div>
+        
+        <h3 class="property-title">
+            <a href="{{ $property.RelPermalink }}">{{ $property.Title }}</a>
+        </h3>
+        
+        <div class="property-location">
+            <i class="icon-location"></i>
+            <span>{{ $property.Params.location }}</span>
+        </div>
+        
+        <div class="property-details">
+            <div class="detail-item">
+                <i class="icon-bed"></i>
+                <span>{{ $property.Params.bedrooms }} {{ i18n "bedrooms" | default "Schlafzimmer" }}</span>
+            </div>
+            <div class="detail-item">
+                <i class="icon-bath"></i>
+                <span>{{ $property.Params.bathrooms }} {{ i18n "bathrooms" | default "Badezimmer" }}</span>
+            </div>
+            <div class="detail-item">
+                <i class="icon-area"></i>
+                <span>{{ $property.Params.area }} m²</span>
+            </div>
+        </div>
+        
+        <div class="property-type">
+            <span class="type-badge">{{ $property.Params.type }}</span>
+        </div>
+        
+        {{ if $property.Params.features }}
+            <div class="property-features">
+                {{ range first 3 $property.Params.features }}
+                    <span class="feature-tag">{{ . }}</span>
+                {{ end }}
+            </div>
+        {{ end }}
+    </div>
+    
+    <div class="property-footer">
+        <div class="property-agent">
+            <span class="agent-label">{{ i18n "agent" | default "Makler" }}:</span>
+            <span class="agent-name">{{ $property.Params.agent }}</span>
+        </div>
+        <div class="property-date">
+            {{ $property.Date.Format "02.01.2006" }}
+        </div>
+    </div>
+</div>

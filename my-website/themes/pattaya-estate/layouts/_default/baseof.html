@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="keywords" content="{{ if .Params.keywords }}{{ .Params.keywords }}{{ else }}Immobilien Pattaya, Condo kaufen, Villa Thailand, Foreign Quota, Immobilienberatung, Property Management, Jomtien, Pratumnak, Naklua{{ end }}">
+    <meta name="author" content="Pattaya Living Estate">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="{{ .Language.Lang }}">
+    <meta name="geo.region" content="TH-20">
+    <meta name="geo.placename" content="Pattaya, Thailand">
+    <meta name="geo.position" content="12.9236;100.8825">
+    <meta name="ICBM" content="12.9236, 100.8825">
     
     {{- if .IsPage -}}
     <link rel="canonical" href="{{ .Permalink }}" />
@@ -301,6 +309,58 @@
         // Optimize scroll performance
         document.addEventListener('touchstart', function() {}, { passive: true });
         document.addEventListener('touchmove', function() {}, { passive: true });
+    }
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "{{ .Site.Title }}",
+        "url": "{{ .Site.BaseURL }}",
+        "logo": "{{ .Site.BaseURL }}images/logo.png",
+        "telephone": "+66-XXXXXXXXX",
+        "email": "info@pattayalivingestate.com",
+        "sameAs": [
+            "https://facebook.com/pattayalivingestate",
+            "https://instagram.com/pattayalivingestate",
+            "https://youtube.com/@pattayalivingestate"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123/45 Beach Road",
+            "addressLocality": "Pattaya",
+            "addressRegion": "Chonburi",
+            "postalCode": "20150",
+            "addressCountry": "TH"
+        },
+        "areaServed": [
+            {
+                "@type": "City",
+                "name": "Pattaya"
+            },
+            {
+                "@type": "Place",
+                "name": "Jomtien"
+            },
+            {
+                "@type": "Place", 
+                "name": "Pratumnak"
+            }
+        ],
+        "serviceType": [
+            "Real Estate Sales",
+            "Property Management", 
+            "Investment Consulting",
+            "Legal Support",
+            "Foreign Quota Assistance"
+        ],
+        "priceRange": "THB 2,000,000 - 20,000,000",
+        "currenciesAccepted": ["THB", "EUR", "USD"],
+        "paymentAccepted": ["Cash", "Bank Transfer", "Credit Card"],
+        "openingHours": "Mo-Fr 09:00-18:00, Sa 09:00-16:00",
+        "languages": ["de", "en", "th"]
     }
     </script>
 </body>
