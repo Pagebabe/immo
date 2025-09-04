@@ -15,6 +15,7 @@ type = "types"
 location = "locations"
 
 [params]
+description = "Professionelle Immobilienberatung für Ausländer in Thailand. Finden Sie Ihr Traumhaus in Pattaya mit über 30 verwalteten Objekten."
 currency = "THB"
 ga4 = "G-XXXXXXX"
 gsc_verify = "GSC_TOKEN"

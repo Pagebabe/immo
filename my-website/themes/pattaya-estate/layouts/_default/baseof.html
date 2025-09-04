@@ -65,28 +65,6 @@
     {{ partial "header.html" . }}
     {{ partial "breadcrumbs.html" . }}
     
-    <header class="site-header">
-        <div class="container">
-            <h1 class="site-title">
-                <a href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
-            </h1>
-            
-            {{ partial "lang-switcher.html" . }}
-            {{ partial "currency-switcher.html" . }}
-            
-            <nav class="main-nav">
-                <ul>
-                    {{ $current := . }}
-                    {{ range .Site.Menus.main }}
-                    <li><a href="{{ .URL }}" class="{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}active{{ end }}">{{ .Name }}</a></li>
-                    {{ end }}
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    {{ partial "breadcrumbs.html" . }}
-    
     <main class="main-content">
         {{ block "main" . }}{{ end }}
     </main>
