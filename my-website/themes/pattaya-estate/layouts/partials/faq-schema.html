@@ -1,0 +1,21 @@
+{{ $faq := .Page.Params.faq }}
+{{ if $faq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $index, $item := $faq }}
+    {
+      "@type": "Question",
+      "name": "{{ $item.q }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ $item.a | plainify }}"
+      }
+    }{{ if lt $index (sub (len $faq) 1) }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}

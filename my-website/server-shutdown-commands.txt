@@ -1,0 +1,44 @@
+# 🛑 SERVER "PLATT MACHEN" - BEFEHLE FÜR paattaya.space
+
+# SSH-Verbindung herstellen:
+ssh root@paattaya.space
+# Passwort: Fuckthematrix123!
+
+# Alle Docker Container stoppen:
+docker stop $(docker ps -aq)
+
+# Alle Container entfernen:
+docker rm $(docker ps -aq)
+
+# Docker Compose herunterfahren:
+docker-compose down
+
+# Alle Docker Networks entfernen:
+docker network prune -f
+
+# Alle Docker Volumes entfernen:
+docker volume prune -f
+
+# Komplettes Docker System bereinigen:
+docker system prune -af
+
+# Verbleibende Container prüfen:
+docker ps -a
+
+# Verbleibende Images prüfen:
+docker images
+
+# System Status prüfen:
+df -h
+free -h
+
+# Alle Services stoppen (falls vorhanden):
+systemctl stop nginx 2>/dev/null || echo "Nginx nicht aktiv"
+systemctl stop apache2 2>/dev/null || echo "Apache nicht aktiv"
+systemctl stop mysql 2>/dev/null || echo "MySQL nicht aktiv"
+
+# Alle laufenden Prozesse prüfen:
+ps aux | grep -E "(nginx|apache|mysql|docker)"
+
+# Server neu starten (optional):
+# reboot

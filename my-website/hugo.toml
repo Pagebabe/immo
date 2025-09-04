@@ -1,0 +1,149 @@
+baseURL = 'https://paattaya.space/'
+defaultContentLanguage = 'de'
+defaultContentLanguageInSubdir = false
+title = 'Pattaya Living Estate'
+theme = 'pattaya-estate'
+[pagination]
+pagerSize = 12
+
+[outputs]
+home = ["HTML","RSS","JSON","SITEMAP","ROBOTS"]
+section = ["HTML","RSS","JSON"]
+
+[taxonomies]
+type = "types"
+location = "locations"
+
+[params]
+currency = "THB"
+ga4 = "G-XXXXXXX"
+gsc_verify = "GSC_TOKEN"
+
+[params.currencySwitcher]
+default = "THB"
+supported = ["THB","EUR","USD"]
+
+[params.currencyRates]
+THB = 1
+EUR = 0.027
+USD = 0.030
+
+[params.maps]
+tiles = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+attribution = "© OpenStreetMap contributors"
+
+[languages]
+
+[languages.en]
+languageName = "English"
+weight = 1
+title = "Pattaya Living Estate"
+[languages.en.params]
+currency = "THB"
+dateFormat = "Jan 2, 2006"
+
+[languages.de]
+languageName = "Deutsch"
+weight = 2
+title = "Pattaya Living Estate"
+[languages.de.params]
+currency = "THB"
+dateFormat = "02.01.2006"
+
+[languages.th]
+languageName = "ไทย"
+weight = 3
+title = "อสังหา พัทยา"
+[languages.th.params]
+currency = "THB"
+dateFormat = "2 ม.ค. 2006"
+
+[[languages.en.menu.main]]
+name = "Properties"
+url = "/en/properties/"
+weight = 1
+
+[[languages.en.menu.main]]
+name = "Services"
+url = "/en/services/"
+weight = 2
+
+[[languages.en.menu.main]]
+name = "Areas"
+url = "/en/areas/"
+weight = 3
+
+[[languages.en.menu.main]]
+name = "Blog"
+url = "/en/blog/"
+weight = 4
+
+[[languages.en.menu.main]]
+name = "About"
+url = "/en/about/"
+weight = 5
+
+[[languages.en.menu.main]]
+name = "Contact"
+url = "/en/contact/"
+weight = 6
+
+[[languages.de.menu.main]]
+name = "Immobilien"
+url = "/de/properties/"
+weight = 1
+
+[[languages.de.menu.main]]
+name = "Leistungen"
+url = "/de/services/"
+weight = 2
+
+[[languages.de.menu.main]]
+name = "Stadtteile"
+url = "/de/areas/"
+weight = 3
+
+[[languages.de.menu.main]]
+name = "Blog"
+url = "/de/blog/"
+weight = 4
+
+[[languages.de.menu.main]]
+name = "Über uns"
+url = "/de/about/"
+weight = 5
+
+[[languages.de.menu.main]]
+name = "Kontakt"
+url = "/de/contact/"
+weight = 6
+
+[[languages.th.menu.main]]
+name = "อสังหา"
+url = "/th/properties/"
+weight = 1
+
+[[languages.th.menu.main]]
+name = "บริการ"
+url = "/th/services/"
+weight = 2
+
+[[languages.th.menu.main]]
+name = "ย่าน"
+url = "/th/areas/"
+weight = 3
+
+[[languages.th.menu.main]]
+name = "บล็อก"
+url = "/th/blog/"
+weight = 4
+
+[[languages.th.menu.main]]
+name = "เกี่ยวกับเรา"
+url = "/th/about/"
+weight = 5
+
+[[languages.th.menu.main]]
+name = "ติดต่อ"
+url = "/th/contact/"
+weight = 6

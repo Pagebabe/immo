@@ -1,0 +1,54 @@
+<div id="consent-banner" class="consent-banner" style="display: none;">
+    <div class="consent-content">
+        <p>We use cookies for analytics. <button id="consent-accept" class="consent-btn accept">Accept</button> <button id="consent-decline" class="consent-btn decline">Decline</button></p>
+    </div>
+</div>
+
+<script>
+(function() {
+    const CONSENT_KEY = 'ple_consent';
+    const CONSENT_VERSION = 'v1';
+    
+    function setConsent(accepted) {
+        const consent = `${CONSENT_VERSION}:${accepted ? 'accepted' : 'declined'}`;
+        localStorage.setItem(CONSENT_KEY, consent);
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'ad_storage': accepted ? 'granted' : 'denied',
+                'analytics_storage': accepted ? 'granted' : 'denied'
+            });
+        }
+        
+        document.getElementById('consent-banner').style.display = 'none';
+    }
+    
+    function showBanner() {
+        document.getElementById('consent-banner').style.display = 'block';
+    }
+    
+    function initConsent() {
+        const stored = localStorage.getItem(CONSENT_KEY);
+        if (!stored || !stored.startsWith(CONSENT_VERSION + ':')) {
+            showBanner();
+        } else {
+            const accepted = stored.includes(':accepted');
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'ad_storage': accepted ? 'granted' : 'denied',
+                    'analytics_storage': accepted ? 'granted' : 'denied'
+                });
+            }
+        }
+        
+        document.getElementById('consent-accept').addEventListener('click', () => setConsent(true));
+        document.getElementById('consent-decline').addEventListener('click', () => setConsent(false));
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initConsent);
+    } else {
+        initConsent();
+    }
+})();
+</script>

@@ -1,0 +1,124 @@
+{{ define "main" }}
+  {{ if eq .Section "properties" }}
+    <!-- Property Detail Page -->
+    <article class="property-detail">
+      <div class="container">
+        <div class="property-header">
+          <h1>{{ .Title }}</h1>
+          <div class="property-price-large">
+            <span class="price" data-thb="{{ .Params.price | default 0 }}">{{ lang.FormatNumber 0 .Params.price }} {{ .Site.Params.currency }}</span>
+          </div>
+          <p class="property-location">{{ .Params.location }} • {{ i18n .Params.type_key | default .Params.type }}</p>
+          {{ partial "property-ctas.html" . }}
+        </div>
+
+        <!-- Gallery -->
+        {{ with .Params.gallery }}
+        <div class="property-gallery">
+          {{ range . }}
+            {{ $img := resources.Get . }}
+            {{ if $img }}
+              {{ $resized := $img | images.Fit "1400x900" }}
+              {{ $webp := $resized | images.Format "webp" }}
+              {{ $resized2x := $img | images.Fit "2800x1800" }}
+              {{ $webp2x := $resized2x | images.Format "webp" }}
+              <picture>
+                <source media="(min-width: 1400px)" srcset="{{ $webp2x.RelPermalink }} 2x, {{ $webp.RelPermalink }} 1x" type="image/webp">
+                <source media="(min-width: 1400px)" srcset="{{ $resized2x.RelPermalink }} 2x, {{ $resized.RelPermalink }} 1x">
+                <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                <img src="{{ $resized.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+              </picture>
+            {{ end }}
+          {{ end }}
+        </div>
+        {{ end }}
+
+        <!-- Property Details -->
+        <div class="property-content">
+          <div class="property-info">
+            <h2>Property Details</h2>
+            <div class="property-specs">
+              <div class="spec-item">
+                <span class="spec-label">Bedrooms:</span>
+                <span class="spec-value">{{ .Params.bedrooms | default "N/A" }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Bathrooms:</span>
+                <span class="spec-value">{{ .Params.bathrooms | default "N/A" }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Living Area:</span>
+                <span class="spec-value">{{ .Params.living_area | default "N/A" }} m²</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Pool:</span>
+                <span class="spec-value">{{ .Params.pool | default "N/A" }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Ownership:</span>
+                <span class="spec-value">{{ .Params.ownership | default "N/A" }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Deed:</span>
+                <span class="spec-value">{{ .Params.deed | default "N/A" }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Description -->
+        <div class="property-description">
+          {{ .Content }}
+        </div>
+
+        <!-- Map -->
+        {{ if and .Params.lat .Params.lng }}
+        <div class="property-map">
+          <h3>Location</h3>
+          <div id="property-map" style="height: 400px; width: 100%;"></div>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const map = L.map('property-map').setView([{{ .Params.lat }}, {{ .Params.lng }}], 15);
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+              }).addTo(map);
+              L.marker([{{ .Params.lat }}, {{ .Params.lng }}]).addTo(map)
+                .bindPopup('{{ .Title }}').openPopup();
+            });
+          </script>
+        </div>
+        {{ end }}
+
+        <!-- Social Sharing -->
+        <div class="property-social-sharing">
+          {{ partial "social-sharing.html" . }}
+        </div>
+
+        <!-- Lead Form -->
+        <div class="property-lead-form">
+          {{ partial "lead-form.html" . }}
+        </div>
+      </div>
+    </article>
+  {{ else }}
+    <!-- Regular Page -->
+    <article class="page-content">
+      <div class="container">
+        <header class="page-header">
+          <h1>{{ .Title }}</h1>
+          {{ if .Date }}
+            {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+            {{ $dateHuman := .Date | time.Format ":date_long" }}
+            <time datetime="{{ $dateMachine }}" class="page-date">{{ $dateHuman }}</time>
+          {{ end }}
+        </header>
+        
+        <div class="prose prose-lg max-w-4xl mx-auto">
+          {{ .Content }}
+        </div>
+        
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+      </div>
+    </article>
+  {{ end }}
+{{ end }}

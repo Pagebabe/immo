@@ -1,0 +1,52 @@
+# 🚨 SOFORT-REPARATUR - BITTE DIESE BEFEHLE MANUELL AUSFÜHREN
+
+# 1. SSH-Verbindung (öffne Terminal und führe aus):
+ssh root@paattaya.space
+# Passwort eingeben: Fuckthematrix123!
+
+# 2. ALLE Container stoppen und entfernen:
+docker stop $(docker ps -aq) 2>/dev/null
+docker rm $(docker ps -aq) 2>/dev/null
+docker system prune -f
+
+# 3. Einfache Test-Website erstellen:
+echo "<h1>TEST - Pattaya Estate</h1><p>Website funktioniert!</p>" > /var/www/html/index.html
+
+# 4. Nginx direkt ohne Docker starten:
+apt update
+apt install -y nginx
+systemctl stop apache2 2>/dev/null || true
+systemctl start nginx
+systemctl enable nginx
+
+# 5. Status prüfen:
+systemctl status nginx
+curl -I http://localhost
+
+# 6. Firewall prüfen und öffnen:
+ufw status
+ufw allow 80
+ufw allow 443
+
+# 7. Ports prüfen:
+netstat -tlnp | grep :80
+ss -tlnp | grep :80
+
+# 8. Test von außen:
+curl -I http://paattaya.space
+
+# FALLS IMMER NOCH NICHT ERREICHBAR:
+# 9. DNS prüfen:
+dig paattaya.space
+nslookup paattaya.space
+
+# 10. Server-IP prüfen:
+ip addr show
+
+# 11. Routing prüfen:
+ip route
+
+# 12. Iptables prüfen:
+iptables -L
+
+# ✅ Nach diesen Schritten sollte die Website erreichbar sein!

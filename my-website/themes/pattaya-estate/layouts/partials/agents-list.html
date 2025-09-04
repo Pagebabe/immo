@@ -1,0 +1,13 @@
+<section class="agents">
+  <h2>Team</h2>
+  <div class="grid">
+    {{ range site.Data.agents }}
+      <article class="agent-card">
+        <div class="avatar"></div>
+        <h3>{{ .name }}</h3>
+        <p>{{ delimit .langs ", " }}</p>
+        <p><a href="tel:{{ .phone }}">{{ .phone }}</a> • <a href="mailto:{{ .email }}">{{ .email }}</a></p>
+      </article>
+    {{ end }}
+  </div>
+</section>

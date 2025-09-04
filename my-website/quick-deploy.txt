@@ -1,0 +1,27 @@
+# 🚀 QUICK DEPLOYMENT - MANUELLE BEFEHLE
+
+# 1. SSH-Verbindung herstellen:
+ssh root@paattaya.space
+# Passwort: Fuckthematrix123!
+
+# 2. Server bereinigen:
+docker stop $(docker ps -aq) 2>/dev/null || echo "Keine Container"
+docker rm $(docker ps -aq) 2>/dev/null || echo "Keine Container"
+docker system prune -af
+cd /root && rm -rf *
+
+# 3. In neuem Terminal - Dateien kopieren:
+scp Dockerfile root@paattaya.space:/root/
+scp docker-compose-server.yml root@paattaya.space:/root/docker-compose.yml
+scp nginx.conf root@paattaya.space:/root/
+rsync -avz --exclude='public/' --exclude='.git/' --exclude='node_modules/' ./ root@paattaya.space:/root/website/
+
+# 4. Auf dem Server - Website starten:
+cd /root
+docker-compose up --build -d
+docker ps
+
+# 5. Website testen:
+curl -I https://paattaya.space
+
+# ✅ FERTIG! Website läuft unter https://paattaya.space

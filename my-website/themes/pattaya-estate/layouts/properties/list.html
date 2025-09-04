@@ -1,0 +1,473 @@
+{{ define "head" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {{ range $index, $page := .Paginator.Pages }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "item": {
+        "@type": "RealEstateListing",
+        "name": {{ $page.Title | jsonify }},
+        "url": {{ $page.Permalink | jsonify }}
+      }
+    }{{ if lt $index (sub (len $.Paginator.Pages) 1) }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{ define "main" }}
+<section class="properties-section">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">{{ i18n "properties" | default "Immobilien" }}</h1>
+            <p class="page-subtitle">{{ i18n "properties_subtitle" | default "Entdecken Sie unsere Auswahl an Immobilien in Pattaya" }}</p>
+        </div>
+
+        <!-- Advanced Search & Filters -->
+        <div class="search-filters-container">
+            <div class="search-bar">
+                <div class="search-input-group">
+                    <i class="icon-search"></i>
+                    <input type="text" id="search" placeholder="{{ i18n "search_placeholder" | default "Suche nach Titel, Ort oder Features..." }}" autocomplete="off">
+                    <button type="button" class="search-clear" id="search-clear" style="display: none;">
+                        <i class="icon-close"></i>
+                    </button>
+                </div>
+                <div class="search-results-count" id="search-count"></div>
+            </div>
+
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="type">{{ i18n "property_type" | default "Typ" }}</label>
+                    <select id="type">
+                        <option value="">{{ i18n "all_types" | default "Alle Typen" }}</option>
+                        <option value="condo">{{ i18n "condo" | default "Condo" }}</option>
+                        <option value="villa">{{ i18n "villa" | default "Villa" }}</option>
+                        <option value="house">{{ i18n "house" | default "Haus" }}</option>
+                        <option value="townhouse">{{ i18n "townhouse" | default "Townhouse" }}</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="location">{{ i18n "location" | default "Lage" }}</label>
+                    <select id="location">
+                        <option value="">{{ i18n "all_locations" | default "Alle Lagen" }}</option>
+                        <option value="jomtien">Jomtien</option>
+                        <option value="pattaya">Central Pattaya</option>
+                        <option value="pratumnak">Pratumnak</option>
+                        <option value="naklua">Naklua</option>
+                        <option value="wongamat">Wongamat</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="bedrooms">{{ i18n "bedrooms" | default "Schlafzimmer" }}</label>
+                    <select id="bedrooms">
+                        <option value="">{{ i18n "any" | default "Beliebig" }}</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                        <option value="5">5+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="bathrooms">{{ i18n "bathrooms" | default "Badezimmer" }}</label>
+                    <select id="bathrooms">
+                        <option value="">{{ i18n "any" | default "Beliebig" }}</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="price-min">{{ i18n "min_price" | default "Min. Preis" }}</label>
+                    <input type="number" id="price-min" placeholder="0" min="0">
+                </div>
+
+                <div class="filter-group">
+                    <label for="price-max">{{ i18n "max_price" | default "Max. Preis" }}</label>
+                    <input type="number" id="price-max" placeholder="∞" min="0">
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort">{{ i18n "sort_by" | default "Sortieren nach" }}</label>
+                    <select id="sort">
+                        <option value="default">{{ i18n "default" | default "Standard" }}</option>
+                        <option value="price-asc">{{ i18n "price_low_high" | default "Preis: Niedrig → Hoch" }}</option>
+                        <option value="price-desc">{{ i18n "price_high_low" | default "Preis: Hoch → Niedrig" }}</option>
+                        <option value="area-asc">{{ i18n "area_small_large" | default "Fläche: Klein → Groß" }}</option>
+                        <option value="area-desc">{{ i18n "area_large_small" | default "Fläche: Groß → Klein" }}</option>
+                        <option value="newest">{{ i18n "newest" | default "Neueste" }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button type="button" class="btn btn-secondary" id="filters-reset">
+                    <i class="icon-refresh"></i>
+                    {{ i18n "reset_filters" | default "Filter zurücksetzen" }}
+                </button>
+                <button type="button" class="btn btn-outline" id="toggle-filters">
+                    <i class="icon-filter"></i>
+                    {{ i18n "more_filters" | default "Mehr Filter" }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Additional Filters (Collapsible) -->
+        <div class="additional-filters" id="additional-filters" style="display: none;">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="area-min">{{ i18n "min_area" | default "Min. Fläche (m²)" }}</label>
+                    <input type="number" id="area-min" placeholder="0" min="0">
+                </div>
+
+                <div class="filter-group">
+                    <label for="area-max">{{ i18n "max_area" | default "Max. Fläche (m²)" }}</label>
+                    <input type="number" id="area-max" placeholder="∞" min="0">
+                </div>
+
+                <div class="filter-group">
+                    <label for="features">{{ i18n "features" | default "Features" }}</label>
+                    <select id="features" multiple>
+                        <option value="pool">{{ i18n "pool" | default "Pool" }}</option>
+                        <option value="garden">{{ i18n "garden" | default "Garten" }}</option>
+                        <option value="parking">{{ i18n "parking" | default "Parkplatz" }}</option>
+                        <option value="beachfront">{{ i18n "beachfront" | default "Strandfront" }}</option>
+                        <option value="furnished">{{ i18n "furnished" | default "Möbliert" }}</option>
+                        <option value="balcony">{{ i18n "balcony" | default "Balkon" }}</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="condition">{{ i18n "condition" | default "Zustand" }}</label>
+                    <select id="condition">
+                        <option value="">{{ i18n "any" | default "Beliebig" }}</option>
+                        <option value="new">{{ i18n "new" | default "Neu" }}</option>
+                        <option value="excellent">{{ i18n "excellent" | default "Ausgezeichnet" }}</option>
+                        <option value="good">{{ i18n "good" | default "Gut" }}</option>
+                        <option value="needs_renovation">{{ i18n "needs_renovation" | default "Renovierungsbedürftig" }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Properties Grid -->
+        <div class="properties-container">
+            <div class="properties-header">
+                <div class="results-info">
+                    <span id="results-count">{{ len .Paginator.Pages }} {{ i18n "properties_found" | default "Immobilien gefunden" }}</span>
+                </div>
+                <div class="view-options">
+                    <button type="button" class="view-btn active" data-view="grid" title="{{ i18n "grid_view" | default "Rasteransicht" }}">
+                        <i class="icon-grid"></i>
+                    </button>
+                    <button type="button" class="view-btn" data-view="list" title="{{ i18n "list_view" | default "Listenansicht" }}">
+                        <i class="icon-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="properties-grid" id="properties-grid" data-view="grid">
+                {{ range .Paginator.Pages }}
+                    {{ partial "property-card.html" . }}
+                {{ end }}
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <div class="no-results-content">
+                    <i class="icon-search"></i>
+                    <h3>{{ i18n "no_results" | default "Keine Ergebnisse gefunden" }}</h3>
+                    <p>{{ i18n "no_results_desc" | default "Versuchen Sie es mit anderen Suchkriterien oder kontaktieren Sie uns für eine persönliche Beratung." }}</p>
+                    <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary">
+                        {{ i18n "contact_us" | default "Kontaktieren Sie uns" }}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt .Paginator.TotalPages 1 }}
+        <div class="pagination-container">
+            {{ template "_internal/pagination.html" . }}
+        </div>
+        {{ end }}
+
+        <!-- CTA Section -->
+        <div class="properties-cta">
+            <div class="cta-content">
+                <h3>{{ i18n "need_help" | default "Benötigen Sie Hilfe?" }}</h3>
+                <p>{{ i18n "cta_desc" | default "Unsere Experten helfen Ihnen gerne bei der Suche nach Ihrer Traumimmobilie." }}</p>
+                <div class="cta-actions">
+                    <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary">
+                        <i class="icon-phone"></i>
+                        {{ i18n "free_consultation" | default "Kostenlose Beratung" }}
+                    </a>
+                    <a href="https://wa.me/66XXXXXXXXX?text=Hallo%20PLE%2C%20ich%20suche..." class="btn btn-whatsapp">
+                        <i class="icon-whatsapp"></i>
+                        {{ i18n "whatsapp_contact" | default "WhatsApp" }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Properties Data for JavaScript -->
+<script type="application/json" id="props-json">
+[
+    {{ range $index, $page := .Paginator.Pages }}
+    {
+        "title": {{ $page.Title | jsonify }},
+        "price": {{ $page.Params.price | default 0 }},
+        "type": {{ $page.Params.type_key | default $page.Params.type | jsonify }},
+        "location": {{ $page.Params.location_key | default $page.Params.location | jsonify }},
+        "bedrooms": {{ $page.Params.bedrooms | default 0 }},
+        "bathrooms": {{ $page.Params.bathrooms | default 0 }},
+        "area": {{ $page.Params.living_area | default 0 }},
+        "url": {{ $page.RelPermalink | jsonify }},
+        "features": {{ $page.Params.features | jsonify }},
+        "condition": {{ $page.Params.condition | default "good" | jsonify }},
+        "date": {{ $page.Date | jsonify }}
+    }{{ if lt $index (sub (len $.Paginator.Pages) 1) }},{{ end }}
+    {{ end }}
+]
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const searchInput = document.getElementById('search');
+    const searchClear = document.getElementById('search-clear');
+    const searchCount = document.getElementById('search-count');
+    const resultsCount = document.getElementById('results-count');
+    const noResults = document.getElementById('no-results');
+    const propertiesGrid = document.getElementById('properties-grid');
+    const toggleFilters = document.getElementById('toggle-filters');
+    const additionalFilters = document.getElementById('additional-filters');
+    
+    // Filter elements
+    const type = document.getElementById('type');
+    const location = document.getElementById('location');
+    const bedrooms = document.getElementById('bedrooms');
+    const bathrooms = document.getElementById('bathrooms');
+    const priceMin = document.getElementById('price-min');
+    const priceMax = document.getElementById('price-max');
+    const areaMin = document.getElementById('area-min');
+    const areaMax = document.getElementById('area-max');
+    const features = document.getElementById('features');
+    const condition = document.getElementById('condition');
+    const sort = document.getElementById('sort');
+    
+    // View buttons
+    const viewButtons = document.querySelectorAll('.view-btn');
+    
+    // Load properties data
+    const propsData = JSON.parse(document.getElementById('props-json').textContent);
+    const fuse = new Fuse(propsData, { 
+        keys: ['title', 'type', 'location', 'features'],
+        threshold: 0.3 
+    });
+    
+    // URL sync
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('q');
+    if (queryParam) {
+        searchInput.value = queryParam;
+        searchClear.style.display = 'block';
+    }
+
+    // Search clear functionality
+    searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        searchClear.style.display = 'none';
+        applyFilters();
+    });
+
+    searchInput.addEventListener('input', function() {
+        searchClear.style.display = this.value ? 'block' : 'none';
+        applyFilters();
+    });
+
+    // Toggle additional filters
+    toggleFilters.addEventListener('click', function() {
+        const isVisible = additionalFilters.style.display !== 'none';
+        additionalFilters.style.display = isVisible ? 'none' : 'block';
+        this.innerHTML = isVisible ? 
+            '<i class="icon-filter"></i> {{ i18n "more_filters" | default "Mehr Filter" }}' :
+            '<i class="icon-close"></i> {{ i18n "less_filters" | default "Weniger Filter" }}';
+    });
+
+    // View toggle
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            viewButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            propertiesGrid.setAttribute('data-view', this.dataset.view);
+        });
+    });
+
+    function applyFilters() {
+        const searchValue = searchInput.value.trim();
+        const typeValue = type.value;
+        const locationValue = location.value;
+        const bedroomsValue = parseInt(bedrooms.value || "0", 10);
+        const bathroomsValue = parseInt(bathrooms.value || "0", 10);
+        const priceMinValue = parseInt(priceMin.value || "0", 10);
+        const priceMaxValue = parseInt(priceMax.value || "999999999", 10);
+        const areaMinValue = parseInt(areaMin.value || "0", 10);
+        const areaMaxValue = parseInt(areaMax.value || "999999", 10);
+        const featuresValue = Array.from(features.selectedOptions).map(opt => opt.value);
+        const conditionValue = condition.value;
+        const sortValue = sort.value;
+        
+        let filteredData = [...propsData];
+
+        // Fuse.js search
+        if (searchValue) {
+            const searchResults = fuse.search(searchValue);
+            filteredData = searchResults.map(result => result.item);
+        }
+
+        // Apply filters
+        filteredData = filteredData.filter(property => {
+            // Type filter
+            if (typeValue && property.type !== typeValue) return false;
+            
+            // Location filter
+            if (locationValue && property.location.toLowerCase() !== locationValue) return false;
+            
+            // Bedrooms filter
+            if (bedroomsValue && property.bedrooms < bedroomsValue) return false;
+            
+            // Bathrooms filter
+            if (bathroomsValue && property.bathrooms < bathroomsValue) return false;
+            
+            // Price filter
+            if (property.price < priceMinValue || property.price > priceMaxValue) return false;
+            
+            // Area filter
+            if (property.area < areaMinValue || property.area > areaMaxValue) return false;
+            
+            // Features filter
+            if (featuresValue.length > 0) {
+                const hasFeature = featuresValue.some(feature => 
+                    property.features && property.features.includes(feature)
+                );
+                if (!hasFeature) return false;
+            }
+            
+            // Condition filter
+            if (conditionValue && property.condition !== conditionValue) return false;
+            
+            return true;
+        });
+
+        // Sort results
+        if (sortValue !== 'default') {
+            filteredData.sort((a, b) => {
+                switch (sortValue) {
+                    case 'price-asc':
+                        return a.price - b.price;
+                    case 'price-desc':
+                        return b.price - a.price;
+                    case 'area-asc':
+                        return a.area - b.area;
+                    case 'area-desc':
+                        return b.area - a.area;
+                    case 'newest':
+                        return new Date(b.date) - new Date(a.date);
+                    default:
+                        return 0;
+                }
+            });
+        }
+
+        // Update UI
+        updateResults(filteredData);
+        
+        // Update URL
+        const newUrl = new URL(window.location);
+        if (searchValue) {
+            newUrl.searchParams.set('q', searchValue);
+        } else {
+            newUrl.searchParams.delete('q');
+        }
+        window.history.replaceState({}, '', newUrl);
+    }
+
+    function updateResults(data) {
+        const cards = document.querySelectorAll('.property-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const cardUrl = card.querySelector('a').href;
+            const isVisible = data.some(property => property.url === cardUrl);
+            
+            card.style.display = isVisible ? '' : 'none';
+            if (isVisible) visibleCount++;
+        });
+
+        // Update counts
+        resultsCount.textContent = `${visibleCount} {{ i18n "properties_found" | default "Immobilien gefunden" }}`;
+        searchCount.textContent = searchInput.value ? `${visibleCount} {{ i18n "results" | default "Ergebnisse" }}` : '';
+        
+        // Show/hide no results
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        propertiesGrid.style.display = visibleCount === 0 ? 'none' : 'grid';
+    }
+
+    // Event listeners
+    [type, location, bedrooms, bathrooms, priceMin, priceMax, areaMin, areaMax, condition, sort].forEach(element => {
+        if (element) element.addEventListener('change', applyFilters);
+    });
+
+    if (features) {
+        features.addEventListener('change', applyFilters);
+    }
+
+    // Reset filters
+    document.getElementById('filters-reset').addEventListener('click', function() {
+        // Reset all inputs
+        searchInput.value = '';
+        searchClear.style.display = 'none';
+        type.selectedIndex = 0;
+        location.selectedIndex = 0;
+        bedrooms.selectedIndex = 0;
+        bathrooms.selectedIndex = 0;
+        priceMin.value = '';
+        priceMax.value = '';
+        areaMin.value = '';
+        areaMax.value = '';
+        condition.selectedIndex = 0;
+        sort.selectedIndex = 0;
+        
+        // Reset features (multiple select)
+        if (features) {
+            Array.from(features.options).forEach(option => option.selected = false);
+        }
+        
+        // Hide additional filters
+        additionalFilters.style.display = 'none';
+        toggleFilters.innerHTML = '<i class="icon-filter"></i> {{ i18n "more_filters" | default "Mehr Filter" }}';
+        
+        // Apply filters
+        applyFilters();
+    });
+    
+    // Initial filter
+    applyFilters();
+});
+</script>
+{{ end }}

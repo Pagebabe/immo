@@ -1,0 +1,163 @@
+<article class="property-card" 
+         data-type="{{ .Params.type_key | default .Params.type }}" 
+         data-location="{{ .Params.location_key | default .Params.location }}" 
+         data-bed="{{ .Params.bedrooms }}" 
+         data-bath="{{ .Params.bathrooms }}"
+         data-price="{{ .Params.price }}"
+         data-area="{{ .Params.living_area }}"
+         data-condition="{{ .Params.condition | default "good" }}">
+    
+    <div class="property-image-container">
+        <a href="{{ .RelPermalink }}" class="property-image-link">
+            {{ with index .Params.gallery 0 }}
+                {{ $img := resources.Get . }}
+                {{ if $img }}
+                    {{ $resized := $img | images.Resize "800x" }}
+                    {{ $webp := $resized | images.Format "webp" }}
+                    {{ $resized2x := $img | images.Resize "1600x" }}
+                    {{ $webp2x := $resized2x | images.Format "webp" }}
+                    <div class="property-image">
+                        <picture>
+                            <source media="(min-width: 800px)" srcset="{{ $webp2x.RelPermalink }} 2x, {{ $webp.RelPermalink }} 1x" type="image/webp">
+                            <source media="(min-width: 800px)" srcset="{{ $resized2x.RelPermalink }} 2x, {{ $resized.RelPermalink }} 1x">
+                            <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                            <img loading="lazy" src="{{ $resized.RelPermalink }}" alt="{{ with $.Title }}{{ . }}{{ else }}{{ i18n "no_image" | default "No image" }}{{ end }}">
+                        </picture>
+                        
+                        <!-- Property Badges -->
+                        <div class="property-badges">
+                            {{ if .Params.featured }}
+                                <span class="badge badge-featured">{{ i18n "featured" | default "Empfohlen" }}</span>
+                            {{ end }}
+                            {{ if .Params.new }}
+                                <span class="badge badge-new">{{ i18n "new" | default "Neu" }}</span>
+                            {{ end }}
+                            {{ if .Params.condition }}
+                                <span class="badge badge-condition">{{ i18n .Params.condition | default .Params.condition }}</span>
+                            {{ end }}
+                        </div>
+
+                        <!-- Property Actions -->
+                        <div class="property-actions">
+                            <button class="action-btn compare-btn" data-id="{{ .File.BaseFileName }}" data-title="{{ .Title }}" title="{{ i18n "add_to_compare" | default "Vergleichen" }}">
+                                <i class="icon-compare"></i>
+                            </button>
+                            <button class="action-btn favorite-btn" data-id="{{ .File.BaseFileName }}" data-title="{{ .Title }}" title="{{ i18n "add_to_favorites" | default "Zu Favoriten" }}">
+                                <i class="icon-heart"></i>
+                            </button>
+                        </div>
+
+                        <!-- Image Overlay -->
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <span class="view-details">{{ i18n "view_details" | default "Details anzeigen" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {{ else }}
+                    <div class="property-image no-image">
+                        <div class="no-image-placeholder">
+                            <i class="icon-home"></i>
+                            <span>{{ i18n "no_image" | default "Kein Bild" }}</span>
+                        </div>
+                    </div>
+                {{ end }}
+            {{ else }}
+                <div class="property-image no-image">
+                    <div class="no-image-placeholder">
+                        <i class="icon-home"></i>
+                        <span>{{ i18n "no_image" | default "Kein Bild" }}</span>
+                    </div>
+                </div>
+            {{ end }}
+        </a>
+    </div>
+
+    <div class="property-content">
+        <!-- Price -->
+        <div class="property-price">
+            <span class="price" data-thb="{{ .Params.price | default 0 }}">
+                {{ lang.FormatNumber 0 .Params.price }} {{ .Site.Params.currency }}
+            </span>
+            {{ if .Params.price_per_sqm }}
+                <span class="price-per-sqm">
+                    {{ lang.FormatNumber 0 .Params.price_per_sqm }} {{ .Site.Params.currency }}/m²
+                </span>
+            {{ end }}
+        </div>
+
+        <!-- Title -->
+        <h3 class="property-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h3>
+
+        <!-- Location -->
+        <div class="property-location">
+            <i class="icon-location"></i>
+            <span>{{ .Params.location }}</span>
+        </div>
+
+        <!-- Property Details -->
+        <div class="property-details">
+            {{ if .Params.bedrooms }}
+                <div class="detail-item">
+                    <i class="icon-bed"></i>
+                    <span>{{ .Params.bedrooms }} {{ i18n "bedrooms" | default "Schlafzimmer" }}</span>
+                </div>
+            {{ end }}
+            {{ if .Params.bathrooms }}
+                <div class="detail-item">
+                    <i class="icon-bath"></i>
+                    <span>{{ .Params.bathrooms }} {{ i18n "bathrooms" | default "Badezimmer" }}</span>
+                </div>
+            {{ end }}
+            {{ if .Params.living_area }}
+                <div class="detail-item">
+                    <i class="icon-area"></i>
+                    <span>{{ .Params.living_area }} m²</span>
+                </div>
+            {{ end }}
+        </div>
+
+        <!-- Property Type -->
+        <div class="property-type">
+            <span class="type-badge">{{ i18n .Params.type_key | default .Params.type | default "Immobilie" }}</span>
+        </div>
+
+        <!-- Features -->
+        {{ with .Params.features }}
+        <div class="property-features">
+            {{ range first 3 . }}
+                <span class="feature-tag">{{ i18n . | default . }}</span>
+            {{ end }}
+            {{ if gt (len .) 3 }}
+                <span class="feature-more">+{{ sub (len .) 3 }} {{ i18n "more" | default "mehr" }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+
+        <!-- Property Footer -->
+        <div class="property-footer">
+            <div class="property-meta">
+                {{ if .Params.agent }}
+                    <div class="agent-info">
+                        <i class="icon-user"></i>
+                        <span>{{ .Params.agent }}</span>
+                    </div>
+                {{ end }}
+                {{ if .Date }}
+                    <div class="date-info">
+                        <i class="icon-calendar"></i>
+                        <span>{{ .Date.Format "02.01.2006" }}</span>
+                    </div>
+                {{ end }}
+            </div>
+            
+            <div class="property-cta">
+                <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm">
+                    {{ i18n "view_details" | default "Details anzeigen" }}
+                </a>
+            </div>
+        </div>
+    </div>
+</article>

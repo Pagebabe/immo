@@ -1,0 +1,124 @@
+{{ with site.Params.ga4 }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','{{ . }}', {
+    // Enhanced measurement
+    enhanced_measurements: {
+        scrolls: true,
+        outbound_clicks: true,
+        site_search: true,
+        video_engagement: true,
+        file_downloads: true
+    }
+});
+
+// Page view tracking
+gtag('event', 'page_view', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    engagement_time_msec: 0
+});
+
+// Real Estate specific events
+document.addEventListener('DOMContentLoaded', function() {
+    // Property view tracking
+    if (window.location.pathname.includes('/properties/') && window.location.pathname !== '/properties/') {
+        gtag('event', 'view_item', {
+            currency: 'THB',
+            value: 0,
+            items: [{
+                item_id: window.location.pathname,
+                item_name: document.title,
+                item_category: 'property',
+                item_category2: 'pattaya',
+                price: 0,
+                quantity: 1
+            }]
+        });
+    }
+    
+    // Search tracking
+    const searchInput = document.getElementById('q');
+    if (searchInput) {
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                if (this.value.length > 2) {
+                    gtag('event', 'search', {
+                        search_term: this.value,
+                        page_location: window.location.href
+                    });
+                }
+            }, 1000);
+        });
+    }
+    
+    // Filter usage tracking
+    const filters = document.querySelectorAll('#filters select, #filters input');
+    filters.forEach(filter => {
+        filter.addEventListener('change', function() {
+            gtag('event', 'filter_used', {
+                filter_type: this.id,
+                filter_value: this.value,
+                page_location: window.location.href
+            });
+        });
+    });
+    
+    // Property comparison tracking
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.compare-btn')) {
+            gtag('event', 'add_to_compare', {
+                currency: 'THB',
+                value: 0,
+                items: [{
+                    item_id: e.target.dataset.id,
+                    item_name: e.target.dataset.title,
+                    item_category: 'property_comparison'
+                }]
+            });
+        }
+        
+        if (e.target.matches('.fav-btn')) {
+            gtag('event', 'add_to_favorites', {
+                currency: 'THB',
+                value: 0,
+                items: [{
+                    item_id: e.target.dataset.id,
+                    item_category: 'property_favorites'
+                }]
+            });
+        }
+    });
+    
+    // Currency conversion tracking
+    const currencySelect = document.getElementById('currency');
+    if (currencySelect) {
+        currencySelect.addEventListener('change', function() {
+            gtag('event', 'currency_change', {
+                currency_from: 'THB',
+                currency_to: this.value,
+                page_location: window.location.href
+            });
+        });
+    }
+    
+    // Time on page tracking
+    let startTime = Date.now();
+    window.addEventListener('beforeunload', function() {
+        gtag('event', 'timing_complete', {
+            name: 'page_time',
+            value: Math.round((Date.now() - startTime) / 1000)
+        });
+    });
+});
+</script>
+{{ end }}
+{{ with site.Params.gsc_verify }}
+<meta name="google-site-verification" content="{{ . }}">
+{{ end }}

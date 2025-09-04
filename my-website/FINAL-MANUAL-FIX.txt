@@ -1,0 +1,62 @@
+# 🚨 FINALE MANUELLE REPARATUR - KOPIEREN UND EINFÜGEN
+
+# 1. SSH-Verbindung herstellen:
+ssh root@paattaya.space
+# Passwort: Fuckthematrix123!
+
+# 2. Server bereinigen:
+docker stop $(docker ps -aq) 2>/dev/null || echo "Keine Container"
+docker rm $(docker ps -aq) 2>/dev/null || echo "Keine Container"
+
+# 3. Website erstellen:
+cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattaya Estate</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); }
+        h1 { text-align: center; font-size: 3em; margin-bottom: 20px; }
+        .status { background: #4CAF50; color: white; padding: 10px; border-radius: 5px; text-align: center; margin: 20px 0; }
+        .contact { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏖️ Pattaya Estate</h1>
+        <div class="status">✅ WEBSITE LÄUFT WIEDER!</div>
+        <h2>Ihr deutschsprachiger Immobilienmakler in Pattaya</h2>
+        <p>Willkommen bei Pattaya Estate - Ihrem vertrauensvollen Partner für Immobilien in Thailands beliebtestem Urlaubs- und Lebensparadies.</p>
+        <div class="contact">
+            <h3>📞 Kontakt</h3>
+            <p><strong>Telefon:</strong> +66 38 123 4567</p>
+            <p><strong>WhatsApp:</strong> +66 81 234 5678</p>
+            <p><strong>E-Mail:</strong> info@paattaya.space</p>
+            <p><strong>Website:</strong> https://paattaya.space</p>
+        </div>
+        <p style="text-align: center; margin-top: 30px; opacity: 0.8;">© 2025 Pattaya Estate. Alle Rechte vorbehalten.</p>
+    </div>
+</body>
+</html>
+EOF
+
+# 4. Nginx Container starten:
+docker run -d --name paattaya-website \
+    -p 80:80 -p 443:443 \
+    -v /root/index.html:/usr/share/nginx/html/index.html:ro \
+    --restart unless-stopped \
+    nginx:alpine
+
+# 5. Status prüfen:
+docker ps
+sleep 3
+curl -I http://localhost
+
+# 6. Website testen:
+curl -I http://paattaya.space
+curl -I https://paattaya.space
+
+# ✅ FERTIG! Website sollte unter https://paattaya.space erreichbar sein!

@@ -1,0 +1,100 @@
+<div class="property-ctas">
+  <div class="cta-grid">
+    <!-- Primary CTA -->
+    <a href="https://wa.me/66XXXXXXXXX?text=Hallo%2C%20ich%20interessiere%20mich%20für%20{{ .Title | urlquery }}" 
+       class="cta-button whatsapp" 
+       data-property="{{ .Title }}"
+       data-price="{{ .Params.price | default 0 }}">
+      <span>📱</span>
+      <span>WhatsApp Beratung</span>
+    </a>
+    
+    <!-- Secondary CTA -->
+    <a href="https://cal.com/pattaya-estate/30min" 
+       class="cta-button" 
+       data-property="{{ .Title }}"
+       data-price="{{ .Params.price | default 0 }}">
+      <span>📅</span>
+      <span>Termin vereinbaren</span>
+    </a>
+    
+    <!-- Lead Form CTA -->
+    <button class="cta-button success" 
+            onclick="document.getElementById('lead-form-modal').style.display='block'"
+            data-property="{{ .Title }}"
+            data-price="{{ .Params.price | default 0 }}">
+      <span>📝</span>
+      <span>Kostenlose Beratung</span>
+    </button>
+  </div>
+  
+  <div class="cta-benefits">
+    <div class="benefit-item">
+      <span class="benefit-icon">⚡</span>
+      <span>Sofortige Antwort</span>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🔒</span>
+      <span>100% Vertraulich</span>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">💰</span>
+      <span>Kostenlos</span>
+    </div>
+  </div>
+</div>
+
+<!-- Lead Form Modal -->
+<div id="lead-form-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>🏠 Kostenlose Immobilienberatung</h3>
+      <button class="modal-close" onclick="document.getElementById('lead-form-modal').style.display='none'">×</button>
+    </div>
+    <div class="modal-body">
+      {{ partial "lead-form.html" . }}
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // CTA Click Tracking
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const property = this.dataset.property;
+            const price = this.dataset.price;
+            const ctaType = this.classList.contains('whatsapp') ? 'whatsapp' : 
+                           this.classList.contains('success') ? 'lead_form' : 'appointment';
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cta_click', {
+                    event_category: 'conversion',
+                    event_label: ctaType,
+                    custom_parameter_1: property,
+                    custom_parameter_2: price,
+                    page_location: window.location.href
+                });
+            }
+        });
+    });
+    
+    // Modal functionality
+    const modal = document.getElementById('lead-form-modal');
+    const closeBtn = document.querySelector('.modal-close');
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Close modal with escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+        }
+    });
+});
+</script>

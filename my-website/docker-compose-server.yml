@@ -1,0 +1,25 @@
+# Docker Compose für Server-Deployment - Nur Website
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: paattaya-website
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    environment:
+      - HUGO_ENV=production
+    volumes:
+      # SSL-Zertifikate (falls vorhanden)
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - website-network
+
+networks:
+  website-network:
+    driver: bridge
+
+volumes:
+  ssl:

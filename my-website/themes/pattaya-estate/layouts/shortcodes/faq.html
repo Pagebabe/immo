@@ -1,0 +1,12 @@
+{{ $faq := .Page.Params.faq }}
+{{ if $faq }}
+<section class="faq">
+  <h2>{{ i18n "faq" | default "Frequently Asked Questions" }}</h2>
+  <dl>
+    {{ range $faq }}
+    <dt>{{ .q }}</dt>
+    <dd>{{ .a | markdownify }}</dd>
+    {{ end }}
+  </dl>
+</section>
+{{ end }}

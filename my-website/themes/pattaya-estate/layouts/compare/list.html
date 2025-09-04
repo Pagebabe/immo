@@ -1,0 +1,48 @@
+{{ define "main" }}
+<section class="compare-section">
+    <div class="container">
+        <h1>{{ .Title }}</h1>
+        <div id="compare-content">
+            <p>{{ i18n "select_properties_to_compare" | default "Select properties to compare" }}</p>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const compareItems = JSON.parse(localStorage.getItem('ple_compare') || '[]');
+    const content = document.getElementById('compare-content');
+    
+    if (compareItems.length === 0) {
+        content.innerHTML = '<p>{{ i18n "no_properties_selected" | default "No properties selected for comparison" }}</p>';
+        return;
+    }
+    
+    // Create comparison table
+    let html = '<div class="compare-table"><table><thead><tr>';
+    html += '<th>{{ i18n "property" | default "Property" }}</th>';
+    html += '<th>{{ i18n "price" | default "Price" }}</th>';
+    html += '<th>{{ i18n "type" | default "Type" }}</th>';
+    html += '<th>{{ i18n "location" | default "Location" }}</th>';
+    html += '<th>{{ i18n "bedrooms" | default "Bedrooms" }}</th>';
+    html += '<th>{{ i18n "bathrooms" | default "Bathrooms" }}</th>';
+    html += '<th>{{ i18n "area" | default "Area" }}</th>';
+    html += '</tr></thead><tbody>';
+    
+    compareItems.forEach(function(item) {
+        html += '<tr>';
+        html += '<td><a href="' + item.url + '">' + item.title + '</a></td>';
+        html += '<td>' + (item.price || 'N/A') + '</td>';
+        html += '<td>' + (item.type || 'N/A') + '</td>';
+        html += '<td>' + (item.location || 'N/A') + '</td>';
+        html += '<td>' + (item.bedrooms || 'N/A') + '</td>';
+        html += '<td>' + (item.bathrooms || 'N/A') + '</td>';
+        html += '<td>' + (item.area || 'N/A') + '</td>';
+        html += '</tr>';
+    });
+    
+    html += '</tbody></table></div>';
+    content.innerHTML = html;
+});
+</script>
+{{ end }}

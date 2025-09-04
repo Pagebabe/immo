@@ -1,0 +1,54 @@
+{{ if .IsPage }}
+<!-- Google Search Console Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary }}",
+  "url": "{{ .Permalink }}",
+  "mainEntity": {
+    "@type": "RealEstateListing",
+    "name": "{{ .Title }}",
+    "description": "{{ .Description | default .Summary }}",
+    "url": "{{ .Permalink }}",
+    "image": "{{ if .Params.gallery }}{{ index .Params.gallery 0 | absURL }}{{ end }}",
+    "offers": {
+      "@type": "Offer",
+      "price": "{{ .Params.price | default 0 }}",
+      "priceCurrency": "THB",
+      "availability": "https://schema.org/InStock"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "{{ .Params.location | default "Pattaya" }}",
+      "addressRegion": "Chonburi",
+      "addressCountry": "TH"
+    }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ .Site.BaseURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ .Section | title }}",
+        "item": "{{ .Site.BaseURL }}{{ .Section }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ .Title }}",
+        "item": "{{ .Permalink }}"
+      }
+    ]
+  }
+}
+</script>
+{{ end }}

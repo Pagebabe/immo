@@ -1,0 +1,278 @@
+<!-- Quick Search Section -->
+<section class="quick-search">
+    <div class="container">
+        <h2 class="section-title">{{ i18n "quick_search_title" | default "Schnellsuche" }}</h2>
+        <div class="search-filters">
+            <div class="filter-group">
+                <label>{{ i18n "property_type" | default "Immobilientyp" }}</label>
+                <select id="quick-type">
+                    <option value="">{{ i18n "all_types" | default "Alle Typen" }}</option>
+                    <option value="condo">{{ i18n "condo" | default "Condo" }}</option>
+                    <option value="villa">{{ i18n "villa" | default "Villa" }}</option>
+                    <option value="house">{{ i18n "house" | default "Haus" }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>{{ i18n "location" | default "Lage" }}</label>
+                <select id="quick-location">
+                    <option value="">{{ i18n "all_locations" | default "Alle Lagen" }}</option>
+                    <option value="jomtien">{{ i18n "jomtien" | default "Jomtien" }}</option>
+                    <option value="pratumnak">{{ i18n "pratumnak" | default "Pratumnak" }}</option>
+                    <option value="central">{{ i18n "central_pattaya" | default "Central Pattaya" }}</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>{{ i18n "max_price" | default "Max. Preis" }}</label>
+                <select id="quick-price">
+                    <option value="">{{ i18n "any_price" | default "Beliebiger Preis" }}</option>
+                    <option value="5000000">5M THB</option>
+                    <option value="10000000">10M THB</option>
+                    <option value="20000000">20M THB</option>
+                    <option value="50000000">50M THB</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="button" class="btn btn-primary" id="quick-search-btn">
+                    <i class="icon-search"></i>
+                    {{ i18n "search" | default "Suchen" }}
+                </button>
+                <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-outline">
+                    {{ i18n "advanced_search" | default "Erweiterte Suche" }}
+                </a>
+            </div>
+        </div>
+        <div class="popular-searches">
+            <h3>{{ i18n "popular_searches" | default "Beliebte Suchen" }}</h3>
+            <div class="search-tags">
+                <a href="{{ (site.GetPage "/properties").RelPermalink }}?type=condo&location=jomtien" class="search-tag">Jomtien Condos</a>
+                <a href="{{ (site.GetPage "/properties").RelPermalink }}?type=villa&location=pratumnak" class="search-tag">Pratumnak Villas</a>
+                <a href="{{ (site.GetPage "/properties").RelPermalink }}?price_max=10000000" class="search-tag">Unter 10M THB</a>
+                <a href="{{ (site.GetPage "/properties").RelPermalink }}?type=condo&beachfront=true" class="search-tag">Beachfront Condos</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Properties Section -->
+<section class="featured-properties">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{{ i18n "featured_properties" | default "Empfohlene Immobilien" }}</h2>
+            <p class="section-subtitle">{{ i18n "featured_properties_sub" | default "Unsere Top-Auswahl an Immobilien in den besten Lagen von Pattaya" }}</p>
+            <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-outline">
+                {{ i18n "view_all_properties" | default "Alle Immobilien anzeigen" }}
+                <i class="icon-arrow-right"></i>
+            </a>
+        </div>
+        <div class="properties-grid">
+            {{ range first 6 (where site.RegularPages "Section" "properties") }}
+                {{ if .Params.featured }}
+                    <div class="property-card featured">
+                        <div class="property-image">
+                            {{ if .Params.gallery }}
+                                {{ $firstImage := index .Params.gallery 0 }}
+                                <picture>
+                                    <source type="image/webp" srcset="{{ $firstImage }}?w=400&h=300&f=webp">
+                                    <img src="{{ $firstImage }}?w=400&h=300" alt="{{ .Title }}" loading="lazy">
+                                </picture>
+                            {{ end }}
+                            <div class="property-badge">{{ i18n "featured" | default "Empfohlen" }}</div>
+                            <div class="property-actions">
+                                <button class="action-btn compare-btn" data-id="{{ .File.BaseFileName }}" data-title="{{ .Title }}">
+                                    <i class="icon-compare"></i>
+                                </button>
+                                <button class="action-btn favorite-btn" data-id="{{ .File.BaseFileName }}" data-title="{{ .Title }}">
+                                    <i class="icon-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price" data-thb="{{ .Params.price }}">{{ .Params.price | lang.FormatNumber 0 }} THB</span>
+                            </div>
+                            <h3 class="property-title">
+                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            </h3>
+                            <div class="property-location">
+                                <i class="icon-location"></i>
+                                {{ .Params.location }}
+                            </div>
+                            <div class="property-features">
+                                {{ if .Params.bedrooms }}
+                                    <span class="feature">
+                                        <i class="icon-bed"></i>
+                                        {{ .Params.bedrooms }} {{ i18n "bedrooms" | default "Schlafzimmer" }}
+                                    </span>
+                                {{ end }}
+                                {{ if .Params.bathrooms }}
+                                    <span class="feature">
+                                        <i class="icon-bath"></i>
+                                        {{ .Params.bathrooms }} {{ i18n "bathrooms" | default "Badezimmer" }}
+                                    </span>
+                                {{ end }}
+                                {{ if .Params.area }}
+                                    <span class="feature">
+                                        <i class="icon-area"></i>
+                                        {{ .Params.area }} m²
+                                    </span>
+                                {{ end }}
+                            </div>
+                            <div class="property-cta">
+                                <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm">
+                                    {{ i18n "view_details" | default "Details anzeigen" }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{{ i18n "our_services" | default "Unsere Services" }}</h2>
+            <p class="section-subtitle">{{ i18n "services_subtitle" | default "Vollständige Immobilienbetreuung von A bis Z" }}</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="icon-home"></i>
+                </div>
+                <h3>{{ i18n "buy_property" | default "Immobilien kaufen" }}</h3>
+                <p>{{ i18n "buy_property_desc" | default "Wir helfen Ihnen beim Finden und Kaufen Ihrer Traumimmobilie in Pattaya." }}</p>
+                <a href="{{ (site.GetPage "/services/buy-property").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }}
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="icon-sell"></i>
+                </div>
+                <h3>{{ i18n "sell_property" | default "Immobilien verkaufen" }}</h3>
+                <p>{{ i18n "sell_property_desc" | default "Professionelle Vermarktung und Verkauf Ihrer Immobilie zum besten Preis." }}</p>
+                <a href="{{ (site.GetPage "/services/sell-property").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }}
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="icon-management"></i>
+                </div>
+                <h3>{{ i18n "property_management" | default "Immobilienverwaltung" }}</h3>
+                <p>{{ i18n "property_management_desc" | default "Vollständige Verwaltung Ihrer Immobilie - von der Vermietung bis zur Wartung." }}</p>
+                <a href="{{ (site.GetPage "/services/property-management").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }}
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="icon-legal"></i>
+                </div>
+                <h3>{{ i18n "legal_support" | default "Rechtliche Beratung" }}</h3>
+                <p>{{ i18n "legal_support_desc" | default "Professionelle rechtliche Unterstützung bei allen Immobilientransaktionen." }}</p>
+                <a href="{{ (site.GetPage "/services/legal-support").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }}
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Areas Section -->
+<section class="areas-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{{ i18n "popular_areas" | default "Beliebte Gebiete" }}</h2>
+            <p class="section-subtitle">{{ i18n "areas_subtitle" | default "Entdecken Sie die besten Lagen in Pattaya" }}</p>
+        </div>
+        <div class="areas-grid">
+            {{ range (site.GetPage "/areas").Pages }}
+                <div class="area-card">
+                    <div class="area-image">
+                        {{ if .Params.image }}
+                            <picture>
+                                <source type="image/webp" srcset="{{ .Params.image }}?w=400&h=250&f=webp">
+                                <img src="{{ .Params.image }}?w=400&h=250" alt="{{ .Title }}" loading="lazy">
+                            </picture>
+                        {{ end }}
+                        <div class="area-overlay">
+                            <h3>{{ .Title }}</h3>
+                            <p>{{ .Params.description | truncate 100 }}</p>
+                            <a href="{{ .RelPermalink }}" class="btn btn-white btn-sm">
+                                {{ i18n "explore_area" | default "Gebiet erkunden" }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Trust Section -->
+<section class="trust-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{{ i18n "why_choose_us" | default "Warum uns wählen?" }}</h2>
+            <p class="section-subtitle">{{ i18n "trust_subtitle" | default "Vertrauen Sie auf unsere Erfahrung und Expertise" }}</p>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <i class="icon-experience"></i>
+                </div>
+                <h3>{{ i18n "local_expertise" | default "Lokale Expertise" }}</h3>
+                <p>{{ i18n "local_expertise_desc" | default "Über 5 Jahre Erfahrung im Pattaya Immobilienmarkt" }}</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <i class="icon-multilingual"></i>
+                </div>
+                <h3>{{ i18n "multilingual_service" | default "Mehrsprachiger Service" }}</h3>
+                <p>{{ i18n "multilingual_service_desc" | default "Betreuung auf Deutsch, Englisch und Thai" }}</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <i class="icon-support"></i>
+                </div>
+                <h3>{{ i18n "full_support" | default "Vollständige Betreuung" }}</h3>
+                <p>{{ i18n "full_support_desc" | default "Von der Suche bis zur Nachbetreuung - alles aus einer Hand" }}</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <i class="icon-transparent"></i>
+                </div>
+                <h3>{{ i18n "transparent_pricing" | default "Transparente Preise" }}</h3>
+                <p>{{ i18n "transparent_pricing_desc" | default "Keine versteckten Kosten - faire und transparente Preise" }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>{{ i18n "ready_to_start" | default "Bereit für Ihr Traumhaus?" }}</h2>
+            <p>{{ i18n "cta_subtitle" | default "Kontaktieren Sie uns für eine kostenlose, unverbindliche Beratung" }}</p>
+            <div class="cta-actions">
+                <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary btn-lg">
+                    <i class="icon-phone"></i>
+                    {{ i18n "get_free_consultation" | default "Kostenlose Beratung" }}
+                </a>
+                <a href="https://wa.me/66XXXXXXXXX?text=Hallo%20PLE%2C%20ich%20suche..." class="btn btn-whatsapp btn-lg">
+                    <i class="icon-whatsapp"></i>
+                    {{ i18n "whatsapp_contact" | default "WhatsApp" }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

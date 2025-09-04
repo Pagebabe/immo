@@ -1,0 +1,13 @@
+<div class="compare-drawer" id="compare-drawer">
+    <div class="compare-header">
+        <h3>{{ i18n "compare_properties" | default "Compare Properties" }}</h3>
+        <button class="close-drawer" onclick="closeCompareDrawer()">×</button>
+    </div>
+    <div class="compare-items" id="compare-items">
+        <!-- Items will be populated by JS -->
+    </div>
+    <div class="compare-actions">
+        <button class="btn" onclick="openComparePage()" id="compare-btn" disabled>{{ i18n "compare" | default "Compare" }}</button>
+        <button class="btn outline" onclick="clearCompare()">{{ i18n "clear_all" | default "Clear All" }}</button>
+    </div>
+</div>

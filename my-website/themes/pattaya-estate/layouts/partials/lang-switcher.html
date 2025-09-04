@@ -1,0 +1,12 @@
+<nav class="lang-switcher">
+    <ul>
+        {{ range .AllTranslations }}
+        <li>
+            <a href="{{ .RelPermalink }}" lang="{{ .Lang }}" hreflang="{{ .Lang }}" 
+               {{ if eq .Lang $.Site.Language.Lang }}class="active"{{ end }}>
+                {{ .Site.Language.LanguageName }}
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+</nav>

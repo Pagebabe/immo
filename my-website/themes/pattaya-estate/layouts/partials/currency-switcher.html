@@ -1,0 +1,7 @@
+<div class="currency-switcher">
+    <select id="currency" data-rates='{{ .Site.Params.currencyRates | jsonify }}'>
+        {{ range .Site.Params.currencySwitcher.supported }}
+        <option value="{{ . }}" {{ if eq . $.Site.Params.currencySwitcher.default }}selected{{ end }}>{{ . }}</option>
+        {{ end }}
+    </select>
+</div>

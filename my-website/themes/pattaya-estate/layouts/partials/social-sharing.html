@@ -1,0 +1,156 @@
+<div class="social-sharing">
+  <h4>📱 Teile diese Immobilie</h4>
+  <div class="sharing-buttons">
+    <!-- Facebook Share -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | urlquery }}&quote={{ .Title | urlquery }}" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="share-btn facebook"
+       data-platform="facebook"
+       data-property="{{ .Title }}"
+       data-url="{{ .Permalink }}">
+      <span class="share-icon">📘</span>
+      <span class="share-text">Facebook</span>
+    </a>
+
+    <!-- WhatsApp Share -->
+    <a href="https://wa.me/?text={{ .Title | urlquery }}%20-%20{{ .Permalink | urlquery }}" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="share-btn whatsapp"
+       data-platform="whatsapp"
+       data-property="{{ .Title }}"
+       data-url="{{ .Permalink }}">
+      <span class="share-icon">💬</span>
+      <span class="share-text">WhatsApp</span>
+    </a>
+
+    <!-- Telegram Share -->
+    <a href="https://t.me/share/url?url={{ .Permalink | urlquery }}&text={{ .Title | urlquery }}" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="share-btn telegram"
+       data-platform="telegram"
+       data-property="{{ .Title }}"
+       data-url="{{ .Permalink }}">
+      <span class="share-icon">✈️</span>
+      <span class="share-text">Telegram</span>
+    </a>
+
+    <!-- Twitter Share -->
+    <a href="https://twitter.com/intent/tweet?url={{ .Permalink | urlquery }}&text={{ .Title | urlquery }}&hashtags=Pattaya,Immobilien,Thailand" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="share-btn twitter"
+       data-platform="twitter"
+       data-property="{{ .Title }}"
+       data-url="{{ .Permalink }}">
+      <span class="share-icon">🐦</span>
+      <span class="share-text">Twitter</span>
+    </a>
+
+    <!-- LinkedIn Share -->
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="share-btn linkedin"
+       data-platform="linkedin"
+       data-property="{{ .Title }}"
+       data-url="{{ .Permalink }}">
+      <span class="share-icon">💼</span>
+      <span class="share-text">LinkedIn</span>
+    </a>
+
+    <!-- Email Share -->
+    <a href="mailto:?subject={{ .Title | urlquery }}&body=Schau%20dir%20diese%20Immobilie%20an:%20{{ .Permalink | urlquery }}" 
+       class="share-btn email"
+       data-platform="email"
+       data-property="{{ .Title }}"
+       data-url="{{ .Permalink }}">
+      <span class="share-icon">📧</span>
+      <span class="share-text">E-Mail</span>
+    </a>
+
+    <!-- Copy Link -->
+    <button class="share-btn copy-link" 
+            onclick="copyToClipboard('{{ .Permalink }}')"
+            data-platform="copy"
+            data-property="{{ .Title }}"
+            data-url="{{ .Permalink }}">
+      <span class="share-icon">🔗</span>
+      <span class="share-text">Link kopieren</span>
+    </button>
+  </div>
+</div>
+
+<script>
+// Copy to clipboard functionality
+function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(function() {
+      showCopySuccess();
+    }).catch(function(err) {
+      fallbackCopyTextToClipboard(text);
+    });
+  } else {
+    fallbackCopyTextToClipboard(text);
+  }
+}
+
+function fallbackCopyTextToClipboard(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  
+  try {
+    const successful = document.execCommand('copy');
+    if (successful) {
+      showCopySuccess();
+    }
+  } catch (err) {
+    console.error('Fallback: Could not copy text: ', err);
+  }
+  
+  document.body.removeChild(textArea);
+}
+
+function showCopySuccess() {
+  const copyBtn = document.querySelector('.copy-link');
+  const originalText = copyBtn.querySelector('.share-text').textContent;
+  copyBtn.querySelector('.share-text').textContent = 'Kopiert!';
+  copyBtn.classList.add('copied');
+  
+  setTimeout(() => {
+    copyBtn.querySelector('.share-text').textContent = originalText;
+    copyBtn.classList.remove('copied');
+  }, 2000);
+}
+
+// Social sharing analytics
+document.addEventListener('DOMContentLoaded', function() {
+  const shareButtons = document.querySelectorAll('.share-btn');
+  
+  shareButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const platform = this.dataset.platform;
+      const property = this.dataset.property;
+      const url = this.dataset.url;
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'share', {
+          method: platform,
+          content_type: 'property',
+          item_id: url,
+          item_name: property,
+          page_location: window.location.href
+        });
+      }
+    });
+  });
+});
+</script>

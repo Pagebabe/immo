@@ -1,0 +1,68 @@
+{{ if not .IsHome }}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb-list">
+            <li class="breadcrumb-item">
+                <a href="{{ "/" | relLangURL }}" class="breadcrumb-link">
+                    <i class="icon-home"></i>
+                    {{ i18n "home" | default "Startseite" }}
+                </a>
+            </li>
+            
+            {{ if .IsPage }}
+                {{ if .Parent }}
+                    {{ if not .Parent.IsHome }}
+                        <li class="breadcrumb-item">
+                            <a href="{{ .Parent.RelPermalink }}" class="breadcrumb-link">
+                                {{ .Parent.Title }}
+                            </a>
+                        </li>
+                    {{ end }}
+                {{ end }}
+                
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ .Title }}
+                </li>
+            {{ else if .IsSection }}
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ .Title }}
+                </li>
+            {{ end }}
+        </ol>
+    </div>
+</nav>
+
+<!-- JSON-LD Schema for Breadcrumbs -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "{{ i18n "home" | default "Startseite" }}",
+            "item": "{{ "/" | absURL }}"
+        }{{ if .IsPage }}{{ if .Parent }}{{ if not .Parent.IsHome }},
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ .Parent.Title }}",
+            "item": "{{ .Parent.Permalink }}"
+        }{{ end }}{{ end }},
+        {
+            "@type": "ListItem",
+            "position": {{ if .Parent }}{{ if not .Parent.IsHome }}3{{ else }}2{{ end }}{{ else }}2{{ end }},
+            "name": "{{ .Title }}",
+            "item": "{{ .Permalink }}"
+        }{{ else if .IsSection }},
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ .Title }}",
+            "item": "{{ .Permalink }}"
+        }{{ end }}
+    ]
+}
+</script>
+{{ end }}

@@ -1,0 +1,77 @@
+<div class="social-footer">
+  <div class="container">
+    <div class="social-content">
+      <h3>📱 Folge uns auf Social Media</h3>
+      <p>Bleibe auf dem Laufenden über neue Immobilien, Marktupdates und exklusive Angebote in Pattaya.</p>
+    </div>
+    
+    <div class="social-links">
+      <a href="https://facebook.com/pattayalivingestate" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="social-link facebook"
+         data-platform="facebook">
+        <span class="social-icon">📘</span>
+        <span class="social-text">Facebook</span>
+      </a>
+      
+      <a href="https://instagram.com/pattayalivingestate" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="social-link instagram"
+         data-platform="instagram">
+        <span class="social-icon">📷</span>
+        <span class="social-text">Instagram</span>
+      </a>
+      
+      <a href="https://youtube.com/@pattayalivingestate" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="social-link youtube"
+         data-platform="youtube">
+        <span class="social-icon">📺</span>
+        <span class="social-text">YouTube</span>
+      </a>
+      
+      <a href="https://linkedin.com/company/pattayalivingestate" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="social-link linkedin"
+         data-platform="linkedin">
+        <span class="social-icon">💼</span>
+        <span class="social-text">LinkedIn</span>
+      </a>
+      
+      <a href="https://wa.me/66XXXXXXXXX?text=Hallo%2C%20ich%20interessiere%20mich%20für%20Immobilien%20in%20Pattaya" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="social-link whatsapp"
+         data-platform="whatsapp">
+        <span class="social-icon">💬</span>
+        <span class="social-text">WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Social media analytics
+document.addEventListener('DOMContentLoaded', function() {
+  const socialLinks = document.querySelectorAll('.social-link');
+  
+  socialLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      const platform = this.dataset.platform;
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'social_media_click', {
+          event_category: 'social',
+          event_label: platform,
+          page_location: window.location.href,
+          page_title: document.title
+        });
+      }
+    });
+  });
+});
+</script>

@@ -1,0 +1,81 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-background">
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">{{ i18n "welcome_headline" | default "Ihr Traumhaus in Pattaya wartet" }}</h1>
+            <p class="hero-subtitle">{{ i18n "welcome_sub" | default "Professionelle Immobilienberatung für Ausländer in Thailand. Über 30 Objekte in Verwaltung." }}</p>
+            <div class="hero-ctas">
+                <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-primary btn-lg">
+                    <i class="icon-home"></i>
+                    {{ i18n "browse_properties" | default "Immobilien entdecken" }}
+                </a>
+                <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-secondary btn-lg">
+                    <i class="icon-phone"></i>
+                    {{ i18n "free_consultation" | default "Kostenlose Beratung" }}
+                </a>
+            </div>
+            <div class="hero-trust">
+                <div class="trust-item">
+                    <i class="icon-location"></i>
+                    <span>{{ i18n "on_site_pattaya" | default "Vor Ort in Pattaya" }}</span>
+                </div>
+                <div class="trust-item">
+                    <i class="icon-properties"></i>
+                    <span>{{ i18n "managed_properties" | default "30+ verwaltete Objekte" }}</span>
+                </div>
+                <div class="trust-item">
+                    <i class="icon-languages"></i>
+                    <span>{{ i18n "multilingual" | default "DE / EN / TH" }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">{{ i18n "properties_managed" | default "Objekte verwaltet" }}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">{{ i18n "years_experience" | default "Jahre Erfahrung" }}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">{{ i18n "satisfaction" | default "Zufriedenheit" }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ partial "homepage-sections.html" . }}
+
+<!-- JavaScript for Quick Search -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const quickSearchBtn = document.getElementById('quick-search-btn');
+    const quickType = document.getElementById('quick-type');
+    const quickLocation = document.getElementById('quick-location');
+    const quickPrice = document.getElementById('quick-price');
+    
+    if (quickSearchBtn) {
+        quickSearchBtn.addEventListener('click', function() {
+            const params = new URLSearchParams();
+            
+            if (quickType.value) params.set('type', quickType.value);
+            if (quickLocation.value) params.set('location', quickLocation.value);
+            if (quickPrice.value) params.set('price_max', quickPrice.value);
+            
+            const searchUrl = '{{ (site.GetPage "/properties").RelPermalink }}' + 
+                (params.toString() ? '?' + params.toString() : '');
+            
+            window.location.href = searchUrl;
+        });
+    }
+});
+</script>
+{{ end }}

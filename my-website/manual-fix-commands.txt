@@ -1,0 +1,55 @@
+# 🚨 NOTFALL-REPARATUR - MANUELLE BEFEHLE
+
+# 1. SSH-Verbindung herstellen:
+ssh root@paattaya.space
+# Passwort: Fuckthematrix123!
+
+# 2. Server-Status prüfen:
+uptime
+df -h
+free -h
+docker ps -a
+netstat -tlnp | grep :80
+netstat -tlnp | grep :443
+
+# 3. Verzeichnis prüfen:
+ls -la /root/
+
+# 4. Falls docker-compose.yml existiert:
+cd /root
+docker-compose down
+docker-compose up --build -d
+
+# 5. Falls kein docker-compose.yml:
+# Einfache Website erstellen:
+cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pattaya Estate</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>🏖️ Pattaya Estate</h1>
+    <p>Website wird repariert...</p>
+    <p>Ihr deutschsprachiger Immobilienmakler in Pattaya</p>
+</body>
+</html>
+EOF
+
+# Einfacher nginx Container:
+docker run -d --name paattaya-website \
+    -p 80:80 -p 443:443 \
+    -v /root/index.html:/usr/share/nginx/html/index.html:ro \
+    --restart unless-stopped \
+    nginx:alpine
+
+# 6. Status prüfen:
+docker ps
+curl -I http://localhost
+
+# 7. Website testen:
+curl -I http://paattaya.space
+curl -I https://paattaya.space
+
+# ✅ FERTIG! Website sollte wieder erreichbar sein

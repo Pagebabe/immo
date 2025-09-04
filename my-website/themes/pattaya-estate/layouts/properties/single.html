@@ -1,0 +1,130 @@
+{{ define "head" }}
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"RealEstateListing",
+  "name":"{{ .Title }}",
+  "url":"{{ .Permalink }}",
+  "address":{"@type":"PostalAddress","addressLocality":"{{ .Params.location }}","addressCountry":"TH"},
+  "offers":{"@type":"Offer","price":"{{ .Params.price }}","priceCurrency":"THB","availability":"https://schema.org/{{ if eq .Params.status "available" }}InStock{{ else }}OutOfStock{{ end }}"},
+  "numberOfRooms":"{{ .Params.bedrooms }}",
+  "floorSize":{"@type":"QuantitativeValue","value":"{{ .Params.living_area }}","unitCode":"MTK"}
+}
+</script>
+{{ partial "faq-schema.html" . }}
+{{ end }}
+
+{{ define "main" }}
+<article class="property-detail">
+    <div class="container">
+        <div class="property-header">
+            <h1>{{ .Title }}</h1>
+            <div class="property-price-large">
+                <span class="price" data-thb="{{ .Params.price | default 0 }}">{{ lang.FormatNumber 0 .Params.price }} {{ .Site.Params.currency }}</span>
+            </div>
+            <p class="property-location">{{ .Params.location }} • {{ i18n .Params.type_key | default .Params.type }}</p>
+            {{ partial "property-ctas.html" . }}
+        </div>
+
+        <!-- Gallery -->
+        {{ with .Params.gallery }}
+        <div class="property-gallery">
+            {{ range . }}
+                {{ $img := resources.Get . }}
+                {{ if $img }}
+                    {{ $resized := $img | images.Fit "1400x900" }}
+                    {{ $webp := $resized | images.Format "webp" }}
+                    {{ $resized2x := $img | images.Fit "2800x1800" }}
+                    {{ $webp2x := $resized2x | images.Format "webp" }}
+                    <picture>
+                        <source media="(min-width: 1400px)" srcset="{{ $webp2x.RelPermalink }} 2x, {{ $webp.RelPermalink }} 1x" type="image/webp">
+                        <source media="(min-width: 1400px)" srcset="{{ $resized2x.RelPermalink }} 2x, {{ $resized.RelPermalink }} 1x">
+                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $resized.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+                    </picture>
+                {{ end }}
+            {{ end }}
+        </div>
+        {{ end }}
+
+        <div class="property-content">
+            <div class="property-details">
+                <h2>{{ i18n "properties" }}</h2>
+                <ul class="details-list">
+                    <li><strong>{{ i18n "bedrooms" }}:</strong> {{ .Params.bedrooms }}</li>
+                    <li><strong>{{ i18n "bathrooms" }}:</strong> {{ .Params.bathrooms }}</li>
+                    <li><strong>{{ i18n "living_area" }}:</strong> {{ .Params.living_area }} m²</li>
+                    {{ with .Params.pool }}
+                    <li><strong>{{ i18n "pool" }}:</strong> {{ i18n . }}</li>
+                    {{ end }}
+                    {{ with .Params.ownership }}
+                    <li><strong>{{ i18n "ownership" }}:</strong> {{ i18n . }}</li>
+                    {{ end }}
+                    {{ with .Params.deed }}
+                    <li><strong>{{ i18n "deed" }}:</strong> {{ i18n . }}</li>
+                    {{ end }}
+                    <li><strong>{{ i18n "status" }}:</strong> {{ i18n .Params.status }}</li>
+                </ul>
+
+                {{ with .Params.features }}
+                <h3>{{ i18n "features" }}</h3>
+                <div class="features-list">
+                    {{ range . }}
+                    <span class="feature-tag">{{ i18n . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+                
+                <!-- Second CTA -->
+                <div class="property-actions" style="margin-top: 2rem;">
+                    <a class="btn" href="https://wa.me/66XXXXXXXXX?text={{ urlquery (printf "Interesse: %s – %s" .Title .Permalink) }}">WhatsApp</a>
+                    <a class="btn outline" href="https://cal.com/your-cal-alias?date=next-7-days&name={{ urlquery .Title }}">Book Viewing</a>
+                </div>
+            </div>
+
+            {{ with .Params.lat }}
+            {{ with $.Params.lng }}
+            <div class="property-map">
+                <h2>{{ i18n "location" | default "Location" }}</h2>
+                <div id="map" style="height:320px;margin:16px 0;"></div>
+            </div>
+            {{ end }}
+            {{ end }}
+
+            <div class="property-description">
+                <h2>Beschreibung</h2>
+                <div class="content">
+                    {{ .Content }}
+                </div>
+            </div>
+
+            <div class="property-contact">
+                <h2>{{ i18n "contact" }}</h2>
+                <div class="contact-info">
+                    <p><strong>{{ i18n "agent" }}:</strong> {{ .Params.contact.agent }}</p>
+                    <p><strong>{{ i18n "phone" }}:</strong> <a href="tel:{{ .Params.contact.phone }}">{{ .Params.contact.phone }}</a></p>
+                    <p><strong>{{ i18n "email" }}:</strong> <a href="mailto:{{ .Params.contact.email }}">{{ .Params.contact.email }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+{{ with .Params.lat }}
+{{ with $.Params.lng }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const map = L.map('map').setView([{{ . }}, {{ $.Params.lng }}], 15);
+    
+    L.tileLayer('{{ $.Site.Params.maps.tiles }}', {
+        attribution: '{{ $.Site.Params.maps.attribution }}'
+    }).addTo(map);
+    
+    L.marker([{{ . }}, {{ $.Params.lng }}]).addTo(map)
+        .bindPopup('{{ $.Title }}')
+        .openPopup();
+});
+</script>
+{{ end }}
+{{ end }}
+{{ end }}

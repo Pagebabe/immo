@@ -1,0 +1,41 @@
+# Docker Compose für Pattaya Estate Website
+
+services:
+  hugo-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pattaya-estate-website
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - HUGO_ENV=production
+    volumes:
+      # Für Entwicklung: Live-Reload (optional)
+      - .:/src:ro
+    networks:
+      - pattaya-network
+
+  # Optional: Nginx Reverse Proxy für mehrere Services (deaktiviert)
+  # nginx-proxy:
+  #   image: nginx:alpine
+  #   container_name: pattaya-nginx-proxy
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx-proxy.conf:/etc/nginx/nginx.conf:ro
+  #     - ./ssl:/etc/nginx/ssl:ro
+  #   depends_on:
+  #     - hugo-website
+  #   restart: unless-stopped
+  #   networks:
+  #     - pattaya-network
+
+networks:
+  pattaya-network:
+    driver: bridge
+
+volumes:
+  hugo-data:

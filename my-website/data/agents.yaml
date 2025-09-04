@@ -1,0 +1,40 @@
+- name: John Smith
+  phone: "+66 38 123 456"
+  email: "john@pattayalivingestate.com"
+  langs: ["en","de"]
+  photo: "agents/john-smith.jpg"
+  position: "Senior Property Consultant"
+  experience: "10+ years in Pattaya real estate"
+  specialties: ["luxury condos", "investment properties", "golf course properties"]
+- name: Sarah Johnson
+  phone: "+66 38 123 457"
+  email: "sarah@pattayalivingestate.com"
+  langs: ["en","th"]
+  photo: "agents/sarah-johnson.jpg"
+  position: "Luxury Property Specialist"
+  experience: "8+ years in luxury real estate"
+  specialties: ["penthouses", "beachfront properties", "villas"]
+- name: Michael Brown
+  phone: "+66 38 123 458"
+  email: "michael@pattayalivingestate.com"
+  langs: ["en","de","th"]
+  photo: "agents/michael-brown.jpg"
+  position: "Family Property Consultant"
+  experience: "12+ years in family properties"
+  specialties: ["family homes", "villas", "jomtien properties"]
+- name: Lisa Wilson
+  phone: "+66 38 123 459"
+  email: "lisa@pattayalivingestate.com"
+  langs: ["en","de"]
+  photo: "agents/lisa-wilson.jpg"
+  position: "Investment Property Advisor"
+  experience: "15+ years in real estate investment"
+  specialties: ["investment condos", "rental properties", "market analysis"]
+- name: David Lee
+  phone: "+66 38 123 460"
+  email: "david@pattayalivingestate.com"
+  langs: ["en","th"]
+  photo: "agents/david-lee.jpg"
+  position: "Pratumnak Specialist"
+  experience: "7+ years in Pratumnak area"
+  specialties: ["pratumnak properties", "hilltop views", "luxury townhouses"]

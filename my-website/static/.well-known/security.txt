@@ -1,0 +1,4 @@
+Contact: mailto:hello@example.com
+Acknowledgements: https://example.com/
+Preferred-Languages: en, de, th
+Policy: https://example.com/

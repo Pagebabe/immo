@@ -1,0 +1,292 @@
+- id: properties
+  translation: Immobilien
+- id: filter_type
+  translation: Typ
+- id: filter_location
+  translation: Standort
+- id: bedrooms
+  translation: Schlafzimmer
+- id: bathrooms
+  translation: Badezimmer
+- id: living_area
+  translation: Wohnfläche
+- id: max_price
+  translation: Max Preis
+- id: search_placeholder
+  translation: Suche (Titel/Ort/Feature)
+- id: reset_filters
+  translation: Filter zurücksetzen
+- id: contact
+  translation: Kontakt
+- id: free_consultation
+  translation: Kostenlose Beratung
+- id: on_site_pattaya
+  translation: Vor Ort in Pattaya
+- id: managed_properties
+  translation: 30+ verwaltete Objekte
+- id: multilingual
+  translation: DE / EN / TH
+- id: properties_managed
+  translation: Objekte verwaltet
+- id: years_experience
+  translation: Jahre Erfahrung
+- id: satisfaction
+  translation: Zufriedenheit
+- id: quick_search_title
+  translation: Schnellsuche
+- id: all_types
+  translation: Alle Typen
+- id: all_locations
+  translation: Alle Lagen
+- id: any_price
+  translation: Beliebiger Preis
+- id: advanced_search
+  translation: Erweiterte Suche
+- id: popular_searches
+  translation: Beliebte Suchen
+- id: featured_properties
+  translation: Empfohlene Immobilien
+- id: featured_properties_sub
+  translation: Unsere Top-Auswahl an Immobilien in den besten Lagen von Pattaya
+- id: view_all_properties
+  translation: Alle Immobilien anzeigen
+- id: featured
+  translation: Empfohlen
+- id: view_details
+  translation: Details anzeigen
+- id: our_services
+  translation: Unsere Services
+- id: services_subtitle
+  translation: Vollständige Immobilienbetreuung von A bis Z
+- id: buy_property
+  translation: Immobilien kaufen
+- id: buy_property_desc
+  translation: Wir helfen Ihnen beim Finden und Kaufen Ihrer Traumimmobilie in Pattaya.
+- id: sell_property
+  translation: Immobilien verkaufen
+- id: sell_property_desc
+  translation: Professionelle Vermarktung und Verkauf Ihrer Immobilie zum besten Preis.
+- id: property_management
+  translation: Immobilienverwaltung
+- id: property_management_desc
+  translation: Vollständige Verwaltung Ihrer Immobilie - von der Vermietung bis zur Wartung.
+- id: legal_support
+  translation: Rechtliche Beratung
+- id: legal_support_desc
+  translation: Professionelle rechtliche Unterstützung bei allen Immobilientransaktionen.
+- id: learn_more
+  translation: Mehr erfahren
+- id: popular_areas
+  translation: Beliebte Gebiete
+- id: areas_subtitle
+  translation: Entdecken Sie die besten Lagen in Pattaya
+- id: explore_area
+  translation: Gebiet erkunden
+- id: why_choose_us
+  translation: Warum uns wählen?
+- id: trust_subtitle
+  translation: Vertrauen Sie auf unsere Erfahrung und Expertise
+- id: local_expertise
+  translation: Lokale Expertise
+- id: local_expertise_desc
+  translation: Über 5 Jahre Erfahrung im Pattaya Immobilienmarkt
+- id: multilingual_service
+  translation: Mehrsprachiger Service
+- id: multilingual_service_desc
+  translation: Betreuung auf Deutsch, Englisch und Thai
+- id: full_support
+  translation: Vollständige Betreuung
+- id: full_support_desc
+  translation: Von der Suche bis zur Nachbetreuung - alles aus einer Hand
+- id: transparent_pricing
+  translation: Transparente Preise
+- id: transparent_pricing_desc
+  translation: Keine versteckten Kosten - faire und transparente Preise
+- id: ready_to_start
+  translation: Bereit für Ihr Traumhaus?
+- id: cta_subtitle
+  translation: Kontaktieren Sie uns für eine kostenlose, unverbindliche Beratung
+- id: get_free_consultation
+  translation: Kostenlose Beratung
+- id: whatsapp_contact
+  translation: WhatsApp
+- id: tagline
+  translation: Immobilien in Pattaya
+- id: home
+  translation: Startseite
+- id: properties_subtitle
+  translation: Entdecken Sie unsere Auswahl an Immobilien in Pattaya
+- id: any
+  translation: Beliebig
+- id: min_price
+  translation: Min. Preis
+- id: sort_by
+  translation: Sortieren nach
+- id: default
+  translation: Standard
+- id: price_low_high
+  translation: "Preis: Niedrig → Hoch"
+- id: price_high_low
+  translation: "Preis: Hoch → Niedrig"
+- id: area_small_large
+  translation: "Fläche: Klein → Groß"
+- id: area_large_small
+  translation: "Fläche: Groß → Klein"
+- id: newest
+  translation: Neueste
+- id: more_filters
+  translation: Mehr Filter
+- id: less_filters
+  translation: Weniger Filter
+- id: min_area
+  translation: Min. Fläche (m²)
+- id: max_area
+  translation: Max. Fläche (m²)
+- id: features
+  translation: Features
+- id: pool
+  translation: Pool
+- id: garden
+  translation: Garten
+- id: parking
+  translation: Parkplatz
+- id: beachfront
+  translation: Strandfront
+- id: furnished
+  translation: Möbliert
+- id: balcony
+  translation: Balkon
+- id: condition
+  translation: Zustand
+- id: excellent
+  translation: Ausgezeichnet
+- id: good
+  translation: Gut
+- id: needs_renovation
+  translation: Renovierungsbedürftig
+- id: properties_found
+  translation: Immobilien gefunden
+- id: grid_view
+  translation: Rasteransicht
+- id: list_view
+  translation: Listenansicht
+- id: no_results
+  translation: Keine Ergebnisse gefunden
+- id: no_results_desc
+  translation: Versuchen Sie es mit anderen Suchkriterien oder kontaktieren Sie uns für eine persönliche Beratung.
+- id: contact_us
+  translation: Kontaktieren Sie uns
+- id: need_help
+  translation: Benötigen Sie Hilfe?
+- id: cta_desc
+  translation: Unsere Experten helfen Ihnen gerne bei der Suche nach Ihrer Traumimmobilie.
+- id: more
+  translation: mehr
+- id: add_to_compare
+  translation: Vergleichen
+- id: add_to_favorites
+  translation: Zu Favoriten
+- id: no_image
+  translation: Kein Bild
+- id: townhouse
+  translation: Townhouse
+- id: agent
+  translation: Makler
+- id: phone
+  translation: Telefon
+- id: email
+  translation: E-Mail
+- id: features
+  translation: Ausstattung
+- id: pool
+  translation: Pool
+- id: ownership
+  translation: Eigentum
+- id: deed
+  translation: Urkunde
+- id: status
+  translation: Status
+- id: available
+  translation: Verfügbar
+- id: sold
+  translation: Verkauft
+- id: condo
+  translation: Condo
+- id: villa
+  translation: Villa
+- id: house
+  translation: Haus
+- id: foreign_quota
+  translation: Ausländer-Quote
+- id: thai_quota
+  translation: Thai-Quote
+- id: chanote
+  translation: Chanote
+- id: nor_sor_3
+  translation: Nor Sor 3
+- id: shared
+  translation: Gemeinsam
+- id: private
+  translation: Privat
+- id: sea_view
+  translation: Meerblick
+- id: parking
+  translation: Parkplatz
+- id: gym
+  translation: Fitnessstudio
+- id: security
+  translation: Sicherheit
+- id: language_switcher
+  translation: Sprache
+- id: services
+  translation: Leistungen
+- id: welcome_headline
+  translation: Finde deine Immobilie in Pattaya
+- id: welcome_sub
+  translation: Mehrsprachige, schnelle, statische Website mit Hugo.
+- id: browse_properties
+  translation: Zu den Immobilien
+- id: near_beach
+  translation: Nahe zum Strand
+- id: bedrooms_short
+  translation: SZ
+- id: no_image
+  translation: Kein Bild
+- id: home
+  translation: Startseite
+- id: home
+  translation: Startseite
+- id: faq
+  translation: Häufig gestellte Fragen
+- id: search
+  translation: Immobilien suchen
+- id: compare
+  translation: Vergleichen
+- id: favorites
+  translation: Favoriten
+- id: added_to_compare
+  translation: Zum Vergleich hinzugefügt
+- id: max_3_compare
+  translation: Maximal 3 Immobilien können verglichen werden
+- id: toggle_favorite
+  translation: Favorit umschalten
+- id: results
+  translation: Ergebnisse
+- id: compare_properties
+  translation: Immobilien vergleichen
+- id: clear_all
+  translation: Alle löschen
+- id: select_properties_to_compare
+  translation: Immobilien zum Vergleichen auswählen
+- id: no_properties_selected
+  translation: Keine Immobilien zum Vergleichen ausgewählt
+- id: property
+  translation: Immobilie
+- id: price
+  translation: Preis
+- id: type
+  translation: Typ
+- id: location
+  translation: Standort
+- id: area
+  translation: Fläche

@@ -1,0 +1,157 @@
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="{{ "/" | relLangURL }}" class="logo-link">
+                    <span class="logo-text">{{ site.Title }}</span>
+                    <span class="logo-tagline">{{ i18n "tagline" | default "Immobilien in Pattaya" }}</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-menu">
+                    {{ range site.Menus.main }}
+                        <li class="nav-item {{ if .HasChildren }}has-dropdown{{ end }}">
+                            <a href="{{ .URL }}" class="nav-link {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}active{{ end }}">
+                                {{ .Name }}
+                                {{ if .HasChildren }}
+                                    <i class="icon-chevron-down"></i>
+                                {{ end }}
+                            </a>
+                            {{ if .HasChildren }}
+                                <ul class="dropdown-menu">
+                                    {{ range .Children }}
+                                        <li class="dropdown-item">
+                                            <a href="{{ .URL }}" class="dropdown-link {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}active{{ end }}">
+                                                {{ .Name }}
+                                            </a>
+                                        </li>
+                                    {{ end }}
+                                </ul>
+                            {{ end }}
+                        </li>
+                    {{ end }}
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    {{ range site.Languages }}
+                        <a href="{{ . | relLangURL }}" class="lang-link {{ if eq .Lang $.Language.Lang }}active{{ end }}">
+                            {{ .Lang | upper }}
+                        </a>
+                    {{ end }}
+                </div>
+
+                <!-- Contact Button -->
+                <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary btn-sm">
+                    <i class="icon-phone"></i>
+                    {{ i18n "contact" | default "Kontakt" }}
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-menu">
+                {{ range site.Menus.main }}
+                    <li class="mobile-nav-item {{ if .HasChildren }}has-submenu{{ end }}">
+                        <a href="{{ .URL }}" class="mobile-nav-link {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}active{{ end }}">
+                            {{ .Name }}
+                            {{ if .HasChildren }}
+                                <i class="icon-chevron-right submenu-toggle"></i>
+                            {{ end }}
+                        </a>
+                        {{ if .HasChildren }}
+                            <ul class="mobile-submenu">
+                                {{ range .Children }}
+                                    <li class="mobile-submenu-item">
+                                        <a href="{{ .URL }}" class="mobile-submenu-link {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}active{{ end }}">
+                                            {{ .Name }}
+                                        </a>
+                                    </li>
+                                {{ end }}
+                            </ul>
+                        {{ end }}
+                    </li>
+                {{ end }}
+            </ul>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions">
+                <div class="mobile-language-switcher">
+                    {{ range site.Languages }}
+                        <a href="{{ . | relLangURL }}" class="mobile-lang-link {{ if eq .Lang $.Language.Lang }}active{{ end }}">
+                            {{ .Lang | upper }}
+                        </a>
+                    {{ end }}
+                </div>
+                <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary btn-block">
+                    <i class="icon-phone"></i>
+                    {{ i18n "contact" | default "Kontakt" }}
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-overlay" id="mobile-overlay"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const submenuToggles = document.querySelectorAll('.submenu-toggle');
+
+    // Mobile menu toggle
+    if (mobileMenuToggle && mobileNav && mobileOverlay) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.classList.toggle('mobile-menu-open');
+        });
+
+        mobileOverlay.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.classList.remove('mobile-menu-open');
+        });
+    }
+
+    // Submenu toggles
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const submenu = this.parentElement.nextElementSibling;
+            if (submenu) {
+                submenu.classList.toggle('active');
+                this.classList.toggle('active');
+            }
+        });
+    });
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            mobileNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.classList.remove('mobile-menu-open');
+        }
+    });
+});
+</script>

@@ -1,0 +1,11 @@
+{{ $name := .Get "name" }}
+{{ $limit := .Get "limit" | default 12 }}
+<section>
+  <h2>{{ $name }}</h2>
+  <div class="grid">
+    {{ $items := where (where site.RegularPages "Section" "properties") ".Params.location" $name }}
+    {{ range first (int $limit) $items }}
+      {{ partial "property-card.html" . }}
+    {{ end }}
+  </div>
+</section>

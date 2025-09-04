@@ -1,0 +1,292 @@
+- id: properties
+  translation: Properties
+- id: filter_type
+  translation: Type
+- id: filter_location
+  translation: Location
+- id: bedrooms
+  translation: Bedrooms
+- id: bathrooms
+  translation: Bathrooms
+- id: living_area
+  translation: Living Area
+- id: max_price
+  translation: Max Price
+- id: search_placeholder
+  translation: Search (Title/Location/Feature)
+- id: reset_filters
+  translation: Reset filters
+- id: contact
+  translation: Contact
+- id: free_consultation
+  translation: Free Consultation
+- id: on_site_pattaya
+  translation: On-site in Pattaya
+- id: managed_properties
+  translation: 30+ managed properties
+- id: multilingual
+  translation: DE / EN / TH
+- id: properties_managed
+  translation: Properties managed
+- id: years_experience
+  translation: Years experience
+- id: satisfaction
+  translation: Satisfaction
+- id: quick_search_title
+  translation: Quick Search
+- id: all_types
+  translation: All Types
+- id: all_locations
+  translation: All Locations
+- id: any_price
+  translation: Any Price
+- id: advanced_search
+  translation: Advanced Search
+- id: popular_searches
+  translation: Popular Searches
+- id: featured_properties
+  translation: Featured Properties
+- id: featured_properties_sub
+  translation: Our top selection of properties in the best locations in Pattaya
+- id: view_all_properties
+  translation: View all properties
+- id: featured
+  translation: Featured
+- id: view_details
+  translation: View details
+- id: our_services
+  translation: Our Services
+- id: services_subtitle
+  translation: Complete real estate service from A to Z
+- id: buy_property
+  translation: Buy Property
+- id: buy_property_desc
+  translation: We help you find and buy your dream property in Pattaya.
+- id: sell_property
+  translation: Sell Property
+- id: sell_property_desc
+  translation: Professional marketing and sale of your property at the best price.
+- id: property_management
+  translation: Property Management
+- id: property_management_desc
+  translation: Complete management of your property - from rental to maintenance.
+- id: legal_support
+  translation: Legal Support
+- id: legal_support_desc
+  translation: Professional legal support for all real estate transactions.
+- id: learn_more
+  translation: Learn more
+- id: popular_areas
+  translation: Popular Areas
+- id: areas_subtitle
+  translation: Discover the best locations in Pattaya
+- id: explore_area
+  translation: Explore area
+- id: why_choose_us
+  translation: Why choose us?
+- id: trust_subtitle
+  translation: Trust our experience and expertise
+- id: local_expertise
+  translation: Local Expertise
+- id: local_expertise_desc
+  translation: Over 5 years of experience in the Pattaya real estate market
+- id: multilingual_service
+  translation: Multilingual Service
+- id: multilingual_service_desc
+  translation: Support in German, English and Thai
+- id: full_support
+  translation: Full Support
+- id: full_support_desc
+  translation: From search to aftercare - everything from one source
+- id: transparent_pricing
+  translation: Transparent Pricing
+- id: transparent_pricing_desc
+  translation: No hidden costs - fair and transparent prices
+- id: ready_to_start
+  translation: Ready for your dream home?
+- id: cta_subtitle
+  translation: Contact us for a free, no-obligation consultation
+- id: get_free_consultation
+  translation: Free Consultation
+- id: whatsapp_contact
+  translation: WhatsApp
+- id: tagline
+  translation: Real Estate in Pattaya
+- id: home
+  translation: Home
+- id: properties_subtitle
+  translation: Discover our selection of properties in Pattaya
+- id: any
+  translation: Any
+- id: min_price
+  translation: Min. Price
+- id: sort_by
+  translation: Sort by
+- id: default
+  translation: Default
+- id: price_low_high
+  translation: "Price: Low → High"
+- id: price_high_low
+  translation: "Price: High → Low"
+- id: area_small_large
+  translation: "Area: Small → Large"
+- id: area_large_small
+  translation: "Area: Large → Small"
+- id: newest
+  translation: Newest
+- id: more_filters
+  translation: More Filters
+- id: less_filters
+  translation: Less Filters
+- id: min_area
+  translation: Min. Area (m²)
+- id: max_area
+  translation: Max. Area (m²)
+- id: features
+  translation: Features
+- id: pool
+  translation: Pool
+- id: garden
+  translation: Garden
+- id: parking
+  translation: Parking
+- id: beachfront
+  translation: Beachfront
+- id: furnished
+  translation: Furnished
+- id: balcony
+  translation: Balcony
+- id: condition
+  translation: Condition
+- id: excellent
+  translation: Excellent
+- id: good
+  translation: Good
+- id: needs_renovation
+  translation: Needs Renovation
+- id: properties_found
+  translation: Properties found
+- id: grid_view
+  translation: Grid View
+- id: list_view
+  translation: List View
+- id: no_results
+  translation: No results found
+- id: no_results_desc
+  translation: Try different search criteria or contact us for personal consultation.
+- id: contact_us
+  translation: Contact us
+- id: need_help
+  translation: Need help?
+- id: cta_desc
+  translation: Our experts are happy to help you find your dream property.
+- id: more
+  translation: more
+- id: add_to_compare
+  translation: Compare
+- id: add_to_favorites
+  translation: Add to Favorites
+- id: no_image
+  translation: No Image
+- id: townhouse
+  translation: Townhouse
+- id: agent
+  translation: Agent
+- id: phone
+  translation: Phone
+- id: email
+  translation: Email
+- id: features
+  translation: Features
+- id: pool
+  translation: Pool
+- id: ownership
+  translation: Ownership
+- id: deed
+  translation: Deed
+- id: status
+  translation: Status
+- id: available
+  translation: Available
+- id: sold
+  translation: Sold
+- id: condo
+  translation: Condo
+- id: villa
+  translation: Villa
+- id: house
+  translation: House
+- id: foreign_quota
+  translation: Foreign Quota
+- id: thai_quota
+  translation: Thai Quota
+- id: chanote
+  translation: Chanote
+- id: nor_sor_3
+  translation: Nor Sor 3
+- id: shared
+  translation: Shared
+- id: private
+  translation: Private
+- id: sea_view
+  translation: Sea View
+- id: parking
+  translation: Parking
+- id: gym
+  translation: Gym
+- id: security
+  translation: Security
+- id: language_switcher
+  translation: Language
+- id: services
+  translation: Services
+- id: welcome_headline
+  translation: Find your property in Pattaya
+- id: welcome_sub
+  translation: Multilingual, fast, static website with Hugo.
+- id: browse_properties
+  translation: Browse Properties
+- id: near_beach
+  translation: Near Beach
+- id: bedrooms_short
+  translation: BR
+- id: no_image
+  translation: No Image
+- id: home
+  translation: Home
+- id: home
+  translation: Home
+- id: faq
+  translation: Frequently Asked Questions
+- id: search
+  translation: Search properties
+- id: compare
+  translation: Compare
+- id: favorites
+  translation: Favorites
+- id: added_to_compare
+  translation: Added to compare
+- id: max_3_compare
+  translation: Maximum 3 properties can be compared
+- id: toggle_favorite
+  translation: Toggle favorite
+- id: results
+  translation: results
+- id: compare_properties
+  translation: Compare Properties
+- id: clear_all
+  translation: Clear All
+- id: select_properties_to_compare
+  translation: Select properties to compare
+- id: no_properties_selected
+  translation: No properties selected for comparison
+- id: property
+  translation: Property
+- id: price
+  translation: Price
+- id: type
+  translation: Type
+- id: location
+  translation: Location
+- id: area
+  translation: Area

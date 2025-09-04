@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    
+    {{- if .IsPage -}}
+    <link rel="canonical" href="{{ .Permalink }}" />
+    {{- end -}}
+    {{- range .AllTranslations -}}
+    <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}" />
+    {{- end -}}
+    <link rel="alternate" hreflang="x-default" href="{{ .Site.Home.Permalink }}" />
+    
+    {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0f172a">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    {{ partial "meta-og.html" . }}
+    {{ partial "analytics.html" . }}
+    {{ partial "org-schema.html" . }}
+    {{ partial "gsc-schema.html" . }}
+    
+    <!-- Mobile Touch Optimizations -->
+    <style>
+        /* Prevent zoom on input focus (iOS) */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+            select, textarea, input[type="text"], input[type="password"], 
+            input[type="datetime"], input[type="datetime-local"], 
+            input[type="date"], input[type="month"], input[type="time"], 
+            input[type="week"], input[type="number"], input[type="email"], 
+            input[type="url"], input[type="search"], input[type="tel"], 
+            input[type="color"] {
+                font-size: 16px !important;
+            }
+        }
+        
+        /* Touch-friendly hover states */
+        @media (hover: none) and (pointer: coarse) {
+            .btn:hover, .property-card:hover, .main-nav a:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        
+        /* iOS safe area support */
+        @supports (padding: max(0px)) {
+            .site-header, .main-content, .site-footer {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+        }
+    </style>
+    
+    {{ block "head" . }}{{ end }}
+</head>
+<body>
+    {{ partial "header.html" . }}
+    {{ partial "breadcrumbs.html" . }}
+    
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">
+                <a href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+            </h1>
+            
+            {{ partial "lang-switcher.html" . }}
+            {{ partial "currency-switcher.html" . }}
+            
+            <nav class="main-nav">
+                <ul>
+                    {{ $current := . }}
+                    {{ range .Site.Menus.main }}
+                    <li><a href="{{ .URL }}" class="{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}active{{ end }}">{{ .Name }}</a></li>
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    {{ partial "breadcrumbs.html" . }}
+    
+    <main class="main-content">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "social-footer.html" . }}
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</p>
+        </div>
+    </footer>
+    
+    {{ partial "sticky-wa.html" . }}
+    {{ partial "compare-drawer.html" . }}
+    
+    <!-- GA4 Event Tracking -->
+    <script>
+    // Enhanced Click Tracking
+    document.addEventListener('click', function(e) {
+        // WhatsApp Click Tracking
+        if (e.target.matches('a[href^="https://wa.me/"]')) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'whatsapp_click', {
+                    'event_category': 'engagement',
+                    'event_label': e.target.href,
+                    'page_location': window.location.href,
+                    'page_title': document.title
+                });
+            }
+        }
+        
+        // Cal.com Click Tracking
+        if (e.target.matches('a[href*="cal.com"]')) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cal_click', {
+                    'event_category': 'engagement',
+                    'event_label': e.target.href,
+                    'page_location': window.location.href,
+                    'page_title': document.title
+                });
+            }
+        }
+        
+        // Property Card Click Tracking
+        if (e.target.closest('.property-card a') && typeof gtag !== 'undefined') {
+            const card = e.target.closest('.property-card');
+            const price = card.dataset.price || 0;
+            const type = card.dataset.type || 'unknown';
+            const location = card.dataset.location || 'unknown';
+            
+            gtag('event', 'select_item', {
+                currency: 'THB',
+                value: parseInt(price),
+                items: [{
+                    item_id: card.querySelector('a').href,
+                    item_name: card.querySelector('h3').textContent,
+                    item_category: type,
+                    item_category2: location,
+                    price: parseInt(price),
+                    quantity: 1
+                }]
+            });
+        }
+        
+        // CTA Button Tracking
+        if (e.target.matches('.btn[href], .btn[onclick]') && typeof gtag !== 'undefined') {
+            gtag('event', 'cta_click', {
+                'event_category': 'engagement',
+                'event_label': e.target.textContent || e.target.href,
+                'page_location': window.location.href,
+                'page_title': document.title
+            });
+        }
+    });
+    
+    // Lead Form Submit Tracking
+    document.addEventListener('submit', function(e) {
+        if (e.target.matches('.lead-form')) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'lead_submit', {
+                    'event_category': 'conversion',
+                    'event_label': 'lead_form'
+                });
+            }
+        }
+    });
+    </script>
+    
+    {{ partial "consent.html" . }}
+    
+    <!-- Currency Switcher JS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currencySelect = document.getElementById('currency');
+        const rates = JSON.parse(currencySelect.dataset.rates);
+        
+        // Load saved currency
+        const savedCurrency = localStorage.getItem('ple_currency') || '{{ .Site.Params.currencySwitcher.default }}';
+        currencySelect.value = savedCurrency;
+        
+        // Currency change handler
+        currencySelect.addEventListener('change', function() {
+            const newCurrency = this.value;
+            localStorage.setItem('ple_currency', newCurrency);
+            updatePrices(newCurrency, rates);
+        });
+        
+        // Update prices function
+        function updatePrices(currency, rates) {
+            const priceElements = document.querySelectorAll('.price[data-thb]');
+            priceElements.forEach(function(el) {
+                const thbPrice = parseFloat(el.dataset.thb);
+                const rate = rates[currency] || 1;
+                const convertedPrice = thbPrice * rate;
+                
+                const formatter = new Intl.NumberFormat('{{ .Site.Language.Lang }}', {
+                    style: 'currency',
+                    currency: currency
+                });
+                
+                el.textContent = formatter.format(convertedPrice);
+            });
+        }
+        
+        // Initial price update
+        updatePrices(savedCurrency, rates);
+    });
+    
+    // Compare & Favorites System
+    function addCompare(url, title) {
+        const compareItems = JSON.parse(localStorage.getItem('ple_compare') || '[]');
+        if (compareItems.length >= 3) {
+            alert('{{ i18n "max_3_compare" | default "Maximum 3 properties can be compared" }}');
+            return;
+        }
+        if (!compareItems.find(item => item.url === url)) {
+            compareItems.push({ url, title });
+            localStorage.setItem('ple_compare', JSON.stringify(compareItems));
+            updateCompareDrawer();
+        }
+    }
+    
+    function toggleFavorite(url) {
+        const favs = JSON.parse(localStorage.getItem('ple_favs') || '[]');
+        const index = favs.indexOf(url);
+        if (index > -1) {
+            favs.splice(index, 1);
+        } else {
+            favs.push(url);
+        }
+        localStorage.setItem('ple_favs', JSON.stringify(favs));
+        updateFavoriteButtons();
+    }
+    
+    function updateCompareDrawer() {
+        const compareItems = JSON.parse(localStorage.getItem('ple_compare') || '[]');
+        const drawer = document.getElementById('compare-drawer');
+        const items = document.getElementById('compare-items');
+        const compareBtn = document.getElementById('compare-btn');
+        
+        if (compareItems.length === 0) {
+            drawer.style.display = 'none';
+            return;
+        }
+        
+        drawer.style.display = 'block';
+        items.innerHTML = compareItems.map(item => 
+            '<div class="compare-item"><span>' + item.title + '</span><button onclick="removeCompare(\'' + item.url + '\')">×</button></div>'
+        ).join('');
+        compareBtn.disabled = false;
+    }
+    
+    function updateFavoriteButtons() {
+        const favs = JSON.parse(localStorage.getItem('ple_favs') || '[]');
+        document.querySelectorAll('.fav-btn').forEach(btn => {
+            const url = btn.dataset.id;
+            if (favs.includes(url)) {
+                btn.classList.add('is-fav');
+            } else {
+                btn.classList.remove('is-fav');
+            }
+        });
+    }
+    
+    function removeCompare(url) {
+        const compareItems = JSON.parse(localStorage.getItem('ple_compare') || '[]');
+        const filtered = compareItems.filter(item => item.url !== url);
+        localStorage.setItem('ple_compare', JSON.stringify(filtered));
+        updateCompareDrawer();
+    }
+    
+    function clearCompare() {
+        localStorage.removeItem('ple_compare');
+        updateCompareDrawer();
+    }
+    
+    function openComparePage() {
+        window.location.href = '/{{ .Site.Language.Lang }}/compare/';
+    }
+    
+    function closeCompareDrawer() {
+        document.getElementById('compare-drawer').style.display = 'none';
+    }
+    
+    // Event listeners
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.compare-btn')) {
+            const url = e.target.dataset.id;
+            const title = e.target.dataset.title;
+            addCompare(url, title);
+        }
+        if (e.target.matches('.fav-btn')) {
+            const url = e.target.dataset.id;
+            toggleFavorite(url);
+        }
+    });
+    
+    // Initialize
+    updateCompareDrawer();
+    updateFavoriteButtons();
+    
+    // Mobile touch optimizations
+    if ('ontouchstart' in window) {
+        // Add touch class for mobile-specific styling
+        document.documentElement.classList.add('touch-device');
+        
+        // Prevent double-tap zoom on buttons
+        document.addEventListener('touchend', function(e) {
+            if (e.target.matches('.btn, .compare-btn, .fav-btn')) {
+                e.preventDefault();
+                e.target.click();
+            }
+        }, { passive: false });
+        
+        // Optimize scroll performance
+        document.addEventListener('touchstart', function() {}, { passive: true });
+        document.addEventListener('touchmove', function() {}, { passive: true });
+    }
+    </script>
+</body>
+</html>
