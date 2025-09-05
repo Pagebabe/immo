@@ -11,8 +11,10 @@ language: "de"
 ## 📈 Aktuelle Marktentwicklungen
 
 Unser Blog bietet Ihnen regelmäßige Updates über:
-- **Marktanalysen** - Aktuelle Preisentwicklungen und Trends
-- **Investment-Tipps** - Strategien für maximale Rendite
+
+### 📊 Marktanalysen
+- **Preisentwicklungen** - Aktuelle Trends und Prognosen
+- **Investment-Strategien** - Tipps für maximale Rendite
 - **Rechtliche Updates** - Änderungen im thailändischen Immobilienrecht
 - **Stadtteil-Vergleiche** - Detaillierte Analysen der besten Lagen
 
