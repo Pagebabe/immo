@@ -1,9 +1,56 @@
-<div class="footer-content">
-  <div class="footer-links">
-    <a href="{{ "impressum/" | relLangURL }}">Impressum</a>
-    <a href="{{ "datenschutz/" | relLangURL }}">Datenschutz</a>
-    <a href="{{ "contact/" | relLangURL }}">Kontakt</a>
-    <a href="{{ "about/" | relLangURL }}">Über Uns</a>
-  </div>
-  <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. Alle Rechte vorbehalten.</p>
-</div>
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Pattaya Living Estate</h3>
+                <p>Ihr vertrauensvoller Partner für Immobilieninvestitionen in Pattaya. Über 10 Jahre Erfahrung und 500+ erfolgreiche Transaktionen.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="{{ (site.GetPage "/services/buy-property").RelPermalink }}">Immobilienkauf</a></li>
+                    <li><a href="{{ (site.GetPage "/services/sell-property").RelPermalink }}">Immobilienverkauf</a></li>
+                    <li><a href="{{ (site.GetPage "/services/property-management").RelPermalink }}">Property Management</a></li>
+                    <li><a href="{{ (site.GetPage "/services/legal-support").RelPermalink }}">Rechtliche Beratung</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Stadtteile</h3>
+                <ul>
+                    <li><a href="{{ (site.GetPage "/areas/jomtien").RelPermalink }}">Jomtien</a></li>
+                    <li><a href="{{ (site.GetPage "/areas/pratumnak").RelPermalink }}">Pratumnak</a></li>
+                    <li><a href="{{ (site.GetPage "/areas/central").RelPermalink }}">Central Pattaya</a></li>
+                    <li><a href="{{ (site.GetPage "/areas/naklua").RelPermalink }}">Naklua</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 123/45 Beach Road, Pattaya, Thailand</p>
+                    <p><i class="fas fa-phone"></i> +66-XX-XXX-XXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@pattayalivingestate.com</p>
+                    <p><i class="fas fa-clock"></i> Mo-Fr: 09:00-18:00, Sa: 09:00-16:00</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="{{ "impressum/" | relLangURL }}">Impressum</a>
+                <a href="{{ "datenschutz/" | relLangURL }}">Datenschutz</a>
+                <a href="{{ "contact/" | relLangURL }}">Kontakt</a>
+                <a href="{{ "about/" | relLangURL }}">Über Uns</a>
+            </div>
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. Alle Rechte vorbehalten.</p>
+        </div>
+    </div>
+</footer>

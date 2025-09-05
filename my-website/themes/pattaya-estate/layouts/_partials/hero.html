@@ -1,6 +1,7 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-background">
+        <img src="/images/hero-pattaya-beach.jpg" alt="Pattaya Beach Panorama" class="hero-bg-image">
         <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">
@@ -9,11 +10,11 @@
             <p class="hero-subtitle">{{ i18n "hero_subtitle" | default "Professionelle Immobilienberatung für Deutsche in Thailand. Über 30 Objekte in Verwaltung." }}</p>
             <div class="hero-ctas">
                 <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-primary btn-lg">
-                    <i class="icon-home"></i>
+                    <i class="fas fa-home"></i>
                     {{ i18n "browse_properties" | default "Immobilien entdecken" }}
                 </a>
                 <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-secondary btn-lg">
-                    <i class="icon-phone"></i>
+                    <i class="fas fa-phone"></i>
                     {{ i18n "free_consultation" | default "Kostenlose Beratung" }}
                 </a>
             </div>
@@ -34,5 +35,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="hero-scroll">
+        <a href="#featured-properties" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </div>
 </section>

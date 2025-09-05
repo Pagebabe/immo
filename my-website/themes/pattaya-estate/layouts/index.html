@@ -34,29 +34,35 @@
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="icon-home"></i>
+                    <i class="fas fa-home"></i>
                 </div>
                 <h3>{{ i18n "property_purchase" | default "Immobilienkauf" }}</h3>
                 <p>{{ i18n "property_purchase_desc" | default "Professionelle Beratung beim Kauf Ihrer Traumimmobilie in Pattaya" }}</p>
-                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }} <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
             
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="icon-chart"></i>
+                    <i class="fas fa-chart-line"></i>
                 </div>
                 <h3>{{ i18n "property_management" | default "Property Management" }}</h3>
                 <p>{{ i18n "property_management_desc" | default "Vollständige Verwaltung Ihrer Immobilie für maximale Rendite" }}</p>
-                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }} <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
             
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="icon-shield"></i>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3>{{ i18n "legal_support" | default "Rechtliche Beratung" }}</h3>
                 <p>{{ i18n "legal_support_desc" | default "Foreign Quota, Due Diligence und rechtliche Absicherung" }}</p>
-                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="btn btn-outline">{{ i18n "learn_more" | default "Mehr erfahren" }}</a>
+                <a href="{{ (site.GetPage "/services").RelPermalink }}" class="service-link">
+                    {{ i18n "learn_more" | default "Mehr erfahren" }} <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -73,34 +79,49 @@
         <div class="areas-grid">
             <div class="area-card">
                 <div class="area-image">
-                    <img src="/images/areas/jomtien.jpg" alt="Jomtien Beach" loading="lazy">
+                    <img src="/images/areas/jomtien.jpg" alt="Jomtien Beach" loading="lazy" onerror="this.src='/images/placeholder-property.jpg'">
                 </div>
                 <div class="area-content">
                     <h3>Jomtien</h3>
                     <p>{{ i18n "jomtien_desc" | default "Familienfreundlich, ruhiger Strand, günstige Preise" }}</p>
-                    <a href="{{ (site.GetPage "/areas/jomtien").RelPermalink }}" class="btn btn-outline">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
+                    <div class="area-features">
+                        <span class="area-feature">Familienfreundlich</span>
+                        <span class="area-feature">Günstige Preise</span>
+                        <span class="area-feature">Sauberer Strand</span>
+                    </div>
+                    <a href="{{ (site.GetPage "/areas/jomtien").RelPermalink }}" class="area-link">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
                 </div>
             </div>
             
             <div class="area-card">
                 <div class="area-image">
-                    <img src="/images/areas/pratumnak.jpg" alt="Pratumnak Hill" loading="lazy">
+                    <img src="/images/areas/pratumnak.jpg" alt="Pratumnak Hill" loading="lazy" onerror="this.src='/images/placeholder-property.jpg'">
                 </div>
                 <div class="area-content">
                     <h3>Pratumnak</h3>
                     <p>{{ i18n "pratumnak_desc" | default "Premium-Lage, Hügel-Blick, Luxus-Properties" }}</p>
-                    <a href="{{ (site.GetPage "/areas/pratumnak").RelPermalink }}" class="btn btn-outline">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
+                    <div class="area-features">
+                        <span class="area-feature">Premium-Lage</span>
+                        <span class="area-feature">Meerblick</span>
+                        <span class="area-feature">Luxus-Properties</span>
+                    </div>
+                    <a href="{{ (site.GetPage "/areas/pratumnak").RelPermalink }}" class="area-link">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
                 </div>
             </div>
             
             <div class="area-card">
                 <div class="area-image">
-                    <img src="/images/areas/central.jpg" alt="Central Pattaya" loading="lazy">
+                    <img src="/images/areas/central.jpg" alt="Central Pattaya" loading="lazy" onerror="this.src='/images/placeholder-property.jpg'">
                 </div>
                 <div class="area-content">
                     <h3>Central Pattaya</h3>
                     <p>{{ i18n "central_desc" | default "Urban Leben, Nachtleben, hohe Renditen" }}</p>
-                    <a href="{{ (site.GetPage "/areas/central").RelPermalink }}" class="btn btn-outline">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
+                    <div class="area-features">
+                        <span class="area-feature">Urban Leben</span>
+                        <span class="area-feature">Nachtleben</span>
+                        <span class="area-feature">Hohe Renditen</span>
+                    </div>
+                    <a href="{{ (site.GetPage "/areas/central").RelPermalink }}" class="area-link">{{ i18n "explore_area" | default "Stadtteil erkunden" }}</a>
                 </div>
             </div>
         </div>

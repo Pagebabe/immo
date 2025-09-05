@@ -22,12 +22,21 @@
     {{- end -}}
     <link rel="alternate" hreflang="x-default" href="{{ .Site.Home.Permalink }}" />
     
-    {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Modern CSS -->
+    {{ $css := resources.Get "css/modern.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    
+    <!-- Legacy CSS for compatibility -->
+    {{ $legacyCss := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $legacyCss.RelPermalink }}">
+    
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#2563eb">
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
