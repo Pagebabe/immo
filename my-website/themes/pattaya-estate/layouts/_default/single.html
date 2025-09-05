@@ -1,18 +1,15 @@
 {{ define "main" }}
-<div class="bg-white py-12">
-    <div class="container">
-        <div class="max-w-3xl mx-auto">
+<div class="bg-white section-padding">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
             <h1 class="text-4xl mb-4">{{ .Title }}</h1>
-            {{ if .Description }}
-            <p class="text-lg text-light">{{ .Description }}</p>
-            {{ end }}
+            {{ with .Description }}<p class="text-xl text-[var(--text-light)]">{{ . }}</p>{{ end }}
         </div>
     </div>
 </div>
-
-<div class="py-12">
-    <div class="container">
-        <div class="prose prose-lg max-w-3xl mx-auto">
+<div class="section-padding">
+    <div class="container mx-auto px-4">
+        <div class="prose prose-lg max-w-4xl mx-auto">
             {{ .Content }}
         </div>
     </div>

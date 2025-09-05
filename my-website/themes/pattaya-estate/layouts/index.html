@@ -1,62 +1,54 @@
 {{ define "main" }}
-<!-- 1. Hero Section (Banner) -->
-<header class="hero-section">
-    <div class="hero-overlay"></div>
-    <video autoplay muted loop playsinline class="hero-video">
+<!-- Hero Section mit Video-Banner -->
+<header class="relative h-[70vh] text-white flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
+    <video autoplay muted loop playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-beautiful-shot-of-a-luxurious-house-and-pool-4428-large.mp4" type="video/mp4">
+        Ihr Browser unterstützt das Video-Tag nicht.
     </video>
-    <div class="hero-content">
-        <h1 class="hero-title">Ihr Traum vom Leben in Pattaya</h1>
-        <p class="hero-subtitle">Exklusive Immobilien. Deutschsprachige Experten. Sorgenfreie Abwicklung.</p>
-        <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-primary btn-lg">Unsere Immobilien entdecken</a>
+    <div class="relative z-20 p-4">
+        <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">Ihr Traum vom Leben in Pattaya</h1>
+        <p class="mt-4 text-xl max-w-2xl mx-auto drop-shadow-md">Exklusive Immobilien. Deutschsprachige Experten. Sorgenfreie Abwicklung.</p>
+        <a href="{{ "properties/" | relLangURL }}" class="btn btn-primary mt-8 inline-block">Unsere Immobilien entdecken</a>
     </div>
 </header>
 
-<!-- 2. "Warum Wir?" Sektion -->
+<!-- "Warum Wir?" Sektion -->
 <section class="section-padding bg-white">
-    <div class="container">
-        <h2 class="text-center mb-12">Ihr vertrauensvoller Partner in Thailand</h2>
-        <div class="grid grid-cols-3 text-center">
-            <div class="p-4">
-                <div class="feature-icon">✅</div>
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl text-center mb-12">Ihr vertrauensvoller Partner in Thailand</h2>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+                <div class="text-4xl text-[var(--primary-blue)] mb-4">✅</div>
                 <h3 class="text-xl font-bold mb-2">Rechtssicher & Geprüft</h3>
-                <p class="text-light">Jede Immobilie wird von uns auf Herz und Nieren geprüft. Für Ihre 100%ige Sicherheit.</p>
+                <p class="text-[var(--text-light)]">Jede Immobilie wird von uns auf Herz und Nieren geprüft. Für Ihre 100%ige Sicherheit.</p>
             </div>
-            <div class="p-4">
-                <div class="feature-icon">🇩🇪</div>
+            <div>
+                <div class="text-4xl text-[var(--primary-blue)] mb-4">🇩🇪</div>
                 <h3 class="text-xl font-bold mb-2">Deutschsprachige Experten</h3>
-                <p class="text-light">Wir sprechen Ihre Sprache – vom ersten Kontakt bis zur Schlüsselübergabe und darüber hinaus.</p>
+                <p class="text-[var(--text-light)]">Wir sprechen Ihre Sprache – vom ersten Kontakt bis zur Schlüsselübergabe und darüber hinaus.</p>
             </div>
-            <div class="p-4">
-                <div class="feature-icon">🔑</div>
+            <div>
+                <div class="text-4xl text-[var(--primary-blue)] mb-4">🔑</div>
                 <h3 class="text-xl font-bold mb-2">Full-Service-Verwaltung</h3>
-                <p class="text-light">Wir sind nicht nur Makler, sondern kümmern uns auf Wunsch um die gesamte Verwaltung Ihrer Immobilie.</p>
+                <p class="text-[var(--text-light)]">Wir sind nicht nur Makler, sondern kümmern uns auf Wunsch um die gesamte Verwaltung Ihrer Immobilie.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 3. Featured Immobilien Sektion -->
+<!-- Featured Immobilien Sektion -->
 <section class="section-padding">
-    <div class="container">
-        <h2 class="text-center mb-12">Aktuelle Highlights</h2>
-        <div class="grid grid-cols-3">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl text-center mb-12">Aktuelle Highlights</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {{ range first 3 (where .Site.RegularPages "Section" "properties") }}
-                {{ partial "property-card.html" . }}
+                {{ .Render "card" }}
             {{ end }}
         </div>
         <div class="text-center mt-12">
-            <a href="{{ (site.GetPage "/properties").RelPermalink }}" class="btn btn-secondary">Alle Immobilien anzeigen</a>
+            <a href="{{ "properties/" | relLangURL }}" class="btn btn-secondary">Alle Immobilien anzeigen</a>
         </div>
-    </div>
-</section>
-
-<!-- 4. Call-to-Action Sektion -->
-<section class="section-padding bg-primary text-white">
-    <div class="container text-center">
-        <h2 class="text-white">Bereit für den nächsten Schritt?</h2>
-        <p class="mt-4 text-lg max-w-2xl mx-auto">Lassen Sie uns in einem kostenlosen und unverbindlichen Gespräch über Ihre Wünsche und Ziele sprechen.</p>
-        <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-secondary mt-8">Jetzt kostenlose Beratung buchen</a>
     </div>
 </section>
 {{ end }}

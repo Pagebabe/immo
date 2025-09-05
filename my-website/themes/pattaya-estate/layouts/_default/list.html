@@ -1,36 +1,17 @@
 {{ define "main" }}
-<div class="bg-white py-12">
-    <div class="container">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl mb-4">{{ .Title }}</h1>
-            {{ if .Description }}
-            <p class="text-lg text-light">{{ .Description }}</p>
-            {{ end }}
-        </div>
+<div class="bg-white section-padding">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl">{{ .Title }}</h1>
+        {{ with .Content }}<div class="prose prose-lg max-w-3xl mx-auto mt-4">{{ . }}</div>{{ end }}
     </div>
 </div>
-
-<div class="py-12">
-    <div class="container">
-        <div class="grid grid-cols-3">
+<section class="section-padding">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {{ range .Paginator.Pages }}
                 {{ .Render "card" }}
             {{ end }}
         </div>
-        
-        {{ if gt .Paginator.TotalPages 1 }}
-        <div class="mt-12 text-center">
-            {{ if .Paginator.HasPrev }}
-                <a href="{{ .Paginator.Prev.URL }}" class="btn btn-primary">← Vorherige Seite</a>
-            {{ end }}
-            
-            <span class="mx-4 text-light">Seite {{ .Paginator.PageNumber }} von {{ .Paginator.TotalPages }}</span>
-            
-            {{ if .Paginator.HasNext }}
-                <a href="{{ .Paginator.Next.URL }}" class="btn btn-primary">Nächste Seite →</a>
-            {{ end }}
-        </div>
-        {{ end }}
     </div>
-</div>
+</section>
 {{ end }}

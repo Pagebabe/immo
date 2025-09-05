@@ -1,46 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
-    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta name="keywords" content="{{ if .Params.keywords }}{{ .Params.keywords }}{{ else }}Immobilien Pattaya, Condo kaufen, Villa Thailand, Foreign Quota, Immobilienberatung, Property Management, Jomtien, Pratumnak, Naklua{{ end }}">
-    <meta name="author" content="Pattaya Living Estate">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="{{ .Language.Lang }}">
-    <meta name="geo.region" content="TH-20">
-    <meta name="geo.placename" content="Pattaya, Thailand">
-    <meta name="geo.position" content="12.9236;100.8825">
-    <meta name="ICBM" content="12.9236, 100.8825">
-    
-    {{- if .IsPage -}}
-    <link rel="canonical" href="{{ .Permalink }}" />
-    {{- end -}}
-    {{- range .AllTranslations -}}
-    <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}" />
-    {{- end -}}
-    <link rel="alternate" hreflang="x-default" href="{{ .Site.Home.Permalink }}" />
-    
-    <!-- Google Fonts - Inter -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | Pattaya Living Estate</title>
+    <meta name="description" content="{{ .Description }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Modern CSS -->
-    {{ $css := resources.Get "css/modern.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-    
-    <!-- Relaunch CSS -->
-    {{ $relaunchCss := resources.Get "css/relaunch.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $relaunchCss.RelPermalink }}">
-    
-    <!-- Legacy CSS for compatibility -->
-    {{ $legacyCss := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $legacyCss.RelPermalink }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ "/assets/css/relaunch.css" | relURL }}">
     
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
