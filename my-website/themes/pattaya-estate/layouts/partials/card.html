@@ -1,0 +1,18 @@
+<!-- layouts/partials/card.html -->
+<div class="card overflow-hidden">
+    <a href="{{ .Permalink }}">
+        {{ with .Params.bilder }}
+        <img src="{{ index . 0 | relURL }}" alt="{{ $.Title }}" class="w-full h-48 object-cover">
+        {{ else }}
+        <img src="/images/placeholder-property.jpg" alt="{{ .Title }}" class="w-full h-48 object-cover">
+        {{ end }}
+        <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2 truncate">{{ .Title }}</h3>
+            {{ if .Params.preis }}
+            <div class="text-lg font-semibold text-secondary mb-2">{{ .Params.preis | lang.NumFmt 2 }} THB</div>
+            {{ end }}
+            <p class="text-light text-sm mb-4 h-10 overflow-hidden">{{ .Summary | plainify | truncate 70 }}</p>
+            <span class="font-semibold text-primary">Details anzeigen &rarr;</span>
+        </div>
+    </a>
+</div>

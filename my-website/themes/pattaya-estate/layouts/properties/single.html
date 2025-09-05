@@ -1,130 +1,65 @@
-{{ define "head" }}
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"RealEstateListing",
-  "name":"{{ .Title }}",
-  "url":"{{ .Permalink }}",
-  "address":{"@type":"PostalAddress","addressLocality":"{{ .Params.location }}","addressCountry":"TH"},
-  "offers":{"@type":"Offer","price":"{{ .Params.price }}","priceCurrency":"THB","availability":"https://schema.org/{{ if eq .Params.status "available" }}InStock{{ else }}OutOfStock{{ end }}"},
-  "numberOfRooms":"{{ .Params.bedrooms }}",
-  "floorSize":{"@type":"QuantitativeValue","value":"{{ .Params.living_area }}","unitCode":"MTK"}
-}
-</script>
-{{ partial "faq-schema.html" . }}
-{{ end }}
-
 {{ define "main" }}
-<article class="property-detail">
+<!-- Property Hero Section -->
+<section class="bg-white py-12">
     <div class="container">
-        <div class="property-header">
-            <h1>{{ .Title }}</h1>
-            <div class="property-price-large">
-                <span class="price" data-thb="{{ .Params.price | default 0 }}">{{ lang.FormatNumber 0 .Params.price }} {{ .Site.Params.currency }}</span>
+        <div class="max-w-4xl mx-auto">
+            {{ if .Params.bilder }}
+            <div class="mb-8">
+                <img src="{{ index .Params.bilder 0 | relURL }}" alt="{{ .Title }}" class="w-full h-96 object-cover rounded-lg">
             </div>
-            <p class="property-location">{{ .Params.location }} • {{ i18n .Params.type_key | default .Params.type }}</p>
-            {{ partial "property-ctas.html" . }}
-        </div>
-
-        <!-- Gallery -->
-        {{ with .Params.gallery }}
-        <div class="property-gallery">
-            {{ range . }}
-                {{ $img := resources.Get . }}
-                {{ if $img }}
-                    {{ $resized := $img | images.Fit "1400x900" }}
-                    {{ $webp := $resized | images.Format "webp" }}
-                    {{ $resized2x := $img | images.Fit "2800x1800" }}
-                    {{ $webp2x := $resized2x | images.Format "webp" }}
-                    <picture>
-                        <source media="(min-width: 1400px)" srcset="{{ $webp2x.RelPermalink }} 2x, {{ $webp.RelPermalink }} 1x" type="image/webp">
-                        <source media="(min-width: 1400px)" srcset="{{ $resized2x.RelPermalink }} 2x, {{ $resized.RelPermalink }} 1x">
-                        <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
-                        <img src="{{ $resized.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
-                    </picture>
-                {{ end }}
             {{ end }}
-        </div>
-        {{ end }}
-
-        <div class="property-content">
-            <div class="property-details">
-                <h2>{{ i18n "properties" }}</h2>
-                <ul class="details-list">
-                    <li><strong>{{ i18n "bedrooms" }}:</strong> {{ .Params.bedrooms }}</li>
-                    <li><strong>{{ i18n "bathrooms" }}:</strong> {{ .Params.bathrooms }}</li>
-                    <li><strong>{{ i18n "living_area" }}:</strong> {{ .Params.living_area }} m²</li>
-                    {{ with .Params.pool }}
-                    <li><strong>{{ i18n "pool" }}:</strong> {{ i18n . }}</li>
+            
+            <div class="grid grid-cols-2 gap-8">
+                <div>
+                    <h1 class="text-4xl mb-4">{{ .Title }}</h1>
+                    {{ if .Params.preis }}
+                    <div class="text-3xl font-bold text-secondary mb-4">{{ .Params.preis | lang.NumFmt 2 }} THB</div>
                     {{ end }}
-                    {{ with .Params.ownership }}
-                    <li><strong>{{ i18n "ownership" }}:</strong> {{ i18n . }}</li>
-                    {{ end }}
-                    {{ with .Params.deed }}
-                    <li><strong>{{ i18n "deed" }}:</strong> {{ i18n . }}</li>
-                    {{ end }}
-                    <li><strong>{{ i18n "status" }}:</strong> {{ i18n .Params.status }}</li>
-                </ul>
-
-                {{ with .Params.features }}
-                <h3>{{ i18n "features" }}</h3>
-                <div class="features-list">
-                    {{ range . }}
-                    <span class="feature-tag">{{ i18n . }}</span>
+                    {{ if .Params.beschreibung }}
+                    <p class="text-lg text-light mb-6">{{ .Params.beschreibung }}</p>
                     {{ end }}
                 </div>
-                {{ end }}
                 
-                <!-- Second CTA -->
-                <div class="property-actions" style="margin-top: 2rem;">
-                    <a class="btn" href="https://wa.me/66XXXXXXXXX?text={{ urlquery (printf "Interesse: %s – %s" .Title .Permalink) }}">WhatsApp</a>
-                    <a class="btn outline" href="https://cal.com/your-cal-alias?date=next-7-days&name={{ urlquery .Title }}">Book Viewing</a>
-                </div>
-            </div>
-
-            {{ with .Params.lat }}
-            {{ with $.Params.lng }}
-            <div class="property-map">
-                <h2>{{ i18n "location" | default "Location" }}</h2>
-                <div id="map" style="height:320px;margin:16px 0;"></div>
-            </div>
-            {{ end }}
-            {{ end }}
-
-            <div class="property-description">
-                <h2>Beschreibung</h2>
-                <div class="content">
-                    {{ .Content }}
-                </div>
-            </div>
-
-            <div class="property-contact">
-                <h2>{{ i18n "contact" }}</h2>
-                <div class="contact-info">
-                    <p><strong>{{ i18n "agent" }}:</strong> {{ .Params.contact.agent }}</p>
-                    <p><strong>{{ i18n "phone" }}:</strong> <a href="tel:{{ .Params.contact.phone }}">{{ .Params.contact.phone }}</a></p>
-                    <p><strong>{{ i18n "email" }}:</strong> <a href="mailto:{{ .Params.contact.email }}">{{ .Params.contact.email }}</a></p>
+                <div class="bg-light p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Eigenschaften</h3>
+                    <div class="space-y-2">
+                        {{ if .Params.typ }}<p><strong>Typ:</strong> {{ .Params.typ }}</p>{{ end }}
+                        {{ if .Params.zimmer }}<p><strong>Zimmer:</strong> {{ .Params.zimmer }}</p>{{ end }}
+                        {{ if .Params.groesse }}<p><strong>Größe:</strong> {{ .Params.groesse }} m²</p>{{ end }}
+                        {{ if .Params.lage }}<p><strong>Lage:</strong> {{ .Params.lage }}</p>{{ end }}
+                    </div>
+                    
+                    <div class="mt-6">
+                        <a href="{{ (site.GetPage "/contact").RelPermalink }}" class="btn btn-primary btn-lg w-full">Kontakt aufnehmen</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</article>
+</section>
 
-{{ with .Params.lat }}
-{{ with $.Params.lng }}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const map = L.map('map').setView([{{ . }}, {{ $.Params.lng }}], 15);
-    
-    L.tileLayer('{{ $.Site.Params.maps.tiles }}', {
-        attribution: '{{ $.Site.Params.maps.attribution }}'
-    }).addTo(map);
-    
-    L.marker([{{ . }}, {{ $.Params.lng }}]).addTo(map)
-        .bindPopup('{{ $.Title }}')
-        .openPopup();
-});
-</script>
-{{ end }}
-{{ end }}
+<!-- Property Content -->
+<section class="py-12">
+    <div class="container">
+        <div class="max-w-4xl mx-auto">
+            <div class="prose prose-lg">
+                {{ .Content }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Similar Properties -->
+<section class="py-12 bg-light">
+    <div class="container">
+        <h2 class="text-3xl text-center mb-12">Ähnliche Immobilien</h2>
+        <div class="grid grid-cols-3">
+            {{ range first 3 (where .Site.RegularPages "Section" "properties") }}
+                {{ if ne .Permalink $.Permalink }}
+                    {{ .Render "card" }}
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</section>
 {{ end }}

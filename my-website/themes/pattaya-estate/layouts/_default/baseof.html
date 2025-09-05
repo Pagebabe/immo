@@ -34,6 +34,10 @@
     {{ $css := resources.Get "css/modern.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
     
+    <!-- Relaunch CSS -->
+    {{ $relaunchCss := resources.Get "css/relaunch.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $relaunchCss.RelPermalink }}">
+    
     <!-- Legacy CSS for compatibility -->
     {{ $legacyCss := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $legacyCss.RelPermalink }}">
