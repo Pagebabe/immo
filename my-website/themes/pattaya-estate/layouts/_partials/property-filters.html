@@ -1,0 +1,267 @@
+<!-- Property Filters -->
+<div class="property-filters">
+    <div class="filters-header">
+        <h3>{{ i18n "filter_properties" | default "Immobilien filtern" }}</h3>
+        <button class="btn btn-outline btn-sm" id="reset-filters">
+            <i class="icon-refresh"></i>
+            {{ i18n "reset_filters" | default "Filter zurücksetzen" }}
+        </button>
+    </div>
+    
+    <div class="filters-grid">
+        <!-- Price Range Filter -->
+        <div class="filter-group">
+            <label class="filter-label">{{ i18n "price_range" | default "Preisbereich" }}</label>
+            <div class="price-range">
+                <input type="range" id="price-min" min="0" max="20000000" value="0" step="500000">
+                <input type="range" id="price-max" min="0" max="20000000" value="20000000" step="500000">
+                <div class="price-display">
+                    <span id="price-min-display">0 THB</span>
+                    <span id="price-max-display">20,000,000 THB</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Property Type Filter -->
+        <div class="filter-group">
+            <label class="filter-label">{{ i18n "property_type" | default "Immobilientyp" }}</label>
+            <div class="filter-options">
+                <label class="filter-option">
+                    <input type="checkbox" value="Villa" class="type-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "villas" | default "Villen" }}
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Condo" class="type-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "condos" | default "Condos" }}
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Townhouse" class="type-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "townhouses" | default "Townhouses" }}
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Penthouse" class="type-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "penthouses" | default "Penthouses" }}
+                </label>
+            </div>
+        </div>
+        
+        <!-- Location Filter -->
+        <div class="filter-group">
+            <label class="filter-label">{{ i18n "location" | default "Stadtteil" }}</label>
+            <div class="filter-options">
+                <label class="filter-option">
+                    <input type="checkbox" value="Jomtien" class="location-filter">
+                    <span class="checkmark"></span>
+                    Jomtien
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Pratumnak" class="location-filter">
+                    <span class="checkmark"></span>
+                    Pratumnak
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Central Pattaya" class="location-filter">
+                    <span class="checkmark"></span>
+                    Central Pattaya
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Naklua" class="location-filter">
+                    <span class="checkmark"></span>
+                    Naklua
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Wongamat" class="location-filter">
+                    <span class="checkmark"></span>
+                    Wongamat
+                </label>
+            </div>
+        </div>
+        
+        <!-- Bedrooms Filter -->
+        <div class="filter-group">
+            <label class="filter-label">{{ i18n "bedrooms" | default "Schlafzimmer" }}</label>
+            <div class="filter-options">
+                <label class="filter-option">
+                    <input type="checkbox" value="1" class="bedroom-filter">
+                    <span class="checkmark"></span>
+                    1+
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="2" class="bedroom-filter">
+                    <span class="checkmark"></span>
+                    2+
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="3" class="bedroom-filter">
+                    <span class="checkmark"></span>
+                    3+
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="4" class="bedroom-filter">
+                    <span class="checkmark"></span>
+                    4+
+                </label>
+            </div>
+        </div>
+        
+        <!-- Features Filter -->
+        <div class="filter-group">
+            <label class="filter-label">{{ i18n "features" | default "Ausstattung" }}</label>
+            <div class="filter-options">
+                <label class="filter-option">
+                    <input type="checkbox" value="Pool" class="feature-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "pool" | default "Pool" }}
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Foreign Quota" class="feature-filter">
+                    <span class="checkmark"></span>
+                    Foreign Quota
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Meerblick" class="feature-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "sea_view" | default "Meerblick" }}
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" value="Parkplatz" class="feature-filter">
+                    <span class="checkmark"></span>
+                    {{ i18n "parking" | default "Parkplatz" }}
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="filters-results">
+        <span id="filter-results-count">{{ i18n "showing_all_properties" | default "Alle Immobilien werden angezeigt" }}</span>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const propertyCards = document.querySelectorAll('.property-card');
+    const priceMinInput = document.getElementById('price-min');
+    const priceMaxInput = document.getElementById('price-max');
+    const priceMinDisplay = document.getElementById('price-min-display');
+    const priceMaxDisplay = document.getElementById('price-max-display');
+    const resetButton = document.getElementById('reset-filters');
+    const resultsCount = document.getElementById('filter-results-count');
+    
+    // Price range updates
+    function updatePriceDisplay() {
+        const minPrice = parseInt(priceMinInput.value);
+        const maxPrice = parseInt(priceMaxInput.value);
+        
+        priceMinDisplay.textContent = minPrice.toLocaleString() + ' THB';
+        priceMaxDisplay.textContent = maxPrice.toLocaleString() + ' THB';
+        
+        // Ensure min is not greater than max
+        if (minPrice > maxPrice) {
+            priceMinInput.value = maxPrice;
+            priceMinDisplay.textContent = maxPrice.toLocaleString() + ' THB';
+        }
+        
+        applyFilters();
+    }
+    
+    priceMinInput.addEventListener('input', updatePriceDisplay);
+    priceMaxInput.addEventListener('input', updatePriceDisplay);
+    
+    // Filter functions
+    function applyFilters() {
+        const minPrice = parseInt(priceMinInput.value);
+        const maxPrice = parseInt(priceMaxInput.value);
+        
+        const selectedTypes = Array.from(document.querySelectorAll('.type-filter:checked')).map(cb => cb.value);
+        const selectedLocations = Array.from(document.querySelectorAll('.location-filter:checked')).map(cb => cb.value);
+        const selectedBedrooms = Array.from(document.querySelectorAll('.bedroom-filter:checked')).map(cb => parseInt(cb.value));
+        const selectedFeatures = Array.from(document.querySelectorAll('.feature-filter:checked')).map(cb => cb.value);
+        
+        let visibleCount = 0;
+        
+        propertyCards.forEach(card => {
+            const price = parseInt(card.dataset.price);
+            const type = card.dataset.type;
+            const location = card.dataset.location;
+            const bedrooms = parseInt(card.querySelector('.detail-item:first-child span').textContent);
+            const features = Array.from(card.querySelectorAll('.feature-tag')).map(tag => tag.textContent);
+            
+            let isVisible = true;
+            
+            // Price filter
+            if (price < minPrice || price > maxPrice) {
+                isVisible = false;
+            }
+            
+            // Type filter
+            if (selectedTypes.length > 0 && !selectedTypes.includes(type)) {
+                isVisible = false;
+            }
+            
+            // Location filter
+            if (selectedLocations.length > 0 && !selectedLocations.includes(location)) {
+                isVisible = false;
+            }
+            
+            // Bedrooms filter
+            if (selectedBedrooms.length > 0 && !selectedBedrooms.some(minBedrooms => bedrooms >= minBedrooms)) {
+                isVisible = false;
+            }
+            
+            // Features filter
+            if (selectedFeatures.length > 0 && !selectedFeatures.some(feature => features.includes(feature))) {
+                isVisible = false;
+            }
+            
+            // Show/hide card
+            if (isVisible) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.3s ease-in';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Update results count
+        if (visibleCount === propertyCards.length) {
+            resultsCount.textContent = '{{ i18n "showing_all_properties" | default "Alle Immobilien werden angezeigt" }}';
+        } else {
+            resultsCount.textContent = `${visibleCount} {{ i18n "properties_found" | default "Immobilien gefunden" }}`;
+        }
+    }
+    
+    // Reset filters
+    resetButton.addEventListener('click', function() {
+        // Reset price range
+        priceMinInput.value = 0;
+        priceMaxInput.value = 20000000;
+        updatePriceDisplay();
+        
+        // Reset checkboxes
+        document.querySelectorAll('.filter-option input').forEach(input => {
+            input.checked = false;
+        });
+        
+        // Show all cards
+        propertyCards.forEach(card => {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.3s ease-in';
+        });
+        
+        resultsCount.textContent = '{{ i18n "showing_all_properties" | default "Alle Immobilien werden angezeigt" }}';
+    });
+    
+    // Add event listeners to all filter inputs
+    document.querySelectorAll('.type-filter, .location-filter, .bedroom-filter, .feature-filter').forEach(input => {
+        input.addEventListener('change', applyFilters);
+    });
+    
+    // Initial filter application
+    applyFilters();
+});
+</script>

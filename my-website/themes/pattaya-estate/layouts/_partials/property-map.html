@@ -1,0 +1,167 @@
+<!-- Interactive Property Map -->
+<div class="property-map-container">
+    <div class="map-header">
+        <h3>{{ i18n "property_locations" | default "Immobilien-Standorte" }}</h3>
+        <p>{{ i18n "map_description" | default "Entdecken Sie unsere Immobilien auf der interaktiven Karte" }}</p>
+    </div>
+    
+    <div id="property-map" class="property-map"></div>
+    
+    <div class="map-legend">
+        <div class="legend-item">
+            <span class="legend-marker villa"></span>
+            <span>{{ i18n "villas" | default "Villen" }}</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-marker condo"></span>
+            <span>{{ i18n "condos" | default "Condos" }}</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-marker townhouse"></span>
+            <span>{{ i18n "townhouses" | default "Townhouses" }}</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-marker penthouse"></span>
+            <span>{{ i18n "penthouses" | default "Penthouses" }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Leaflet.js CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<!-- Leaflet.js JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize map
+    const map = L.map('property-map').setView([12.9236, 100.8825], 12);
+    
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 18
+    }).addTo(map);
+    
+    // Property data from Hugo
+    const properties = [
+        {{ range where .Site.RegularPages "Section" "properties" }}
+        {
+            id: "{{ .RelPermalink }}",
+            title: "{{ .Title }}",
+            price: {{ .Params.price }},
+            currency: "{{ .Params.currency }}",
+            type: "{{ .Params.type }}",
+            location: "{{ .Params.location }}",
+            lat: {{ .Params.lat }},
+            lng: {{ .Params.lng }},
+            bedrooms: {{ .Params.bedrooms }},
+            bathrooms: {{ .Params.bathrooms }},
+            area: {{ .Params.area }},
+            featured: {{ .Params.featured }},
+            image: "{{ if .Params.images }}{{ index .Params.images 0 }}{{ else }}/images/placeholder-property.jpg{{ end }}",
+            url: "{{ .RelPermalink }}"
+        }{{ if not (eq . (index (where .Site.RegularPages "Section" "properties") (sub (len (where .Site.RegularPages "Section" "properties")) 1))) }},{{ end }}
+        {{ end }}
+    ];
+    
+    // Custom icons for different property types
+    const iconConfigs = {
+        'Villa': { color: '#e74c3c', icon: '🏠' },
+        'Condo': { color: '#3498db', icon: '🏢' },
+        'Townhouse': { color: '#2ecc71', icon: '🏘️' },
+        'Penthouse': { color: '#f39c12', icon: '🏙️' }
+    };
+    
+    // Create custom icons
+    function createCustomIcon(type) {
+        const config = iconConfigs[type] || iconConfigs['Condo'];
+        return L.divIcon({
+            className: 'custom-marker',
+            html: `<div class="marker-icon" style="background-color: ${config.color}">
+                     <span class="marker-emoji">${config.icon}</span>
+                   </div>`,
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
+    }
+    
+    // Add property markers to map
+    properties.forEach(property => {
+        if (property.lat && property.lng) {
+            const marker = L.marker([property.lat, property.lng], {
+                icon: createCustomIcon(property.type)
+            }).addTo(map);
+            
+            // Create popup content
+            const popupContent = `
+                <div class="map-popup">
+                    <div class="popup-image">
+                        <img src="${property.image}" alt="${property.title}" loading="lazy">
+                        ${property.featured ? '<span class="featured-badge">Featured</span>' : ''}
+                    </div>
+                    <div class="popup-content">
+                        <h4>${property.title}</h4>
+                        <div class="popup-price">${property.price.toLocaleString()} ${property.currency}</div>
+                        <div class="popup-details">
+                            <span><i class="icon-bed"></i> ${property.bedrooms} {{ i18n "bedrooms" | default "Schlafzimmer" }}</span>
+                            <span><i class="icon-bath"></i> ${property.bathrooms} {{ i18n "bathrooms" | default "Badezimmer" }}</span>
+                            <span><i class="icon-area"></i> ${property.area} m²</span>
+                        </div>
+                        <div class="popup-location">
+                            <i class="icon-location"></i> ${property.location}
+                        </div>
+                        <a href="${property.url}" class="btn btn-primary btn-sm">Details ansehen</a>
+                    </div>
+                </div>
+            `;
+            
+            marker.bindPopup(popupContent, {
+                maxWidth: 300,
+                className: 'custom-popup'
+            });
+        }
+    });
+    
+    // Fit map to show all properties
+    if (properties.length > 0) {
+        const group = new L.featureGroup();
+        properties.forEach(property => {
+            if (property.lat && property.lng) {
+                group.addLayer(L.marker([property.lat, property.lng]));
+            }
+        });
+        map.fitBounds(group.getBounds().pad(0.1));
+    }
+    
+    // Add area boundaries (simplified)
+    const areas = [
+        {
+            name: 'Jomtien',
+            coords: [[12.8883, 100.8803], [12.8883, 100.8903], [12.8983, 100.8903], [12.8983, 100.8803]],
+            color: '#3498db'
+        },
+        {
+            name: 'Pratumnak',
+            coords: [[12.9200, 100.8700], [12.9200, 100.8800], [12.9300, 100.8800], [12.9300, 100.8700]],
+            color: '#e74c3c'
+        },
+        {
+            name: 'Central Pattaya',
+            coords: [[12.9236, 100.8825], [12.9236, 100.8925], [12.9336, 100.8925], [12.9336, 100.8825]],
+            color: '#2ecc71'
+        }
+    ];
+    
+    areas.forEach(area => {
+        L.polygon(area.coords, {
+            color: area.color,
+            fillColor: area.color,
+            fillOpacity: 0.1,
+            weight: 2
+        }).addTo(map).bindTooltip(area.name);
+    });
+});
+</script>

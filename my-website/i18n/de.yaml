@@ -268,6 +268,130 @@
   translation: "Kein Bild verfügbar"
 - id: agent
   translation: "Makler"
+
+# Map & Filters
+- id: property_locations
+  translation: "Immobilien-Standorte"
+- id: map_description
+  translation: "Entdecken Sie unsere Immobilien auf der interaktiven Karte"
+- id: villas
+  translation: "Villen"
+- id: condos
+  translation: "Condos"
+- id: townhouses
+  translation: "Townhouses"
+- id: penthouses
+  translation: "Penthouses"
+- id: filter_properties
+  translation: "Immobilien filtern"
+- id: reset_filters
+  translation: "Filter zurücksetzen"
+- id: price_range
+  translation: "Preisbereich"
+- id: property_type
+  translation: "Immobilientyp"
+- id: location
+  translation: "Stadtteil"
+- id: sea_view
+  translation: "Meerblick"
+- id: parking
+  translation: "Parkplatz"
+- id: showing_all_properties
+  translation: "Alle Immobilien werden angezeigt"
+- id: properties_found
+  translation: "Immobilien gefunden"
+
+# Lead Generation
+- id: lead_form_desc
+  translation: "Erhalten Sie eine kostenlose und unverbindliche Beratung für Ihre Immobilieninvestition in Pattaya"
+- id: basic_information
+  translation: "Grundinformationen"
+- id: first_name
+  translation: "Vorname"
+- id: last_name
+  translation: "Nachname"
+- id: country
+  translation: "Land"
+- id: select_country
+  translation: "Land auswählen"
+- id: other
+  translation: "Andere"
+- id: next_step
+  translation: "Weiter"
+- id: property_preferences
+  translation: "Immobilienwünsche"
+- id: interest_type
+  translation: "Interesse"
+- id: select_interest
+  translation: "Interesse auswählen"
+- id: buy_property
+  translation: "Immobilie kaufen"
+- id: sell_property
+  translation: "Immobilie verkaufen"
+- id: rent_property
+  translation: "Immobilie mieten"
+- id: general_consultation
+  translation: "Allgemeine Beratung"
+- id: preferred_type
+  translation: "Bevorzugter Typ"
+- id: any_type
+  translation: "Beliebig"
+- id: condo
+  translation: "Condo"
+- id: villa
+  translation: "Villa"
+- id: townhouse
+  translation: "Townhouse"
+- id: penthouse
+  translation: "Penthouse"
+- id: budget_range
+  translation: "Budget"
+- id: select_budget
+  translation: "Budget auswählen"
+- id: preferred_location
+  translation: "Bevorzugte Lage"
+- id: any_location
+  translation: "Beliebig"
+- id: timeline
+  translation: "Zeitrahmen"
+- id: select_timeline
+  translation: "Zeitrahmen auswählen"
+- id: immediate
+  translation: "Sofort"
+- id: 1_3_months
+  translation: "1-3 Monate"
+- id: 3_6_months
+  translation: "3-6 Monate"
+- id: 6_12_months
+  translation: "6-12 Monate"
+- id: just_planning
+  translation: "Nur Planung"
+- id: previous
+  translation: "Zurück"
+- id: additional_info
+  translation: "Zusätzliche Informationen"
+- id: message
+  translation: "Nachricht"
+- id: message_placeholder
+  translation: "Teilen Sie uns Ihre spezifischen Wünsche oder Fragen mit..."
+- id: newsletter_signup
+  translation: "Ich möchte den Newsletter mit Immobilien-Updates erhalten"
+- id: privacy_consent
+  translation: "Ich stimme der Verarbeitung meiner Daten zu"
+- id: send_request
+  translation: "Anfrage senden"
+- id: request_sent
+  translation: "Anfrage erfolgreich gesendet!"
+- id: success_message
+  translation: "Vielen Dank für Ihre Anfrage. Wir werden uns innerhalb von 24 Stunden bei Ihnen melden."
+- id: form_error
+  translation: "Es gab einen Fehler beim Senden Ihrer Anfrage. Bitte versuchen Sie es erneut."
+- id: whatsapp_chat
+  translation: "WhatsApp Chat"
+- id: book_consultation
+  translation: "Beratungstermin buchen"
+- id: book_meeting
+  translation: "Termin buchen"
 - id: features
   translation: Ausstattung
 - id: pool
